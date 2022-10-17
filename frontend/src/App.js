@@ -11,6 +11,8 @@ import { LoadingOutlined } from "@ant-design/icons";
 import "./App.css";
 import store from "./store";
 
+const Login = React.lazy(() => import("./components/login/Login"));
+const Main = React.lazy(() => import("./components/main/Main"));
 
 class App extends React.Component {
   constructor(props) {
@@ -57,7 +59,9 @@ class App extends React.Component {
             <div className="App">
               <Router>
                 <Switch>
-
+                  <Redirect path="/" to="/login" exact />
+                  <Route path="/login" component={Login} exact />
+                  <Route path="/main" component={Main} />
                 </Switch>
               </Router>
             </div>

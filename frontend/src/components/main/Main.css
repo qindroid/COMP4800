@@ -1,0 +1,8 @@
+.logo {
+    text-align: center;
+    margin: 2em;
+}
+
+.container {
+    min-height: 100vh !important;
+}
