@@ -1,17 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../common/auth");
-const isAdmin = require("../common/isAdmin");
+const checkAdmin = require("../common/isAdmin");
 const errHandler = require("../common/errHandler");
 const Utils = require("../common/utils");
-const user = require("../model/user");
+const User = require("../model/user");
 
-router.post("/create", auth, isAdmin, async function (req, res, next) {
+router.post("/create", auth, checkAdmin, async function (req, res, next) {
     try {
         if (!req.body.username.trim().length) {
             return Utils.SendError(res, errHandler.error_empty_username);
         }
-        await user.create({
+        await User.create({
             username: req.body.username,
             password: req.body.password,
             isAdmin: req.body.isAdmin,
@@ -22,11 +22,12 @@ router.post("/create", auth, isAdmin, async function (req, res, next) {
         console.log(error);
         Utils.SendError(res, error);
     }
+    
 });
 
 router.post("/login", async function (req, res, next) {
     try {
-        let user = await user.findOne({
+        let user = await User.findOne({
             where: req.body,
         });
 
@@ -44,7 +45,7 @@ router.post("/login", async function (req, res, next) {
 
 router.get("/info", auth, async function (req, res, next) {
     try {
-        let user = await user.findOne({
+        let user = await User.findOne({
             where: {
                 token: req.headers.token,
             },
@@ -64,14 +65,14 @@ router.get("/info", auth, async function (req, res, next) {
 
 router.post("/password", auth, async function (req, res, next) {
     try {
-        let user = await user.findOne({
+        let user = await User.findOne({
             where: {
                 token: req.headers.token,
             },
         });
 
         user.token = Utils.CalcStringMD5(user.username + req.body.password);
-        await user.update(
+        await User.update(
             {
                 password: req.body.password,
                 token: user.token,
@@ -90,14 +91,14 @@ router.post("/password", auth, async function (req, res, next) {
     }
 });
 
-router.post("/list", auth, isAdmin, async function (req, res, next) {
+router.post("/list", auth, checkAdmin, async function (req, res, next) {
     try {
         let page = req.body.page ? req.body.page : 1;
         let limit = req.body.limit ? req.body.limit : 20;
         let offset = (page - 1) * limit;
 
-        const count = await user.count();
-        let users = await user.findAll({
+        const count = await User.count();
+        let users = await User.findAll({
             offset,
             limit,
             order: [["id", "DESC"]],
@@ -115,10 +116,10 @@ router.post("/list", auth, isAdmin, async function (req, res, next) {
     }
 });
 
-router.post("/all", auth, isAdmin, async function (req, res, next) {
+router.post("/all", auth, checkAdmin, async function (req, res, next) {
     try {
-        const count = await user.count();
-        let users = await user.findAll({
+        const count = await User.count();
+        let users = await User.findAll({
             attributes: ["id", "username"],
         });
 
@@ -129,9 +130,9 @@ router.post("/all", auth, isAdmin, async function (req, res, next) {
     }
 });
 
-router.post("/detail", auth, isAdmin, async function (req, res, next) {
+router.post("/detail", auth, checkAdmin, async function (req, res, next) {
     try {
-        let user = await user.findOne({
+        let user = await User.findOne({
             where: {
                 id: req.body.id,
             },
@@ -149,9 +150,9 @@ router.post("/detail", auth, isAdmin, async function (req, res, next) {
     }
 });
 
-router.post("/update", auth, isAdmin, async function (req, res, next) {
+router.post("/update", auth, checkAdmin, async function (req, res, next) {
     try {
-        await user.update(
+        await User.update(
             {
                 username: req.body.username,
                 password: req.body.password,
@@ -174,13 +175,13 @@ router.post("/update", auth, isAdmin, async function (req, res, next) {
     }
 });
 
-router.post("/delete", auth, isAdmin, async function (req, res, next) {
+router.post("/delete", auth, checkAdmin, async function (req, res, next) {
     try {
         if (parseInt(req.body.id) === 1) {
             return Utils.SendError(res, errHandler.error_del_sysadmin);
         }
 
-        await user.destroy({
+        await User.destroy({
             where: {
                 id: req.body.id,
             },
