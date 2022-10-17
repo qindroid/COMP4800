@@ -18,10 +18,10 @@
     "production": {
         "db": {
             "mysql": {
-                "host": "127.0.0.1",
+                "host": "129.153.104.208",
                 "database": "comp4800",
                 "username": "root",
-                "password": "123456",
+                "password": "comp4800!",
                 "port": "3306",
                 "max_connections": 5,
                 "min_connections": 0,
