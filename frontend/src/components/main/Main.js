@@ -17,7 +17,7 @@ import main_logo from "../../images/main_logo.png";
 
 const PasswordPage = React.lazy(() => import("../password/Password"));
 const LogoutPage = React.lazy(() => import("../logout/Logout"));
-const StaffPage = React.lazy(() => import("../staff/Staff"));
+const StaffPage = React.lazy(() => import("../staff/User"));
 const StaffEdit = React.lazy(() => import("../staff/Edit"));
 
 const { Sider } = Layout;
@@ -106,71 +106,46 @@ class Main extends React.Component {
 
     render() {
         return (
-            <Layout className="container">
-                <Layout>
-                    <Sider width={200} className="" style={{background : "#FFFFFF"}}>
-                        <div className="logo"  >
-                            <Image
-                                preview={false}
-                                src={main_logo}
-                                background="white"
-                            />
-                        </div>
-                        <Menu
-                            mode="inline"
-                            defaultSelectedKeys={this.state.currentItem}
-                            selectedKeys={this.state.currentItem}
-                            style={{ height: "100%", borderRight: 0}}
-                            onClick={this.onMenuItemClick}
-                            theme="light"
-                        >
-                            <Menu.Item
-                                key="/main/staff"
-                                icon={<UsergroupAddOutlined />}
-                            >
-                                Users
-                            </Menu.Item>
-                            <Menu.Item
-                                key="/main/password"
-                                icon={<SettingOutlined />}
-                            >
-                                Password
-                            </Menu.Item>
-                            <Menu.Item
-                                key="/main/logout"
-                                icon={<LogoutOutlined />}
-                            >
-                                Logout
-                            </Menu.Item>
-                        </Menu>
-                    </Sider>
-                    <Layout style={{ padding: "24px 24px 24px" }}>
-                        <Switch>
-                            <Redirect from="/main/" to="/main/cases" exact />
-                            <Route
-                                path="/main/password"
-                                component={PasswordPage}
-                                exact
-                            />
-                            <Route
-                                path="/main/staff"
-                                component={StaffPage}
-                                exact
-                            />
-                            <Route
-                                path="/main/staff/edit/:id"
-                                component={StaffEdit}
-                                exact
-                            />
-                            <Route
-                                path="/main/logout"
-                                component={LogoutPage}
-                                exact
-                            />
-                        </Switch>
-                    </Layout>
-                </Layout>
+          <Layout className="container">
+            <Layout>
+              <Sider width={200} className="" style={{ background: "#FFFFFF" }}>
+                <div className="logo">
+                  <Image preview={false} src={main_logo} background="white" />
+                </div>
+                <Menu
+                  mode="inline"
+                  defaultSelectedKeys={this.state.currentItem}
+                  selectedKeys={this.state.currentItem}
+                  style={{ height: "100%", borderRight: 0 }}
+                  onClick={this.onMenuItemClick}
+                  theme="light"
+                >
+                  <Menu.Item key="/main/user" icon={<UsergroupAddOutlined />}>
+                    Users
+                  </Menu.Item>
+                  <Menu.Item key="/main/password" icon={<SettingOutlined />}>
+                    Password
+                  </Menu.Item>
+                  <Menu.Item key="/main/logout" icon={<LogoutOutlined />}>
+                    Logout
+                  </Menu.Item>
+                </Menu>
+              </Sider>
+              <Layout style={{ padding: "24px 24px 24px" }}>
+                <Switch>
+                  <Redirect from="/main/" to="/main/cases" exact />
+                  <Route path="/main/password" component={PasswordPage} exact />
+                  <Route path="/main/user" component={StaffPage} exact />
+                  <Route
+                    path="/main/user/edit/:id"
+                    component={StaffEdit}
+                    exact
+                  />
+                  <Route path="/main/logout" component={LogoutPage} exact />
+                </Switch>
+              </Layout>
             </Layout>
+          </Layout>
         );
     }
 }
