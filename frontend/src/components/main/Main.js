@@ -128,7 +128,7 @@ class Main extends React.Component {
                                 key="/main/staff"
                                 icon={<UsergroupAddOutlined />}
                             >
-                                Staff
+                                Users
                             </Menu.Item>
                             <Menu.Item
                                 key="/main/password"
