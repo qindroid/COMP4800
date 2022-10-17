@@ -5,7 +5,7 @@ const logger = require("morgan");
 const app = express();
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/user");
-
+const syncModels = require("./common/syncModels");
 app.set("trust proxy", 1);
 app.use(logger("dev"));
 app.use(cookieParser());
@@ -23,6 +23,7 @@ app.all("*", function (req, res, next) {
         next();
     }
 });
+syncModels();
 app.use("/", indexRouter);
 app.use("/api/user", userRouter);
 module.exports = app;
