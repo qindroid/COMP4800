@@ -1,0 +1,25 @@
+{
+    "name": "comp-4800-backend",
+    "version": "1.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node ./server",
+        "debug": "node inspect ./server"
+    },
+    "dependencies": {
+        "config": "^3.1.0",
+        "cookie-parser": "^1.4.4",
+        "debug": "~2.6.9",
+        "express": "^4.16.4",
+        "formidable": "^1.2.1",
+        "google-libphonenumber": "^3.2.27",
+        "morgan": "~1.9.0",
+        "mysql2": "^2.3.3",
+        "sequelize": "^6.25.2",
+        "sequelize-auto": "^0.8.8",
+        "twilio": "^3.76.1"
+    },
+    "devDependencies": {
+        "sequelize-cli": "^6.5.1"
+    }
+}
