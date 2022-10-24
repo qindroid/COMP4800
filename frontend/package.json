@@ -15,6 +15,7 @@
     "i": "^0.3.7",
     "moment-timezone": "^0.5.34",
     "npm": "^8.8.0",
+    "postcss-cli": "^10.0.0",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
@@ -27,7 +28,9 @@
     "start": "cross-env PORT=8000 BROWSER=none react-scripts start",
     "build": "cross-env CI=false react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:css": "postcss src/tailwind.css -o src/tailwind_compiled.css",
+    "build:watch": "postcss src/tailwind.css -o src/tailwind_compiled.css"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +51,9 @@
     ]
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "autoprefixer": "^10.4.12",
+    "cross-env": "^7.0.3",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.2.1"
   }
 }
