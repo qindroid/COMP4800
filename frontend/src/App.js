@@ -10,7 +10,7 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import "./App.css";
 import "./tailwind_compiled.css";
-
+import "./chat.css";
 import store from "./store";
 
 const Login = React.lazy(() => import("./components/login/Login"));
@@ -58,7 +58,20 @@ class App extends React.Component {
             tip="Loading..."
             indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
           >
-            <h1 className="text-3xl text-red-800 font-bold underline">Hello world!</h1>
+            <div class="chat-notification">
+              <div class="chat-notification-logo-wrapper">
+                <img
+                  class="chat-notification-logo"
+                  src="/img/logo.svg"
+                  alt="ChitChat Logo"
+                />
+              </div>
+              <div class="chat-notification-content">
+                <h4 class="chat-notification-title">ChitChat</h4>
+                <p class="chat-notification-message">You have a new message!</p>
+              </div>
+            </div>
+            
             <div className="App">
               <Router>
                 <Switch>
