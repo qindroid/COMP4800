@@ -19,18 +19,19 @@
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
+    "react-google-charts": "^4.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^2.1.3",
     "redux": "^4.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "cross-env PORT=8000 BROWSER=none react-scripts start",
+    "start": "npm run watch:css && cross-env PORT=8000 BROWSER=none react-scripts start",
     "build": "cross-env CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "postcss src/tailwind.css -o src/tailwind_compiled.css",
-    "build:watch": "postcss src/tailwind.css -o src/tailwind_compiled.css"
+    "watch:css": "postcss src/tailwind.css -o src/tailwind_compiled.css"
   },
   "eslintConfig": {
     "extends": [

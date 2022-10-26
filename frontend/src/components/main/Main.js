@@ -4,17 +4,16 @@ import { Layout, Menu, message, Image } from "antd";
 import axios from "axios";
 import utils from "../../common/Utils";
 import {
-    DatabaseOutlined,
-    SolutionOutlined,
     UsergroupAddOutlined,
     SettingOutlined,
     LogoutOutlined,
-    FileWordOutlined,
+    DashboardOutlined,
 } from "@ant-design/icons";
 import store from "../../store";
 import "./Main.css";
 import main_logo from "../../images/main_logo.png";
 
+const DashboardPage = React.lazy(() => import("../dashboard/Dashboard"));
 const PasswordPage = React.lazy(() => import("../password/Password"));
 const LogoutPage = React.lazy(() => import("../logout/Logout"));
 const StaffPage = React.lazy(() => import("../staff/User"));
@@ -120,6 +119,9 @@ class Main extends React.Component {
                   onClick={this.onMenuItemClick}
                   theme="light"
                 >
+                  <Menu.Item key="/main/dashboard" icon={<DashboardOutlined />}>
+                    Dashboard
+                  </Menu.Item>
                   <Menu.Item key="/main/user" icon={<UsergroupAddOutlined />}>
                     Users
                   </Menu.Item>
@@ -134,6 +136,7 @@ class Main extends React.Component {
               <Layout style={{ padding: "24px 24px 24px" }}>
                 <Switch>
                   <Redirect from="/main/" to="/main/cases" exact />
+                  <Route path="/main/dashboard" component={DashboardPage} exact />
                   <Route path="/main/password" component={PasswordPage} exact />
                   <Route path="/main/user" component={StaffPage} exact />
                   <Route
