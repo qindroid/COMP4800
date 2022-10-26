@@ -25,12 +25,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "cross-env PORT=8000 BROWSER=none react-scripts start",
+    "start": "concurrently --kill-others \"cross-env PORT=8000 BROWSER=none react-scripts start\" \"npm run watch:css\"",
     "build": "cross-env CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "postcss src/tailwind.css -o src/tailwind_compiled.css",
-    "build:watch": "postcss src/tailwind.css -o src/tailwind_compiled.css"
+    "watch:css": "postcss src/tailwind.css -o src/tailwind_compiled.css --watch"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
+    "concurrently": "^7.5.0",
     "cross-env": "^7.0.3",
     "postcss": "^8.4.18",
     "tailwindcss": "^3.2.1"
