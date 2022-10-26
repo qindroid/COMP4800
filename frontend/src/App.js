@@ -15,6 +15,7 @@ import store from "./store";
 
 const Login = React.lazy(() => import("./components/login/Login"));
 const Main = React.lazy(() => import("./components/main/Main"));
+const Sample = React.lazy(() => import("./components/sample/Sample"));
 
 class App extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class App extends React.Component {
 
   render() {
     return (
+      
       <CookiesProvider>
         <Suspense
           fallback={
@@ -72,12 +74,22 @@ class App extends React.Component {
               </div>
             </div>
             
+            <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center space-x-4">
+              <div class="shrink-0">
+                <img class="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo"></img>
+              </div>
+              <div>
+                <div class="text-xl font-medium text-black">ChitChat</div>
+                <p class="text-slate-500">You have a new message!</p>
+              </div>
+            </div>
             <div className="App">
               <Router>
                 <Switch>
                   <Redirect path="/" to="/login" exact />
                   <Route path="/login" component={Login} exact />
                   <Route path="/main" component={Main} />
+                  <Route path="/sample" component={Sample} />
                 </Switch>
               </Router>
             </div>

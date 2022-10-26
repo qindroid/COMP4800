@@ -19,6 +19,7 @@ const PasswordPage = React.lazy(() => import("../password/Password"));
 const LogoutPage = React.lazy(() => import("../logout/Logout"));
 const StaffPage = React.lazy(() => import("../staff/User"));
 const StaffEdit = React.lazy(() => import("../staff/Edit"));
+const SamplePage = React.lazy(() => import("../sample/Sample"));
 
 const { Sider } = Layout;
 
@@ -129,6 +130,9 @@ class Main extends React.Component {
                   <Menu.Item key="/main/logout" icon={<LogoutOutlined />}>
                     Logout
                   </Menu.Item>
+                  <Menu.Item key="/main/sample" icon={<FileWordOutlined />}>
+                    Sample
+                  </Menu.Item>
                 </Menu>
               </Sider>
               <Layout style={{ padding: "24px 24px 24px" }}>
@@ -136,6 +140,7 @@ class Main extends React.Component {
                   <Redirect from="/main/" to="/main/cases" exact />
                   <Route path="/main/password" component={PasswordPage} exact />
                   <Route path="/main/user" component={StaffPage} exact />
+                  <Route path="/main/sample" component={SamplePage} exact />
                   <Route
                     path="/main/user/edit/:id"
                     component={StaffEdit}
