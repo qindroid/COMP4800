@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    button,.button,input[type='button'],input[type='reset'],input[type='submit'] {
+    background-color: red;
+    }
+  }
