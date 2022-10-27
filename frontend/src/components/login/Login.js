@@ -58,7 +58,8 @@ class Login extends React.Component {
                 self.setLoading(false);
             });
     }
-
+ 
+    
     checkLogin() {
         let self = this;
         const { cookies } = self.props;
@@ -93,6 +94,7 @@ class Login extends React.Component {
                         />
                     </Row>
                     {/* User Enter username & password */}
+     
                     <Form name="basic" onFinish={this.onFinish}>
                         <Form.Item
                             name="username"
