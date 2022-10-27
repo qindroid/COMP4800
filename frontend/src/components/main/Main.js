@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import store from "../../store";
 import "./Main.css";
-import main_logo from "../../images/main_logo.png";
+import main_logo from "../../images/logo-color.png";
 
 const DashboardPage = React.lazy(() => import("../dashboard/Dashboard"));
 const PasswordPage = React.lazy(() => import("../password/Password"));
@@ -135,7 +135,7 @@ class Main extends React.Component {
               </Sider>
               <Layout style={{ padding: "24px 24px 24px" }}>
                 <Switch>
-                  <Redirect from="/main/" to="/main/cases" exact />
+                  <Redirect from="/main/" to="/main/dashboard" exact />
                   <Route path="/main/dashboard" component={DashboardPage} exact />
                   <Route path="/main/password" component={PasswordPage} exact />
                   <Route path="/main/user" component={StaffPage} exact />

@@ -5,7 +5,7 @@ import utils from "../../common/Utils";
 import "./Login.css";
 import "../../store";
 import store from "../../store";
-import login_logo from "../../images/main_logo.png";
+import login_logo from "../../images/logo-color.png";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 
