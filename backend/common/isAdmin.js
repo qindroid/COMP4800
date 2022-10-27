@@ -1,6 +1,6 @@
 const utils = require("./utils");
 const error_code = require("./errHandler");
-const User = require("../model/user");
+const User = require("../models/user");
 
 /*
  * This function should be added for any routers when we want to

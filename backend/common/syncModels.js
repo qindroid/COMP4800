@@ -1,5 +1,5 @@
 // Models, you must add all models here
-const User = require("../model/user");
+const User = require("../models/user");
 const sequelize = require("./sequelize");
 const utils = require("./utils");
 

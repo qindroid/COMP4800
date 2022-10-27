@@ -58,7 +58,35 @@ class Login extends React.Component {
                 self.setLoading(false);
             });
     }
-
+    createCashflow() {
+        let self = this;
+        const { cookies } = self.props;
+    
+        console.log("createCashflow works!");
+        axios({
+          method: "post",
+          url: utils.getDomain() + "api/cashflow/create",
+          headers: {token: cookies.get("token")},
+          data: {
+            Type: "Income",
+            Amount: 100,
+            Description: "Digimon stickers",
+            ReferenceType: "Stickers",
+          },
+        })
+          .then(function (res) {
+            if (0 === res.data.code) {
+              console.log(res.data.data);
+            } else {
+              console.log("error");
+              message.error(res.data.message);
+            }
+          })
+          .catch(function (err) {
+            message.error(err.message);
+          });
+      }
+    
     checkLogin() {
         let self = this;
         const { cookies } = self.props;
@@ -93,6 +121,8 @@ class Login extends React.Component {
                         />
                     </Row>
                     {/* User Enter username & password */}
+                    <button onClick={this.createCashflow()}>Create Cashflow</button>
+            
                     <Form name="basic" onFinish={this.onFinish}>
                         <Form.Item
                             name="username"

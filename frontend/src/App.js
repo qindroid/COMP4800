@@ -5,7 +5,7 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import { CookiesProvider } from "react-cookie";
+import { Cookies, CookiesProvider } from "react-cookie";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import "./App.css";
@@ -13,10 +13,16 @@ import "./tailwind_compiled.css";
 import "./chat.css";
 import store from "./store";
 
+import axios from "axios";
+import utils from "./common/Utils";
+import { Row, Form, Col, Input, Button, message, Image } from "antd";
+
+
 const Login = React.lazy(() => import("./components/login/Login"));
 const Main = React.lazy(() => import("./components/main/Main"));
-
+const CashflowManager = React.lazy(() => import("./components/cashflow/Cashflow"));
 class App extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -38,6 +44,7 @@ class App extends React.Component {
     this.unsubscribe();
   }
 
+
   render() {
     return (
       <CookiesProvider>
@@ -58,26 +65,14 @@ class App extends React.Component {
             tip="Loading..."
             indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
           >
-            <div class="chat-notification">
-              <div class="chat-notification-logo-wrapper">
-                <img
-                  class="chat-notification-logo"
-                  src="/img/logo.svg"
-                  alt="ChitChat Logo"
-                />
-              </div>
-              <div class="chat-notification-content">
-                <h4 class="chat-notification-title">ChitChat</h4>
-                <p class="chat-notification-message">You have a new message!</p>
-              </div>
-            </div>
-            
+     
             <div className="App">
               <Router>
                 <Switch>
                   <Redirect path="/" to="/login" exact />
                   <Route path="/login" component={Login} exact />
                   <Route path="/main" component={Main} />
+                  <Route path="/cashflowManager" component={CashflowManager} />
                 </Switch>
               </Router>
             </div>

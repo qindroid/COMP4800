@@ -4,7 +4,7 @@ const auth = require("../common/auth");
 const checkAdmin = require("../common/isAdmin");
 const errHandler = require("../common/errHandler");
 const Utils = require("../common/utils");
-const User = require("../model/user");
+const User = require("../models/user");
 
 router.post("/create", auth, checkAdmin, async function (req, res, next) {
     try {

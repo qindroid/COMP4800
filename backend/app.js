@@ -5,6 +5,7 @@ const logger = require("morgan");
 const app = express();
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/user");
+const cashflowRouter = require("./routes/cashflow");
 const syncModels = require("./common/syncModels");
 var cors = require("cors");
 app.set("trust proxy", 1);
@@ -28,4 +29,5 @@ app.all("*", function (req, res, next) {
 syncModels();
 app.use("/", indexRouter);
 app.use("/api/user", userRouter);
+app.use("/api/cashflow", cashflowRouter);
 module.exports = app;
