@@ -1,4 +1,6 @@
+import React from "react";
 import { gsap } from "gsap";
+const { useLayoutEffect, useRef } = React;
 
 document.addEventListener('mousemove', move);
 function move(e) {
@@ -12,21 +14,26 @@ function move(e) {
   })
 }
 
-/*===== GSAP ANIMATION =====*/
-// NAV
-gsap.from('.nav__logo, .nav__toggle', { opacity: 0, duration: 1, delay: 2, y: 10 })
-gsap.from('.nav__item', { opacity: 0, duration: 1, delay: 2.1, y: 30, stagger: 0.2, })
-
-// HOME
-gsap.from('.home__title', { opacity: 0, duration: 1, delay: 1.6, y: 30 })
-gsap.from('.home__description', { opacity: 0, duration: 1, delay: 1.8, y: 30 })
-gsap.from('.home__button', { opacity: 0, duration: 1, delay: 2.1, y: 30 })
-gsap.from('.home__img', { opacity: 0, duration: 1, delay: 1.3, y: 30 })
-
 function Main() {
+  const app = useRef();
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+
+      gsap.from('.nav__logo, .nav__toggle', { opacity: 0, duration: 1, delay: 2, y: 10 })
+      gsap.from('.nav__item', { opacity: 0, duration: 1, delay: 2.1, y: 30, stagger: 0.3, })
+
+      gsap.from('.home__title', { opacity: 0, duration: 1, delay: 0.8, y: 30 })
+      gsap.from('.home__description', { opacity: 0, duration: 1, delay: 1.0, y: 30 })
+      gsap.from('.home__button', { opacity: 0, duration: 1, delay: 1.3, y: 30 })
+      gsap.from('.home__img', { opacity: 0, duration: 2, delay: 0.5, y: 30 })
+
+    }, app);
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <main className="l-main">
+    <main className="l-main" ref={app}>
 
       <section className="home" id="home">
         <div className="home__container bd-grid">
