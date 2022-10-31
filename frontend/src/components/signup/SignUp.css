@@ -1,0 +1,11 @@
+.container {
+    min-height: 100vh !important;
+    width: 100vw;
+}
+
+.logo {
+    clear: both;
+    display: block;
+    text-align: center;
+    margin: 2em;
+}

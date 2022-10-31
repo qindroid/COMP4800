@@ -8,6 +8,7 @@ import store from "../../store";
 import login_logo from "../../images/logo-color.png";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
+import { Link } from "react-router-dom";
 
 class Login extends React.Component {
     static propTypes = {
@@ -85,53 +86,53 @@ class Login extends React.Component {
 
     render() {
         return (
-            <Row justify="center" align="middle" className="container">
-                <Col span={10}>
-                    <Row className="logo">
-                        <Image
-                            preview={false}
-                            src={login_logo}
-                        />
-                    </Row>
-                    {/* User Enter username & password */}
-     
-                    <Form name="basic" onFinish={this.onFinish}>
-                        <Form.Item
-                            name="username"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "Please input the username",
-                                },
-                            ]}
-                        >
-                            <Input placeholder="Username" size="large" />
-                        </Form.Item>
+          <Row justify="center" align="middle" className="container">
+            <Col span={10}>
+              <Row className="logo">
+                <Image preview={false} src={login_logo} />
+              </Row>
+              {/* User Enter username & password */}
 
-                        <Form.Item
-                            name="password"
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "Please input the password",
-                                },
-                            ]}
-                        >
-                            <Input.Password
-                                placeholder="Password"
-                                size="large"
-                            />
-                        </Form.Item>
+              <Form name="basic" onFinish={this.onFinish}>
+                <Form.Item
+                  name="username"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input the username",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Username" size="large" />
+                </Form.Item>
 
-                        <Form.Item>
-                            {/* Click to login */}
-                            <Button type="primary" htmlType="submit" block>
-                                Login
-                            </Button>
-                        </Form.Item>
-                    </Form>
-                </Col>
-            </Row>
+                <Form.Item
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please input the password",
+                    },
+                  ]}
+                >
+                  <Input.Password placeholder="Password" size="large" />
+                </Form.Item>
+
+                <Form.Item>
+                  {/* Click to login */}
+                  <Button type="primary" htmlType="submit" block>
+                    Login
+                  </Button>
+                </Form.Item>
+                {/* Click to SignUp */}
+                <Button color="primary" onClick={""} block>
+                  <Link to={"/SignUp"} target="_blank">
+                    SignUp
+                  </Link>
+                </Button>
+              </Form>
+            </Col>
+          </Row>
         );
     }
 }

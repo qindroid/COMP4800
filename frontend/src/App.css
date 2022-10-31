@@ -7,18 +7,18 @@
 }
 
 .ant-btn-primary{
-    background-color: #000000;
+    background-color: #1b4571;
     border-color: #929292;
 }
 
 .ant-btn-primary:hover, .ant-btn-primary:focus{
     background-color: #007d2a;
-    border-color: #000000;
+    border-color: #1b4571;
 }
 
 .ant-menu-light .ant-menu-item:hover, .ant-menu-light .ant-menu-item-active, .ant-menu-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-light .ant-menu-submenu-active, .ant-menu-light .ant-menu-submenu-title:hover{
     background-color: #00be3f79;
-    color: #000000;
+    color: #1b4571;
 }
 
 .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after{
@@ -30,11 +30,11 @@
 }
 
 .ant-menu-submenu-selected{
-    color: #000000;
+    color: #1b4571;
     background-color: #00be3f79;
 }
 
 .ant-menu-item-selected{
-    color: #000000;
+    color: #1b4571;
     background-color: #00be3f79;
 }

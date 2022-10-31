@@ -18,6 +18,7 @@ import { Row, Form, Col, Input, Button, message, Image } from "antd";
 
 
 const Login = React.lazy(() => import("./components/login/Login"));
+const SignUp = React.lazy(() => import("./components/signup/SignUp"));
 const Main = React.lazy(() => import("./components/main/Main"));
 const CashflowManager = React.lazy(() => import("./components/cashflow/Cashflow"));
 class App extends React.Component {
@@ -64,12 +65,12 @@ class App extends React.Component {
             tip="Loading..."
             indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
           >
-     
             <div className="App">
               <Router>
                 <Switch>
                   <Redirect path="/" to="/login" exact />
                   <Route path="/login" component={Login} exact />
+                  <Route path="/SignUp" component={SignUp} exact />
                   <Route path="/main" component={Main} />
                   <Route path="/cashflowManager" component={CashflowManager} />
                 </Switch>

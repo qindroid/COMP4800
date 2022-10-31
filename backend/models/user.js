@@ -21,6 +21,14 @@ const User = sequelize.define(
       type: DataTypes.STRING(128).BINARY,
       allowNull: false,
     },
+    created: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    expired: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
     isAdmin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
