@@ -35,4 +35,31 @@ router.get("/get", async function (req, res, next) {
     }
 });
 
+/*
+PATCH is a partial update. It is used to update only the fields that have changed.
+*/
+router.patch("/update", async function (req, res, next) {
+    try {
+        let _cashflow = await Cashflow.findOne({
+            where: {
+                id: req.body.id
+            }
+        });
+        if (_cashflow) {
+            _cashflow.update({
+                Type: req.body.Type,
+                Amount: req.body.Amount,
+                Description: req.body.Description,
+                ReferenceType: req.body.ReferenceType
+            });
+            Utils.SendResult(res, _cashflow);
+        } else {
+            Utils.SendError(res, errHandler.error_cashflow_not_found);
+        }
+    } catch (error) {
+        console.log(error);
+        Utils.SendError(res, error);
+    }
+});
+
 module.exports = router;
