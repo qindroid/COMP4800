@@ -7,19 +7,20 @@ const user = require("../models/user");
  * check if a user has logged in.
  */
 module.exports = function (req, res, next) {
-    user.findAll({
-        where: {
-            token: req.headers.token,
-        },
+  user
+    .findAll({
+      where: {
+        token: req.headers.token,
+      },
     })
-        .then(function (users) {
-            if (users.length) {
-                next();
-            } else {
-                utils.SendError(res, errHandler.error_login);
-            }
-        })
-        .catch(function (error) {
-            utils.SendError(res, error);
-        });
+    .then(function (users) {
+      if (users.length) {
+        next();
+      } else {
+        utils.SendError(res, errHandler.error_login);
+      }
+    })
+    .catch(function (error) {
+      utils.SendError(res, error);
+    });
 };
