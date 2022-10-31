@@ -50,7 +50,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <CookiesProvider>
         <Navigation />
 
         <React.StrictMode>
@@ -59,10 +59,14 @@ class App extends React.Component {
               <Route path="/" element={<Landing />} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
+
+              <Route path="/login" component={Login} />
+              <Route path="/main" component={Main} />
+              <Route path="/sample" component={Sample} />
             </Routes>
           </Router>
         </React.StrictMode>
-      </div>
+      </CookiesProvider>
       // <CookiesProvider>
       //   <Suspense
       //     fallback={
