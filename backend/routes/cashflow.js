@@ -16,7 +16,6 @@ router.post("/create", async function (req, res, next) {
             Description: req.body.Description,
             ReferenceType: req.body.ReferenceType
         });
- 
 
         Utils.SendResult(res, cashflow);
     } catch (error) {
@@ -24,6 +23,16 @@ router.post("/create", async function (req, res, next) {
         Utils.SendError(res, error);
     }
     
+});
+
+router.get("/get", async function (req, res, next) {
+    try {
+        let _cashflows = await Cashflow.findAll();
+        Utils.SendResult(res, _cashflows);
+    } catch (error) {
+        console.log(error);
+        Utils.SendError(res, error);
+    }
 });
 
 module.exports = router;
