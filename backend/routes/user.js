@@ -15,6 +15,8 @@ router.post("/create", auth, checkAdmin, async function (req, res, next) {
             username: req.body.username,
             password: req.body.password,
             isAdmin: req.body.isAdmin,
+            created: Utils.GetNow(),
+            expired: Utils.GetNow() + 1000 * 60 * 60 * 24 * 7, // defalut 3 days expired
             token: Utils.CalcStringMD5(req.body.username + req.body.password),
         });
         Utils.SendResult(res);

@@ -17,6 +17,8 @@ function createAdmin() {
                     id: 1,
                     username: "admin",
                     password: "admin",
+                    created: utils.GetNow(),
+                    expired: utils.GetNow() + 1000 * 60 * 60 * 24 * 365, // defalut 1 year expired
                     isAdmin: true,
                     token: utils.CalcStringMD5("admin" + "admin"),
                 })
