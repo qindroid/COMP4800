@@ -8,8 +8,17 @@ import store from "../../store";
 import login_logo from "../../images/main_logo.png";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+
+const About = () => {
+    const navigate = useNavigate();
+    return (navigate("/landing"));
+};
 
 class Login extends React.Component {
+
+
+
     static propTypes = {
         cookies: instanceOf(Cookies).isRequired,
     };
@@ -37,6 +46,7 @@ class Login extends React.Component {
     }
 
     onFinish(values) {
+
         this.setLoading(true);
 
         let self = this;
@@ -47,7 +57,8 @@ class Login extends React.Component {
                     const { cookies } = self.props;
                     cookies.set("token", res.data.data.token, { path: "/" });
 
-                    self.props.history.push("/main");
+                    // self.props.navigate("/main");
+                    // NavigateToMain("/main");
                 } else {
                     message.error(res.data.message);
                 }
@@ -74,7 +85,7 @@ class Login extends React.Component {
         })
             .then(function (res) {
                 if (0 === res.data.code) {
-                    self.props.history.push("/main");
+                    // self.props.history.push("/main");
                 }
             })
             .catch(function (err) {
@@ -85,6 +96,7 @@ class Login extends React.Component {
     render() {
         return (
             <Row justify="center" align="middle" className="container">
+
                 <Col span={10}>
                     <Row className="logo">
                         <Image
@@ -123,9 +135,10 @@ class Login extends React.Component {
 
                         <Form.Item>
                             {/* Click to login */}
-                            <Button type="primary" htmlType="submit" block>
+                            <Button onClick={About} type="primary" htmlType="submit" block>
                                 Login
                             </Button>
+                            {/* {MyBackButton()} */}
                         </Form.Item>
                     </Form>
                 </Col>

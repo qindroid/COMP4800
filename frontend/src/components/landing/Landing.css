@@ -67,9 +67,9 @@ img{
   display: grid;
   grid-template-columns: 100%;
   column-gap: 2rem;
-  width: calc(100% - 2rem);
-  margin-left: 1rem;
-  margin-right: 1rem;
+  width: calc(100% - 1rem);
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .l-header{
@@ -209,6 +209,9 @@ img{
 
   .nav__list{
     display: flex;
+    @apply 
+      place-items-center
+    ;
   }
 
   .nav__item{

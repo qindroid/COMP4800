@@ -1,4 +1,4 @@
-import React from 'react';
+import "./Navigation.css";
 
 function getNavMenu() {
   return document.getElementById('nav-menu');
@@ -18,32 +18,33 @@ function Navigation() {
 
   /*===== MENU SHOW Y HIDDEN =====*/
   return (
-    <header class="l-header">
-      <nav class="nav bd-grid">
+    <header className="l-header">
+      <nav className="nav bd-grid">
         <div>
-          <a href="/" class="nav__logo">Cashflowify</a>
+          <a href="/" className="nav__logo">Cashflowify</a>
         </div>
 
-        <div class="nav__toggle" id="nav-toggle" onClick={showMenu}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <div className="nav__toggle" id="nav-toggle" onClick={showMenu}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
 
         </div>
 
-        <div class="nav__menu" id="nav-menu" onClick={hideMenu}>
-          <div class="nav__close" id="nav-close">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <div className="nav__menu" id="nav-menu" onClick={hideMenu}>
+          <div className="nav__close" id="nav-close">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
 
           </div>
 
-          <ul class="nav__list">
-            <li class="nav__item"><a href="/" class="nav__link active">Home</a></li>
-            <li class="nav__item"><a href='about' class="nav__link">About</a></li>
-            <li class="nav__item"><a href="plan" class="nav__link">Plan</a></li>
-            <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+          <ul className="nav__list">
+            <li className="nav__item"><a href="/" className="nav__link active">Home</a></li>
+            <li className="nav__item"><a href='about' className="nav__link">About</a></li>
+            <li className="nav__item"><a href="plan" className="nav__link">Plan</a></li>
+            <li className="nav__item"><a href="#contact" className="nav__link">Contact</a></li>
+            <li className="nav__item"><a href="login" className="navigation__login_button">Login/Sign up</a></li>
           </ul>
         </div>
       </nav>
