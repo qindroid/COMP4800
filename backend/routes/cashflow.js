@@ -62,4 +62,23 @@ router.patch("/update", async function (req, res, next) {
     }
 });
 
+router.delete("/delete", async function (req, res, next) {
+    try {
+        let _cashflow = await Cashflow.findOne({
+            where: {
+                id: req.body.id
+            }
+        });
+        if (_cashflow) {
+            await _cashflow.destroy();
+            Utils.SendResult(res);
+        } else {
+            Utils.SendError(res, errHandler.error_cashflow_not_found);
+        }
+    } catch (error) {
+        console.log(error);
+        Utils.SendError(res, error);
+    }
+});
+
 module.exports = router;
