@@ -11,13 +11,19 @@ router.post("/create", auth, checkAdmin, async function (req, res, next) {
         if (!req.body.username.trim().length) {
             return Utils.SendError(res, errHandler.error_empty_username);
         }
+        let _expired = new Date();
+        if (req.body.expired) {
+            _expired = req.body.expired;
+        } else {
+            _expired = Utils.GetNow() + 1000 * 60 * 60 * 24 * 7; // defalut 7 days expired
+        }
         await User.create({
-            username: req.body.username,
-            password: req.body.password,
-            isAdmin: req.body.isAdmin,
-            created: Utils.GetNow(),
-            expired: Utils.GetNow() + 1000 * 60 * 60 * 24 * 7, // defalut 3 days expired
-            token: Utils.CalcStringMD5(req.body.username + req.body.password),
+          username: req.body.username,
+          password: req.body.password,
+          isAdmin: req.body.isAdmin,
+          created: Utils.GetNow(),
+          expired: _expired, // defalut 3 days expired
+          token: Utils.CalcStringMD5(req.body.username + req.body.password),
         });
         Utils.SendResult(res);
     } catch (error) {
@@ -25,6 +31,32 @@ router.post("/create", auth, checkAdmin, async function (req, res, next) {
         Utils.SendError(res, error);
     }
     
+});
+
+router.post("/signup", async function (req, res, next) {
+  try {
+    if (!req.body.username.trim().length) {
+      return Utils.SendError(res, errHandler.error_empty_username);
+    }
+    let _expired = new Date();
+    if (req.body.expired) {
+      _expired = req.body.expired;
+    } else {
+      _expired = Utils.GetNow() + 1000 * 60 * 60 * 24 * 7; // defalut 7 days expired
+    }
+    await User.create({
+      username: req.body.username,
+      password: req.body.password,
+      isAdmin: req.body.isAdmin,
+      created: Utils.GetNow(),
+      expired: _expired, // defalut 3 days expired
+      token: Utils.CalcStringMD5(req.body.username + req.body.password),
+    });
+    Utils.SendResult(res);
+  } catch (error) {
+    console.log(error);
+    Utils.SendError(res, error);
+  }
 });
 
 router.post("/login", async function (req, res, next) {

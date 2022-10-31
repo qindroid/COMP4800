@@ -13,9 +13,9 @@
 	 align-items: center;
 	 justify-content: space-around;
 	 height: 600px;
-	 padding: 2rem;
+	 padding: 1rem;
 	 overflow: auto;
-     width: 100vw;
+     width: 100%;
 }
  .card {
     height: 500px;
@@ -24,7 +24,7 @@
 	 border-radius: 15px;
 	 box-shadow: 1px 1px 10px 1px #ddd;
 	 margin-bottom: 1rem;
-	 max-width: 300px;
+	 max-width: 220px;
 	 padding: 1rem 0;
 	 position: relative;
 	 width: 100%;
@@ -69,7 +69,7 @@
 	 font-weight: 700;
 }
  .card-features {
-	 min-height: 150px;
+	 min-height: 120px;
 }
  .card-features ul li {
 	 margin-bottom: 0.5rem;

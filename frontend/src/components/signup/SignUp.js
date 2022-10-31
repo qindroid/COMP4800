@@ -21,6 +21,7 @@ const cardsData = [
     recurrency: 0.0,
     mostPopular: false,
     data: ["Free charts", "1 Cashflow"],
+    clickMe: Date.now() + 1000 * 60 * 60 * 24 * 7,
   },
   {
     id: 2,
@@ -31,9 +32,10 @@ const cardsData = [
     recurrency: 8.99,
     mostPopular: true,
     data: ["Advanced charts", "Unlimited Cashflow", "24/7 Support"],
+    clickMe: Date.now() + 1000 * 60 * 60 * 24 * 30,
   },
 ];
-
+let _expired = new Date();
 class SignUp extends React.Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired,
@@ -42,13 +44,19 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
 
+    this.id = 0;
+    this.formRef = React.createRef();
+
     this.onFinish = this.onFinish.bind(this);
-    this.checkSignUp = this.checkLogin.bind(this);
+    // this.onGoback = this.onGoback.bind(this);
+
+    this.state = {
+      isAdmin: false,
+    };
   }
 
   componentDidMount() {
     window.document.title = "SignUp - JLLSS";
-    this.checkLogin();
   }
 
   setLoading(bLoading) {
@@ -62,48 +70,29 @@ class SignUp extends React.Component {
 
   onFinish(values) {
     this.setLoading(true);
-
+    let url = "api/user/signup";
     let self = this;
-    axios
-      .post(utils.getDomain() + "api/user/create", values)
-      .then(function (res) {
-        if (0 === res.data.code) {
-          const { cookies } = self.props;
-          cookies.set("token", res.data.data.token, { path: "/" });
 
-          self.props.history.push("/main");
-        } else {
-          message.error(res.data.message);
-        }
+    values["expired"] = _expired;
+    axios({
+      method: "POST",
+      url: utils.getDomain() + url,
+      data: values,
+    })
+      .then(function (res) {
         self.setLoading(false);
+        console.log(values);
+        message.success("Create user successfully");
+        self.props.history.push("/login");
       })
       .catch(function (err) {
-        message.error(err.message);
         self.setLoading(false);
+        message.error(err.message);
       });
   }
 
-  checkLogin() {
-    let self = this;
-    const { cookies } = self.props;
-
-    if (!cookies.get("token")) {
-      return;
-    }
-    // Get user information API
-    axios({
-      method: "GET",
-      url: utils.getDomain() + "api/user/info",
-      headers: { token: cookies.get("token") },
-    })
-      .then(function (res) {
-        if (0 === res.data.code) {
-          self.props.history.push("/main");
-        }
-      })
-      .catch(function (err) {
-        message.error(err.message);
-      });
+  onGoback() {
+    // this.props.history.push("/login");
   }
 
   render() {
@@ -114,8 +103,9 @@ class SignUp extends React.Component {
             <Image preview={false} src={login_logo} />
           </Row>
           {/* User Enter username & password */}
-          <Form name="basic" onFinish={this.onFinish}>
+          <Form name="basic" onFinish={this.onFinish} ref={this.formRef}>
             <Form.Item
+              label="Username"
               name="username"
               rules={[
                 {
@@ -128,38 +118,34 @@ class SignUp extends React.Component {
             </Form.Item>
 
             <Form.Item
+              label="Password"
               name="password"
               rules={[
                 {
                   required: true,
-                  message: "Please input the password",
+                  message: "The length is at least 5",
+                  min: 5,
                 },
               ]}
             >
               <Input.Password placeholder="Password" size="large" />
             </Form.Item>
 
-            <Form.Item>
-              {/* Click to login */}
-              <Button type="primary" htmlType="submit" block>
-                Login
-              </Button>
-            </Form.Item>
-            {/* Click to SignUp */}
-            <Button color="primary" onClick={""} block>
-              <Link to={"/main/dashboard"} target="_blank">
-                SignUp
-              </Link>
-            </Button>
+            <div className="app-wrapper">
+              {cardsData.map((props) => {
+                return (
+                  <PricingCard
+                    {...props}
+                    key={props.id}
+                    clickMe={() => {
+                      _expired = props.clickMe;
+                    }}
+                  />
+                );
+              })}
+            </div>
           </Form>
         </Col>
-        <div className="app-wrapper">
-          {cardsData.map((props) => {
-            return <PricingCard {...props} key={props.id} clickMe={() => {
-                console.log("clicked");
-            }} />;
-          })}
-        </div>
       </Row>
     );
   }
