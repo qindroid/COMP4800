@@ -4,6 +4,7 @@ import {
   Route,
   Redirect,
   Switch,
+  BrowserRouter,
 } from "react-router-dom";
 import { Cookies, CookiesProvider } from "react-cookie";
 import { Spin } from "antd";
@@ -74,21 +75,24 @@ class App extends React.Component {
           >
             <div className="App">
               <Navbar />
-              <Router>
+              <BrowserRouter>
                 <Switch>
-                  {/* <Redirect path="/" to="/landing" exact /> */}
 
-                  {/* <Route path="/" component={Landing} /> */}
+                  <Redirect path="/" to="/landing" exact />
+
+                  <Route path="/landing" component={Landing} />
 
                   <Route path="/login" component={Login} exact />
                   <Route path="/SignUp" component={SignUp} exact />
                   <Route path="/main" component={Main} />
                   <Route path="/cashflowManager" component={CashflowManager} />
 
+                  {/* <Redirect path="/about" to="/aboutus" exact /> */}
+
                   <Route path="/about" component={About} />
 
                 </Switch>
-              </Router>
+              </BrowserRouter>
             </div>
           </Spin>
         </Suspense>
