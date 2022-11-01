@@ -22,6 +22,85 @@ function About() {
 
 
   return (
+    // <section>
+    //   <div class="row">
+    //     <h1>Our Team</h1>
+    //   </div>
+    //   <div class="row">
+    //     {/* <!-- Column 1--> */}
+    //     <div class="column">
+    //       <div class="card">
+    //         <div class="img-container">
+    //           <img src="profile-img-1.png" />
+    //         </div>
+    //         <h3>Luna Turner</h3>
+    //         <p>Founder</p>
+    //         <div class="icons">
+    //           <a href="#">
+    //             <i class="fab fa-twitter"></i>
+    //           </a>
+    //           <a href="#">
+    //             <i class="fab fa-linkedin"></i>
+    //           </a>
+    //           <a href="#">
+    //             <i class="fab fa-github"></i>
+    //           </a>
+    //           <a href="#">
+    //             <i class="fas fa-envelope"></i>
+    //           </a>
+    //         </div>
+    //       </div>
+    //     </div>
+    //     {/* <!-- Column 2--> */}
+    //     <div class="column">
+    //       <div class="card">
+    //         <div class="img-container">
+    //           <img src="profile-img-2.png" />
+    //         </div>
+    //         <h3>Bryant Hall</h3>
+    //         <p>Developer</p>
+    //         <div class="icons">
+    //           <a href="#">
+    //             <UilLinkedin />
+    //           </a>
+    //           <a href="#">
+    //             <i class="fab fa-linkedin"></i>
+    //           </a>
+    //           <a href="#">
+    //             <i class="fab fa-github"></i>
+    //           </a>
+    //           <a href="#">
+    //             <i class="fas fa-envelope"></i>
+    //           </a>
+    //         </div>
+    //       </div>
+    //     </div>
+    //     {/* <!-- Column 3--> */}
+    //     <div class="column">
+    //       <div class="card">
+    //         <div class="img-container">
+    //           <img src="profile-img-3.png" />
+    //         </div>
+    //         <h3>Hope Watkins</h3>
+    //         <p>Designer</p>
+    //         <div class="icons">
+    //           <a href="#">
+    //             <i class="fab fa-twitter"></i>
+    //           </a>
+    //           <a href="#">
+    //             <i class="fab fa-linkedin"></i>
+    //           </a>
+    //           <a href="#">
+    //             <i class="fab fa-github"></i>
+    //           </a>
+    //           <a href="#">
+    //             <i class="fas fa-envelope"></i>
+    //           </a>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </section>
     <about ref={app}>
       <section className="about">
         <div class="w-full">

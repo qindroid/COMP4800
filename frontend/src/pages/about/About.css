@@ -65,19 +65,21 @@
     m-auto 
     w-1/2
   ;
+  text-decoration: none;
 }
 .about__card a {
   @apply 
     text-2xl
     no-underline
   ;
+  color: inherit;
+  text-decoration: none;
 }
 .about__card:hover {
   @apply 
     text-white
     bg-gradient-to-b from-indigo-600 to-indigo-500
   ;
-  /* background: linear-gradient(#6045ea, #8567f7); */
 }
 .about__card:hover .img-container {
   @apply 
@@ -85,6 +87,7 @@
     scale-110
   ;
 }
+
 @media screen and (min-width: 320px) {
   
   .about__row {

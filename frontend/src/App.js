@@ -16,11 +16,18 @@ import axios from "axios";
 import utils from "./common/Utils";
 import { Row, Form, Col, Input, Button, message, Image } from "antd";
 
+// Pages 
+import Navbar from "./components/navigation/Navigation";
+import Landing from "./components/landing/Landing";
+import About from "./pages/about/About";
 
 const Login = React.lazy(() => import("./components/login/Login"));
 const SignUp = React.lazy(() => import("./components/signup/SignUp"));
 const Main = React.lazy(() => import("./components/main/Main"));
 const CashflowManager = React.lazy(() => import("./components/cashflow/Cashflow"));
+
+// Pages
+
 class App extends React.Component {
 
   constructor(props) {
@@ -66,13 +73,20 @@ class App extends React.Component {
             indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
           >
             <div className="App">
+              <Navbar />
               <Router>
                 <Switch>
-                  <Redirect path="/" to="/login" exact />
+                  {/* <Redirect path="/" to="/landing" exact /> */}
+
+                  {/* <Route path="/" component={Landing} /> */}
+
                   <Route path="/login" component={Login} exact />
                   <Route path="/SignUp" component={SignUp} exact />
                   <Route path="/main" component={Main} />
                   <Route path="/cashflowManager" component={CashflowManager} />
+
+                  <Route path="/about" component={About} />
+
                 </Switch>
               </Router>
             </div>
