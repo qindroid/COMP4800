@@ -42,6 +42,16 @@ class User extends React.Component {
               key: "username",
             },
             {
+              title: "Created",
+              dataIndex: "created",
+              key: "created",
+            },
+            {
+              title: "Expired",
+              dataIndex: "expired",
+              key: "expired",
+            },
+            {
               title: "Is Admin",
               key: "isAdmin",
               render: (text, record) => {

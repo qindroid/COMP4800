@@ -5,15 +5,10 @@ import utils from "../../common/Utils";
 import "./Login.css";
 import "../../store";
 import store from "../../store";
-import login_logo from "../../images/main_logo.png";
+import login_logo from "../../images/logo-color.png";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
-
-const About = () => {
-    const navigate = useNavigate();
-    return (navigate("/landing"));
-};
+import { Link } from "react-router-dom";
 
 class Login extends React.Component {
 
@@ -70,6 +65,7 @@ class Login extends React.Component {
             });
     }
 
+
     checkLogin() {
         let self = this;
         const { cookies } = self.props;
@@ -96,15 +92,12 @@ class Login extends React.Component {
     render() {
         return (
             <Row justify="center" align="middle" className="container">
-
                 <Col span={10}>
                     <Row className="logo">
-                        <Image
-                            preview={false}
-                            src={login_logo}
-                        />
+                        <Image preview={false} src={login_logo} />
                     </Row>
                     {/* User Enter username & password */}
+
                     <Form name="basic" onFinish={this.onFinish}>
                         <Form.Item
                             name="username"
@@ -127,19 +120,21 @@ class Login extends React.Component {
                                 },
                             ]}
                         >
-                            <Input.Password
-                                placeholder="Password"
-                                size="large"
-                            />
+                            <Input.Password placeholder="Password" size="large" />
                         </Form.Item>
 
                         <Form.Item>
                             {/* Click to login */}
-                            <Button onClick={About} type="primary" htmlType="submit" block>
+                            <Button type="primary" htmlType="submit" block>
                                 Login
                             </Button>
-                            {/* {MyBackButton()} */}
                         </Form.Item>
+                        {/* Click to SignUp */}
+                        <Button color="primary" onClick={""} block>
+                            <Link to={"/SignUp"} target="_blank">
+                                SignUp
+                            </Link>
+                        </Button>
                     </Form>
                 </Col>
             </Row>

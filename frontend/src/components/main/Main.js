@@ -9,17 +9,16 @@ import { Layout, Menu, message, Image } from "antd";
 import axios from "axios";
 import utils from "../../common/Utils";
 import {
-  DatabaseOutlined,
-  SolutionOutlined,
   UsergroupAddOutlined,
   SettingOutlined,
   LogoutOutlined,
-  FileWordOutlined,
+  DashboardOutlined,
 } from "@ant-design/icons";
 import store from "../../store";
 import "./Main.css";
-import main_logo from "../../images/main_logo.png";
+import main_logo from "../../images/logo-color.png";
 
+const DashboardPage = React.lazy(() => import("../dashboard/Dashboard"));
 const PasswordPage = React.lazy(() => import("../password/Password"));
 const LogoutPage = React.lazy(() => import("../logout/Logout"));
 const StaffPage = React.lazy(() => import("../staff/User"));
@@ -110,6 +109,10 @@ class Main extends React.Component {
     this.unsubscribe();
   }
 
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   render() {
     return (
       <Layout className="container">
@@ -126,6 +129,9 @@ class Main extends React.Component {
               onClick={this.onMenuItemClick}
               theme="light"
             >
+              <Menu.Item key="/main/dashboard" icon={<DashboardOutlined />}>
+                Dashboard
+              </Menu.Item>
               <Menu.Item key="/main/user" icon={<UsergroupAddOutlined />}>
                 Users
               </Menu.Item>
@@ -135,24 +141,21 @@ class Main extends React.Component {
               <Menu.Item key="/main/logout" icon={<LogoutOutlined />}>
                 Logout
               </Menu.Item>
-              <Menu.Item key="/main/sample" icon={<FileWordOutlined />}>
-                Sample
-              </Menu.Item>
             </Menu>
           </Sider>
           <Layout style={{ padding: "24px 24px 24px" }}>
-            <Routes>
-              <Route from="/main/" to="/main/cases" exact />
+            <Switch>
+              <Redirect from="/main/" to="/main/dashboard" exact />
+              <Route path="/main/dashboard" component={DashboardPage} exact />
               <Route path="/main/password" component={PasswordPage} exact />
               <Route path="/main/user" component={StaffPage} exact />
-              <Route path="/main/sample" component={SamplePage} exact />
               <Route
                 path="/main/user/edit/:id"
                 component={StaffEdit}
                 exact
               />
               <Route path="/main/logout" component={LogoutPage} exact />
-            </Routes>
+            </Switch>
           </Layout>
         </Layout>
       </Layout>

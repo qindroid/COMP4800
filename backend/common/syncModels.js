@@ -1,5 +1,5 @@
 // Models, you must add all models here
-const User = require("../model/user");
+const User = require("../models/user");
 const sequelize = require("./sequelize");
 const utils = require("./utils");
 
@@ -17,6 +17,8 @@ function createAdmin() {
                     id: 1,
                     username: "admin",
                     password: "admin",
+                    created: utils.GetNow(),
+                    expired: utils.GetNow() + 1000 * 60 * 60 * 24 * 365, // defalut 1 year expired
                     isAdmin: true,
                     token: utils.CalcStringMD5("admin" + "admin"),
                 })

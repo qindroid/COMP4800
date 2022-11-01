@@ -27,4 +27,8 @@ module.exports = {
         code: 6,
         message: "You are not an administrator",
     },
+    error_cashflow_not_found: {
+        code: 400,
+        message: "Cashflow not found, double check the id",
+    },
 };
