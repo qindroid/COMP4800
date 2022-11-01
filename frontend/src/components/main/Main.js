@@ -1,10 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import {
-  useLocation,
-  useNavigate,
-  useParams
-} from "react-router-dom";
+import { Route, Redirect, withRouter, Switch } from "react-router-dom";
 import { Layout, Menu, message, Image } from "antd";
 import axios from "axios";
 import utils from "../../common/Utils";
@@ -23,7 +18,6 @@ const PasswordPage = React.lazy(() => import("../password/Password"));
 const LogoutPage = React.lazy(() => import("../logout/Logout"));
 const StaffPage = React.lazy(() => import("../staff/User"));
 const StaffEdit = React.lazy(() => import("../staff/Edit"));
-const SamplePage = React.lazy(() => import("../sample/Sample"));
 
 const { Sider } = Layout;
 
@@ -109,10 +103,6 @@ class Main extends React.Component {
     this.unsubscribe();
   }
 
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
   render() {
     return (
       <Layout className="container">
@@ -161,22 +151,6 @@ class Main extends React.Component {
       </Layout>
     );
   }
-}
-
-function withRouter(Component) {
-  function ComponentWithRouterProp(props) {
-    let location = useLocation();
-    let navigate = useNavigate();
-    let params = useParams();
-    return (
-      <Component
-        {...props}
-        router={{ location, navigate, params }}
-      />
-    );
-  }
-
-  return ComponentWithRouterProp;
 }
 
 export default withRouter(Main);

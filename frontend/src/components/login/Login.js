@@ -11,9 +11,6 @@ import { withCookies, Cookies } from "react-cookie";
 import { Link } from "react-router-dom";
 
 class Login extends React.Component {
-
-
-
     static propTypes = {
         cookies: instanceOf(Cookies).isRequired,
     };
@@ -41,7 +38,6 @@ class Login extends React.Component {
     }
 
     onFinish(values) {
-
         this.setLoading(true);
 
         let self = this;
@@ -52,8 +48,7 @@ class Login extends React.Component {
                     const { cookies } = self.props;
                     cookies.set("token", res.data.data.token, { path: "/" });
 
-                    // self.props.navigate("/main");
-                    // NavigateToMain("/main");
+                    self.props.history.push("/main");
                 } else {
                     message.error(res.data.message);
                 }
@@ -81,7 +76,7 @@ class Login extends React.Component {
         })
             .then(function (res) {
                 if (0 === res.data.code) {
-                    // self.props.history.push("/main");
+                    self.props.history.push("/main");
                 }
             })
             .catch(function (err) {

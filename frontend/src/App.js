@@ -47,23 +47,6 @@ class App extends React.Component {
 
   render() {
     return (
-      // <CookiesProvider>
-      //   <Navigation />
-
-      //   <React.StrictMode>
-      //     <Router>
-      //       <Routes>
-      //         <Route path="/" element={<Landing />} />
-      //         <Route path="/about" element={<About />} />
-      //         <Route path="/login" element={<Login />} />
-
-      //         <Route path="/login" component={Login} />
-      //         <Route path="/main" component={Main} />
-      //         <Route path="/sample" component={Sample} />
-      //       </Routes>
-      //     </Router>
-      //   </React.StrictMode>
-      // </CookiesProvider>
       <CookiesProvider>
         <Suspense
           fallback={
@@ -84,15 +67,15 @@ class App extends React.Component {
           >
             <div className="App">
               <Router>
-                <Routes>
-                  <Route path="/" to="/login" exact />
+                <Switch>
+                  <Redirect path="/" to="/login" exact />
                   <Route path="/login" component={Login} exact />
+                  <Route path="/SignUp" component={SignUp} exact />
                   <Route path="/main" component={Main} />
-                  <Route path="/sample" component={Sample} />
-                </Routes>
+                  <Route path="/cashflowManager" component={CashflowManager} />
+                </Switch>
               </Router>
             </div>
-
           </Spin>
         </Suspense>
       </CookiesProvider>
