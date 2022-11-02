@@ -3,6 +3,7 @@ const router = express.Router();
 const auth = require("../common/auth");
 const checkAdmin = require("../common/isAdmin");
 const errHandler = require("../common/errHandler");
+const { endpoint } = require("../common/errHandler");
 const Utils = require("../common/utils");
 const User = require("../models/user");
 
@@ -13,35 +14,41 @@ function createDefaultExpiryDate() {
   return dateNow;
 }
 
-router.post("/create", auth, checkAdmin, async function (req, res, next) {
-  try {
+router.post(
+  "/create",
+  auth,
+  checkAdmin,
+  endpoint(async (req, res, next) => {
+    try {
+      if (!req.body.username.trim().length) {
+        return Utils.SendError(res, errHandler.error_empty_username);
+      }
+      let _expired = createDefaultExpiryDate();
+
+      await User.create({
+        username: req.body.username,
+        password: req.body.password,
+        isAdmin: req.body.isAdmin,
+        created: Utils.GetNow(),
+        expired: _expired,
+        token: Utils.CalcStringMD5(req.body.username + req.body.password),
+      });
+      Utils.SendResult(res);
+    } catch (error) {
+      console.log(error);
+      Utils.SendError(res, error);
+    }
+  })
+);
+
+router.post(
+  "/signup",
+  endpoint(async (req, res, next) => {
     if (!req.body.username.trim().length) {
       return Utils.SendError(res, errHandler.error_empty_username);
     }
     let _expired = createDefaultExpiryDate();
 
-    await User.create({
-      username: req.body.username,
-      password: req.body.password,
-      isAdmin: req.body.isAdmin,
-      created: Utils.GetNow(),
-      expired: _expired,
-      token: Utils.CalcStringMD5(req.body.username + req.body.password),
-    });
-    Utils.SendResult(res);
-  } catch (error) {
-    console.log(error);
-    Utils.SendError(res, error);
-  }
-});
-
-router.post("/signup", async function (req, res, next) {
-  try {
-    if (!req.body.username.trim().length) {
-      return Utils.SendError(res, errHandler.error_empty_username);
-    }
-    let _expired = createDefaultExpiryDate();
-    
     await User.create({
       username: req.body.username,
       password: req.body.password,
@@ -51,14 +58,12 @@ router.post("/signup", async function (req, res, next) {
       token: Utils.CalcStringMD5(req.body.username + req.body.password),
     });
     Utils.SendResult(res);
-  } catch (error) {
-    console.log(error);
-    Utils.SendError(res, error);
-  }
-});
+  })
+);
 
-router.post("/login", async function (req, res, next) {
-  try {
+router.post(
+  "/login",
+  endpoint(async (req, res, next) => {
     let user = await User.findOne({
       where: req.body,
     });
@@ -69,14 +74,13 @@ router.post("/login", async function (req, res, next) {
     }
 
     Utils.SendResult(res, user);
-  } catch (error) {
-    console.log(error);
-    Utils.SendError(res, error);
-  }
-});
+  })
+);
 
-router.get("/info", auth, async function (req, res, next) {
-  try {
+router.get(
+  "/info",
+  auth,
+  endpoint(async (req, res, next) => {
     let user = await User.findOne({
       where: {
         token: req.headers.token,
@@ -89,13 +93,10 @@ router.get("/info", auth, async function (req, res, next) {
     }
 
     Utils.SendResult(res, user);
-  } catch (error) {
-    console.log(error);
-    Utils.SendError(res, error);
-  }
-});
+  })
+);
 
-router.post("/password", auth, async function (req, res, next) {
+router.post("/password", auth, async (req, res, next) => {
   try {
     let user = await User.findOne({
       where: {
@@ -123,8 +124,11 @@ router.post("/password", auth, async function (req, res, next) {
   }
 });
 
-router.post("/list", auth, checkAdmin, async function (req, res, next) {
-  try {
+router.post(
+  "/list",
+  auth,
+  checkAdmin,
+  endpoint(async (req, res, next) => {
     let page = req.body.page ? req.body.page : 1;
     let limit = req.body.limit ? req.body.limit : 20;
     let offset = (page - 1) * limit;
@@ -142,28 +146,28 @@ router.post("/list", auth, checkAdmin, async function (req, res, next) {
     };
 
     Utils.SendResult(res, data);
-  } catch (error) {
-    console.log(error);
-    Utils.SendError(res, error);
-  }
-});
+  })
+);
 
-router.post("/all", auth, checkAdmin, async function (req, res, next) {
-  try {
+router.post(
+  "/all",
+  auth,
+  checkAdmin,
+  endpoint(async (req, res, next) => {
     const count = await User.count();
     let users = await User.findAll({
       attributes: ["id", "username"],
     });
 
     Utils.SendResult(res, users);
-  } catch (error) {
-    console.log(error);
-    Utils.SendError(res, error);
-  }
-});
+  })
+);
 
-router.post("/detail", auth, checkAdmin, async function (req, res, next) {
-  try {
+router.post(
+  "/detail",
+  auth,
+  checkAdmin,
+  endpoint(async (req, res, next) => {
     let user = await User.findOne({
       where: {
         id: req.body.id,
@@ -176,14 +180,14 @@ router.post("/detail", auth, checkAdmin, async function (req, res, next) {
     }
 
     Utils.SendResult(res, user);
-  } catch (error) {
-    console.log(error);
-    Utils.SendError(res, error);
-  }
-});
+  })
+);
 
-router.post("/update", auth, checkAdmin, async function (req, res, next) {
-  try {
+router.post(
+  "/update",
+  auth,
+  checkAdmin,
+  endpoint(async (req, res, next) => {
     await User.update(
       {
         username: req.body.username,
@@ -199,14 +203,14 @@ router.post("/update", auth, checkAdmin, async function (req, res, next) {
     );
 
     Utils.SendResult(res);
-  } catch (error) {
-    console.log(error);
-    Utils.SendError(res, error);
-  }
-});
+  })
+);
 
-router.post("/delete", auth, checkAdmin, async function (req, res, next) {
-  try {
+router.post(
+  "/delete",
+  auth,
+  checkAdmin,
+  endpoint(async (req, res, next) => {
     if (parseInt(req.body.id) === 1) {
       return Utils.SendError(res, errHandler.error_del_sysadmin);
     }
@@ -218,10 +222,7 @@ router.post("/delete", auth, checkAdmin, async function (req, res, next) {
     });
 
     Utils.SendResult(res);
-  } catch (error) {
-    console.log(error);
-    Utils.SendError(res, error);
-  }
-});
+  })
+);
 
 module.exports = router;

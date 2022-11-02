@@ -7,9 +7,11 @@ const indexRouter = require("./routes/index");
 const userRouter = require("./routes/user");
 const cashflowRouter = require("./routes/cashflow");
 const syncModels = require("./common/syncModels");
+const Utils = require("./common/utils");
+
 var cors = require("cors");
 app.set("trust proxy", 1);
-app.use(cors()); 
+app.use(cors());
 app.use(logger("dev"));
 app.use(cookieParser());
 app.use(express.json());
@@ -17,17 +19,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 // Allow crossed domain requests
 app.all("*", function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-    if (req.method === "OPTIONS") {
-        res.sendStatus(200);
-    } else {
-        next();
-    }
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+  if (req.method === "OPTIONS") {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
 });
 syncModels();
 app.use("/", indexRouter);
 app.use("/api/user", userRouter);
 app.use("/api/cashflow", cashflowRouter);
+
+app.use(function (err, req, res, next) {
+    if(!err) return;
+    console.log(`Handling error... ${err}`);
+    Utils.SendError(res, err);
+});
+
 module.exports = app;
