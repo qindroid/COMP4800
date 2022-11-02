@@ -8,7 +8,7 @@ const Cashflow = sequelize.define(
     Type: DataTypes.STRING,
     Amount: DataTypes.FLOAT,
     Description: DataTypes.STRING,
-    referenceType: DataTypes.STRING
+    ReferenceType: DataTypes.STRING
   }
 
 );
