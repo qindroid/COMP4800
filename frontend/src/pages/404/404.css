@@ -1,0 +1,121 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"); */
+
+.error {
+  background-color: var(--first-color);
+  padding: 9rem 0 2rem;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  /* @apply
+    bg-amber-400	
+  ; */
+}
+
+.error__container {
+  display: grid;
+  align-content: center;
+  row-gap: 2.5rem;
+}
+
+.error__data {
+  text-align: center;
+}
+
+.error__title {
+  font-size: var(--big-font-size);
+  margin: .75rem 0;
+}
+
+.error__button {
+  margin-top: 2rem;
+  display: inline-block;
+  background-color: var(--text-color);
+  color: #fff;
+  padding: .80rem 1.5rem;
+  border-radius: 3rem;
+  transition: .4s;
+}
+
+.error__button:hover {
+  box-shadow: 0 4px 12px hsla(38, 69%, 8%, .2);
+  @apply
+    text-amber-400	
+  ;
+}
+
+.error__img img {
+  width: 230px;
+  animation: floaty 1.8s infinite alternate;
+}
+
+.error__img {
+  justify-self: center;
+}
+
+.error__shadow {
+  width: 130px;
+  height: 24px;
+  background-color: hsla(38, 21%, 19%, .16);
+  margin: 0 auto;
+  border-radius: 50%;
+  filter: blur(7px);
+  animation: shadow 1.8s infinite alternate;
+}
+
+/* Animate ghost */
+@keyframes floaty {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(15px);
+  }
+}
+
+@keyframes shadow {
+  0% {
+    transform: scale(1, 1);
+  }
+  100% {
+    transform: scale(.85, .85);
+  }
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 320px) {
+  .error {
+    justify-content: center;
+    padding-top: 7rem;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1024px) {
+  .error__container {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    column-gap: 10rem;
+  }
+  .error__data {
+    justify-self: end;
+    text-align: initial;
+  }
+  .error__img {
+    justify-self: start;
+  }
+  .error__img img {
+    width: 400px;
+  }
+  .error__shadow {
+    width: 250px;
+    height: 40px;
+  }
+}
+
+@media screen and (min-width: 1048px) {
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

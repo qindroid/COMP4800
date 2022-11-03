@@ -49,7 +49,7 @@ function Main() {
           <div className="home__data">
             <h1 className="home__title">Cashflow </h1>
             <p className="home__description">Let's help managing your finance <br /> quick and easy.</p>
-            <a href="#" className="home__button">Get Started</a>
+            <a href="/signup" className="home__button">Get Started</a>
           </div>
         </div>
       </section>

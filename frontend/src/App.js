@@ -21,6 +21,7 @@ import { Row, Form, Col, Input, Button, message, Image } from "antd";
 import Navbar from "./components/navigation/Navigation";
 import Landing from "./components/landing/Landing";
 import About from "./pages/about/About";
+import Error from "./pages/404/404";
 
 const Login = React.lazy(() => import("./components/login/Login"));
 const SignUp = React.lazy(() => import("./components/signup/SignUp"));
@@ -81,6 +82,7 @@ class App extends React.Component {
                   <Redirect path="/" to="/landing" exact />
 
                   <Route path="/landing" component={Landing} />
+                  <Route path="/about" component={About} />
 
                   <Route path="/login" component={Login} exact />
                   <Route path="/SignUp" component={SignUp} exact />
@@ -89,7 +91,7 @@ class App extends React.Component {
 
                   {/* <Redirect path="/about" to="/aboutus" exact /> */}
 
-                  <Route path="/about" component={About} />
+                  <Route path="/*" component={Error} />
 
                 </Switch>
               </BrowserRouter>
