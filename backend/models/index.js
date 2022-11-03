@@ -41,6 +41,8 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
+db['users'].hasMany(db['cashflows'], {foreignKey: 'UserID'});
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
