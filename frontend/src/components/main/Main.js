@@ -12,6 +12,7 @@ import {
 import store from "../../store";
 import "./Main.css";
 import main_logo from "../../images/logo-color.png";
+import { USER_LOGOUT_ROUTE } from "../../common/urls";
 
 const DashboardPage = React.lazy(() => import("../dashboard/Dashboard"));
 const PasswordPage = React.lazy(() => import("../password/Password"));
@@ -62,7 +63,7 @@ class Main extends React.Component {
 
         let self = this;
         axios
-            .get(utils.getDomain() + "api/user/logout")
+            .get(USER_LOGOUT_ROUTE)
             .then(function (res) {
                 if (
                     0 === parseInt(res.data.code) ||

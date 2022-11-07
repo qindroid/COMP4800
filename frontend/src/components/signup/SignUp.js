@@ -11,6 +11,7 @@ import { withCookies, Cookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import PricingCard from "./CardItem";
 import "./CardItem.css";
+import { USER_REGISTER_ROUTE } from "../../common/urls";
 const cardsData = [
   {
     id: 1,
@@ -70,7 +71,7 @@ class SignUp extends React.Component {
 
   onFinish(values) {
     this.setLoading(true);
-    let url = "api/user/signup";
+    let url = USER_REGISTER_ROUTE;
     let self = this;
 
     values["expired"] = _expired;

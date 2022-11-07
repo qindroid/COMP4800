@@ -1,3 +1,5 @@
+import { USER_PASSWORD_ROUTE } from "../../common/urls";
+
 class Account extends React.Component {
     static propTypes = {
         cookies: instanceOf(Cookies).isRequired,
@@ -41,7 +43,7 @@ class Account extends React.Component {
         // Password API
         axios({
             method: "POST",
-            url: utils.getDomain() + "api/user/password/",
+            url: USER_PASSWORD_ROUTE,
             headers: { token: cookies.get("token") },
             data: values,
         })
