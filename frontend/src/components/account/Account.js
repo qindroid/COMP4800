@@ -64,9 +64,6 @@ class Account extends React.Component {
     }
 
     render() {
-        return (
-            // Input inofrmation to change password
-
-        );
+        return (<></>);
     }
 }
