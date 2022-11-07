@@ -7,9 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApi.Entities
 {
-public class Cashflow
+    public class Cashflow
     {
- 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CashFlowId { get; set; }
 
         // cash coming in or cash going out
@@ -23,6 +24,8 @@ public class Cashflow
         public string? ProjectType { get; set; }
 
         [ForeignKey("Id")]
-        public User User { get; set; }
+        public virtual int UserId { get; set; }
+        
+        public virtual User User { get; set; }
     }
 }

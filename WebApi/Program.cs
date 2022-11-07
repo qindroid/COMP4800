@@ -36,12 +36,13 @@ var builder = WebApplication.CreateBuilder(args);
     // configure DI for application services
     services.AddScoped<IJwtUtils, JwtUtils>();
     services.AddScoped<IUserService, UserService>();
+     services.AddScoped<ICashflowService, CashflowService>();
 }
 
 var app = builder.Build();
 
-app.useSwagger();
-app.useSwaggerUI();
+app.UseSwagger();
+app.UseSwaggerUI();
 // migrate any database changes on startup (includes initial db creation)
 using (var scope = app.Services.CreateScope())
 {

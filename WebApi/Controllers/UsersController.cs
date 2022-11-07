@@ -46,6 +46,8 @@ public class UsersController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
+    
+  
         var users = _userService.GetAll();
         return Ok(users);
     }

@@ -22,12 +22,6 @@ public class DataContext : DbContext
     public DbSet<Cashflow> Cashflows { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // modelBuilder.Entity<User>()
-        //     .HasKey(u => u.Id);
-
-        // modelBuilder.Entity<Cashflow>()
-        // .HasOne<User>(c => c.User)
-        // .WithMany(a => a.Cashflows)
-        // .HasForeignKey<int>(b => b.Id);
+        modelBuilder.Seed();
     }
 }
