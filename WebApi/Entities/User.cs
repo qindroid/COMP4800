@@ -16,5 +16,5 @@ public class User : IdentityUser<int>
     [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
     public DateTime? Expired { get; set; }
     public bool IsAdmin { get; set; }
-    public virtual ICollection<Cashflow>? Cashflows { get; set; }
+    public virtual ICollection<Cashflow> Cashflows { get; set; }
 }
