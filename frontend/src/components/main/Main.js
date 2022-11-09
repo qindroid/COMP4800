@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, Redirect, withRouter, Switch } from "react-router-dom";
-import { Layout, Menu, message, Image } from "antd";
+import {Route, Redirect, withRouter, Switch} from "react-router-dom";
+import {Layout, Menu, message, Image} from "antd";
 import axios from "axios";
 import utils from "../../common/Utils";
 import {
@@ -12,6 +12,7 @@ import {
 import store from "../../store";
 import "./Main.css";
 import main_logo from "../../images/logo-color.png";
+import {USER_LOGOUT_ROUTE} from "../../common/urls";
 
 const DashboardPage = React.lazy(() => import("../dashboard/Dashboard"));
 const PasswordPage = React.lazy(() => import("../password/Password"));
@@ -19,7 +20,7 @@ const LogoutPage = React.lazy(() => import("../logout/Logout"));
 const StaffPage = React.lazy(() => import("../staff/User"));
 const StaffEdit = React.lazy(() => import("../staff/Edit"));
 
-const { Sider } = Layout;
+const {Sider} = Layout;
 
 class Main extends React.Component {
   constructor(props) {
@@ -62,12 +63,9 @@ class Main extends React.Component {
 
     let self = this;
     axios
-      .get(utils.getDomain() + "api/user/logout")
+      .get(USER_LOGOUT_ROUTE)
       .then(function (res) {
-        if (
-          0 === parseInt(res.data.code) ||
-          1 === parseInt(res.data.code)
-        ) {
+        if (0 === parseInt(res.data.code) || 1 === parseInt(res.data.code)) {
           self.props.history.push("/");
         } else {
           message.error(res.data.message);
@@ -88,8 +86,7 @@ class Main extends React.Component {
 
     this.unsubscribe = store.subscribe(() => {
       if (
-        self.state.currentItem.length !==
-        store.getState().currentItem.length ||
+        self.state.currentItem.length !== store.getState().currentItem.length ||
         self.state.currentItem[0] !== store.getState().currentItem[0]
       ) {
         self.setState({
@@ -107,7 +104,7 @@ class Main extends React.Component {
     return (
       <Layout className="container">
         <Layout>
-          <Sider width={200} className="" style={{ background: "#FFFFFF" }}>
+          <Sider width={200} className="" style={{background: "#FFFFFF"}}>
             <div className="logo">
               <Image preview={false} src={main_logo} background="white" />
             </div>
@@ -115,10 +112,9 @@ class Main extends React.Component {
               mode="inline"
               defaultSelectedKeys={this.state.currentItem}
               selectedKeys={this.state.currentItem}
-              style={{ height: "100%", borderRight: 0 }}
+              style={{height: "100%", borderRight: 0}}
               onClick={this.onMenuItemClick}
-              theme="light"
-            >
+              theme="light">
               <Menu.Item key="/main/dashboard" icon={<DashboardOutlined />}>
                 Dashboard
               </Menu.Item>
@@ -133,17 +129,13 @@ class Main extends React.Component {
               </Menu.Item>
             </Menu>
           </Sider>
-          <Layout style={{ padding: "24px 24px 24px" }}>
+          <Layout style={{padding: "24px 24px 24px"}}>
             <Switch>
               <Redirect from="/main/" to="/main/dashboard" exact />
               <Route path="/main/dashboard" component={DashboardPage} exact />
               <Route path="/main/password" component={PasswordPage} exact />
               <Route path="/main/user" component={StaffPage} exact />
-              <Route
-                path="/main/user/edit/:id"
-                component={StaffEdit}
-                exact
-              />
+              <Route path="/main/user/edit/:id" component={StaffEdit} exact />
               <Route path="/main/logout" component={LogoutPage} exact />
             </Switch>
           </Layout>
