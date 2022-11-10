@@ -14,8 +14,6 @@ public static class ModelBuilderExtensions
     public static void Seed(this ModelBuilder builder)
     {
 
-        var password = "P@$$w0rd";
-
         User adminUser = new User
         {
             Id = 1,

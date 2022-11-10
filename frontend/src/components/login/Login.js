@@ -46,7 +46,8 @@ class Login extends React.Component {
         axios
             .post(USER_LOGIN_ROUTE, values)
             .then(function (res) {
-                if (0 === res.data.code) {
+                console.log(res);   
+                if (200 === res.data.code) {
                     const { cookies } = self.props;
                     cookies.set("token", res.data.data.token, { path: "/" });
 
@@ -58,6 +59,7 @@ class Login extends React.Component {
             })
             .catch(function (err) {
                 message.error(err.message);
+                console.log(err);
                 self.setLoading(false);
             });
     }

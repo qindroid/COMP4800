@@ -107,4 +107,8 @@ public class UserService : IUserService
         if (user == null) throw new KeyNotFoundException("User not found");
         return user;
     }
+
+    public void GetInfo() {
+
+    } 
 }

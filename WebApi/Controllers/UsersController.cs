@@ -10,7 +10,7 @@ using WebApi.Services;
 
 [Authorize]
 [ApiController]
-[Route("[controller]")]
+[Route("/api/user")]
 public class UsersController : ControllerBase
 {
     private IUserService _userService;
@@ -28,27 +28,38 @@ public class UsersController : ControllerBase
     }
 
     [AllowAnonymous]
-    [HttpPost("authenticate")]
+    [HttpPost("login")]
     public IActionResult Authenticate(AuthenticateRequest model)
     {
         var response = _userService.Authenticate(model);
-        return Ok(response);
+        return Ok(new { code = StatusCodes.Status200OK,  data = response, message="Success"});
     }
 
     [AllowAnonymous]
-    [HttpPost("register")]
+    [HttpPost("signup")]
     public IActionResult Register(RegisterRequest model)
     {
         _userService.Register(model);
         return Ok(new { message = "Registration successful" });
     }
 
+    [HttpPost("logout")]
+    public IActionResult Logout(int id) {
+        // todo
+        return Ok(new {message = ""});
+    }
+    
+    [HttpGet("info")]
+    public IActionResult GetInfo()
+    {
+        // todo
+        return Ok(new { message = "" });
+    }
     [HttpGet]
     public IActionResult GetAll()
     {
-    
-  
         var users = _userService.GetAll();
+
         return Ok(users);
     }
 
@@ -56,6 +67,7 @@ public class UsersController : ControllerBase
     public IActionResult GetById(int id)
     {
         var user = _userService.GetById(id);
+
         return Ok(user);
     }
 

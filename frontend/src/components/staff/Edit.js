@@ -8,7 +8,7 @@ import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 import {
   USER_DETAIL_ROUTE,
-  USER_CREATE_ROUTE,
+  USER_REGISTER_ROUTE,
   USER_UPDATE_ROUTE,
 } from "../../common/urls";
 
@@ -91,7 +91,7 @@ class UserEdit extends React.Component {
   onFinish(values) {
     this.setLoading(true);
     // if has staaff ==?update, if not ===> create a new one
-    let url = USER_CREATE_ROUTE;
+    let url = USER_REGISTER_ROUTE;
     if ("0" !== this.id) {
       url = USER_UPDATE_ROUTE;
     }

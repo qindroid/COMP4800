@@ -3,6 +3,9 @@
 using WebApi.Authorization;
 using WebApi.Helpers;
 using WebApi.Services;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,14 +28,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 
     services.AddCors();
-    services.AddControllers();
-
+    services.AddControllers().AddJsonOptions(
+            options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve
+        );
     // configure automapper with all automapper profiles from this assembly
     services.AddAutoMapper(typeof(Program));
 
     // configure strongly typed settings object
     services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
-
+    services.AddHttpContextAccessor();
     // configure DI for application services
     services.AddScoped<IJwtUtils, JwtUtils>();
     services.AddScoped<IUserService, UserService>();
