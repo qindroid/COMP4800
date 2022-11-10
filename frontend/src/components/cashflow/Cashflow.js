@@ -1,59 +1,64 @@
-import axios from "axios";
-import utils from "../../common/Utils";
-import "../../store";
-import store from "../../store";
-import login_logo from "../../images/main_logo.png";
-import { instanceOf } from "prop-types";
-import { Row, Form, Col, Input, Button, message, Image } from "antd";
-import { withCookies, Cookies } from "react-cookie";
 import React from "react";
-import { CASHFLOW_CREATE_ROUTE } from "../../common/urls";
 
-class CashflowManager extends React.Component {
-  static propTypes = {
-    cookies: instanceOf(Cookies).isRequired,
+import CreateCashflow from "./CreateCashflow";
+import { ShowCashflow } from "./ShowCashflow";
+import { getCashflow, createCashflow } from "../../common/urls";
+
+class Cashflow extends React.Component {
+
+  state = {
+    type: "",
+    amount: "",
+    description: ""
   };
 
-  constructor(props) {
-    super(props);
-
-    this.createCashflow = this.createCashflow.bind(this);
-  }
-  createCashflow() {
-    let self = this;
-    const { cookies } = self.props;
-
-    axios({
-      method: "post",
-      url: CASHFLOW_CREATE_ROUTE,
-      headers: { token: cookies.get("token") },
-      data: {
-        Type: "Income",
-        Amount: 100,
-        Description: "Digimon stickers",
-        ReferenceType: "Stickers",
-      },
-    })
-      .then(function (res) {
-        if (0 === res.data.code) {
-          console.log(res.data.data);
-        } else {
-          console.log("error");
-          message.error(res.data.message);
-        }
+  getCashflow = () => {
+    getCashflow()
+      .then((response) => {
+        console.log(response);
+        this.setState({ type: response.word });
       })
-      .catch(function (err) {
-        message.error(err.message);
+      .catch((error) => {
+        console.log(error);
+      }
+      );
+  };
+
+  createCashflow = (e) => {
+    createCashflow(this.state.cashflow)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-  }
+  };
+
+  onChangeForm = (e) => {
+    let cashflow = this.state.cashflow;
+
+    if (e.target.name === "type") {
+      cashflow.type = e.target.value;
+    } else if (e.target.name === "amount") {
+      cashflow.amount = e.target.value;
+    } else if (e.target.name === "description") {
+      cashflow.description = e.target.value;
+    }
+    this.setState({ cashflow });
+  };
 
   render() {
     return (
-      <div>
-        <button onClick={this.createCashflow}>Create Cashflow</button>
-      </div>
+      <>
+        <CreateCashflow
+          onChangeForm={this.onChangeForm}
+          createCashflow={this.createCashflow}
+        />
+        <ShowCashflow getCashflow={this.getCashflow} cashflow={this.state.type} />
+        {/* {this.getCashflow()} */}
+      </>
     );
   }
 }
 
-export default withCookies(CashflowManager);
+export default Cashflow;
