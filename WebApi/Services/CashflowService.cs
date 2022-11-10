@@ -8,7 +8,7 @@ namespace WebApi.Services
 {
     public interface ICashflowService
     {
-        Task<IEnumerable<Cashflow>> GetAll(int userid);
+        Task<IEnumerable<Cashflow>> GetAll(string userid);
         Task<int> CreateCashflow(CashflowModel cashflowModel, int userid);
         Task<Cashflow> DeleteCashflow(int id);
         Task<int> UpdateCashflow(CashflowModel cashflowRequestData);
@@ -65,11 +65,11 @@ namespace WebApi.Services
             return Task.FromResult(StatusCodes.Status200OK);
         }
 
-        public  async Task<int> UpdateCashflow(CashflowModel cashflowRequestData)
+        public async Task<int> UpdateCashflow(CashflowModel cashflowRequestData)
         {
             var dbCashflow = await (from cashflow in context.Cashflows
-                              where cashflow.CashFlowId == cashflowRequestData.CashFlowId
-                              select cashflow).FirstOrDefaultAsync();
+                                    where cashflow.CashFlowId == cashflowRequestData.CashFlowId
+                                    select cashflow).FirstOrDefaultAsync();
 
             if (dbCashflow is null)
                 return StatusCodes.Status404NotFound;
@@ -86,11 +86,11 @@ namespace WebApi.Services
             return StatusCodes.Status200OK;
         }
 
-        public async Task<IEnumerable<Cashflow>> GetAll(int userId)
+        public async Task<IEnumerable<Cashflow>> GetAll(string userId)
         {
             var cashflow = await context.Cashflows
-                .Where(c => c.UserId== userId).ToListAsync();
-            
+                .Where(c => c.UserId == int.Parse(userId)).ToListAsync();
+
             if (cashflow == null) throw new KeyNotFoundException("cashflow not found");
 
             return cashflow;

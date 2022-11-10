@@ -13,11 +13,7 @@ public static class ModelBuilderExtensions
 {
     public static void Seed(this ModelBuilder builder)
     {
-<<<<<<< HEAD
-
-=======
         // Seeding users
->>>>>>> 137f05ae6e4f05e996e785bf7ee336fa19cc198b
         User adminUser = new User
         {
             Id = "1",
