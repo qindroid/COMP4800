@@ -26,7 +26,7 @@ function Navigation() {
     <header className="l-header">
       <nav className="nav bd-grid">
         <div>
-          <a href="/" className="nav__logo">Cashflowify</a>
+          <a href="/" className="nav__logo">ThrivePlus</a>
         </div>
 
         <div className="nav__toggle" id="nav-toggle" onClick={showMenu}>
@@ -49,20 +49,15 @@ function Navigation() {
             <li className="nav__item"><a href='/about' className="nav__link">About</a></li>
             <li className="nav__item"><a href="plan" className="nav__link">Plan</a></li>
             <li className="nav__item"><a href="abort" className="nav__link">Contact</a></li>
-            <li className="nav__item"><a href="login" className="navigation__login_button">Login/Sign up</a></li>
+            <li className="nav__item vertical-line"></li>
+            <li className="nav__item auth">
+              <a href="/login" className="nav__link">Login</a>
+              <a href="/signup" className="navigation__login_button">Start free</a>
+            </li>
           </ul>
         </div>
       </nav>
-      {/* <BrowserRouter>
-          <Switch>
 
-            <Route path="/#/a/" component={About} />
-
-            <Route path="/b" component={About} exact />
-            <Route path="/c" component={About} exact />
-
-          </Switch>
-        </BrowserRouter> */}
     </header >
 
   );

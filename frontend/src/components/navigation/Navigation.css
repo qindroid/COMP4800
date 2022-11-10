@@ -1,7 +1,23 @@
+.auth {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  margin-left: 0 !important;
+}
+
+.auth .nav__link {
+  justify-self: center;
+}
+
 .navigation__login_button {
   display: inline-block;
   background-color: var(--first-color-dark);
   color: var(--white-color);
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.8rem;
   border-radius: .5rem;
+}
+
+.navigation__login_button:hover {
+  background-color: var(--first-color-darken);
+  color: var(--white-color);
 }

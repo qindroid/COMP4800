@@ -36,21 +36,20 @@ namespace WebApi.Controllers
         [HttpGet("/all")]
         public IActionResult GetAll(HttpContext context)
         {
-
-
             var users = cashflowService.GetAll(context);
+
             return Ok(users);
         }
+
+    
 
         [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
-        {   
-            var cashflow = await cashflowService.GetById(id);
-            User user = cashflow.User;
-            Console.WriteLine(user);
+        {
+            var _cashflow = await cashflowService.GetById(id);
 
-            return Ok(user);
+            return Ok(new { data = new { cashflow = _cashflow } });
         }
 
     }
