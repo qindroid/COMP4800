@@ -7,6 +7,8 @@ import store from "../../store";
 import "./Password.css";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
+import {USER_PASSWORD_ROUTE} from "../../common/urls";
+
 // Allow user change their own password
 class Password extends React.Component {
     static propTypes = {
@@ -51,7 +53,7 @@ class Password extends React.Component {
         // Password API
         axios({
             method: "POST",
-            url: utils.getDomain() + "api/user/password/",
+            url: USER_PASSWORD_ROUTE,
             headers: { token: cookies.get("token") },
             data: values,
         })

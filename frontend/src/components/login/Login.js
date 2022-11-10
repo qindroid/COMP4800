@@ -9,6 +9,8 @@ import login_logo from "../../images/logo-color.png";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 import { Link } from "react-router-dom";
+import {USER_LOGIN_ROUTE, USER_INFO_ROUTE} from "../../common/urls";
+
 
 class Login extends React.Component {
     static propTypes = {
@@ -42,7 +44,7 @@ class Login extends React.Component {
 
         let self = this;
         axios
-            .post(utils.getDomain() + "api/user/login", values)
+            .post(USER_LOGIN_ROUTE, values)
             .then(function (res) {
                 if (0 === res.data.code) {
                     const { cookies } = self.props;
@@ -71,7 +73,7 @@ class Login extends React.Component {
         // Get user information API
         axios({
             method: "GET",
-            url: utils.getDomain() + "api/user/info",
+            url: USER_INFO_ROUTE,
             headers: { token: cookies.get("token") },
         })
             .then(function (res) {
