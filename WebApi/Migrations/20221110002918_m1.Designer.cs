@@ -11,8 +11,8 @@ using WebApi.Helpers;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(SqliteDataContext))]
-    [Migration("20221107030044_IdentityUser")]
-    partial class IdentityUser
+    [Migration("20221110002918_m1")]
+    partial class m1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,9 +40,12 @@ namespace WebApi.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("UserId1")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("CashFlowId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Cashflows");
 
@@ -58,11 +61,53 @@ namespace WebApi.Migrations
                         });
                 });
 
+            modelBuilder.Entity("WebApi.Entities.Role", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "c95d057c-48cd-457f-9950-d6ad01a198be",
+                            ConcurrencyStamp = "e9d96c39-007f-4fb4-b071-8d42e329682c",
+                            CreatedDate = new DateTime(2022, 11, 9, 16, 29, 18, 489, DateTimeKind.Local).AddTicks(8326),
+                            Description = "Admin Role",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = "48bc98a0-3f51-436b-9f66-7a94d9eeffb8",
+                            ConcurrencyStamp = "94e6856d-6d30-4375-bb19-3ea38a54a174",
+                            CreatedDate = new DateTime(2022, 11, 9, 16, 29, 18, 489, DateTimeKind.Local).AddTicks(8405),
+                            Description = "User Role",
+                            Name = "User"
+                        });
+                });
+
             modelBuilder.Entity("WebApi.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
@@ -76,8 +121,7 @@ namespace WebApi.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("Expired")
-                        .ValueGeneratedOnAddOrUpdate()
+                    b.Property<DateTime>("Expired")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsAdmin")
@@ -123,31 +167,69 @@ namespace WebApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d5591e85-5e8e-441e-be32-563e1d660e05",
+                            ConcurrencyStamp = "6fe0f65c-bb8e-4922-b9da-6b8b78f0548a",
                             EmailConfirmed = false,
+                            Expired = new DateTime(2032, 11, 9, 16, 29, 18, 263, DateTimeKind.Local).AddTicks(5322),
                             IsAdmin = true,
                             LockoutEnabled = false,
                             Name = "Admin",
-                            PasswordHash = "$2a$11$er73bEBp8B6Ei8kEp1p4.O6ewHiFadhZEC82QnLgjxykAHp3zbXRO",
+                            PasswordHash = "$2a$11$2ftW2ve4wP7FCk1Cbf.tOODtma0D3vjdj5Z9iTjESEyEBtcoYbbu.",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "009cc2ab-0ebe-4007-a699-3fa8cc5b75a2",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
                         new
                         {
-                            Id = 2,
+                            Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7b95c350-3b4f-462c-b56c-5ffb5055c5ea",
+                            ConcurrencyStamp = "d67b64a1-e0e7-4e34-a50c-c9fbde8a0b92",
                             EmailConfirmed = false,
+                            Expired = new DateTime(2022, 11, 16, 16, 29, 18, 489, DateTimeKind.Local).AddTicks(7699),
                             IsAdmin = false,
                             LockoutEnabled = false,
                             Name = "User1",
-                            PasswordHash = "$2a$11$dtbtPsKwu1.0//CacA5IOeSHWhDPYd/gZPU3fSvQrt8ag9uw6UGsy",
+                            PasswordHash = "$2a$11$xr3FluIAY5f7zHPLPQTODu8jj2vUBJCnr3omPOy.rYYesJazS/wFW",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "bee029b9-4414-45ac-b78f-39b91ff339b0",
                             TwoFactorEnabled = false,
                             UserName = "user1"
+                        });
+                });
+
+            modelBuilder.Entity("WebApi.Entities.UserRoles", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            RoleId = "c95d057c-48cd-457f-9950-d6ad01a198be",
+                            UserId = "1"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            RoleId = "48bc98a0-3f51-436b-9f66-7a94d9eeffb8",
+                            UserId = "2"
                         });
                 });
 
@@ -155,9 +237,22 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("WebApi.Entities.User", "User")
                         .WithMany("Cashflows")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("WebApi.Entities.UserRoles", b =>
+                {
+                    b.HasOne("WebApi.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
+
+                    b.HasOne("WebApi.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Role");
 
                     b.Navigation("User");
                 });
