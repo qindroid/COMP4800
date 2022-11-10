@@ -9,15 +9,22 @@
   --header-height: 3rem;
 
   /*===== Colors =====*/
-  --first-color: #0096FF;
-  --first-color-dark: #005c9d;
-  --first-color-darken: #00375f;
+  --first-color: #60a5fa;
+  --first-color-dark: #2563eb;
+  --first-color-darken: #1d4ed8;
+  --first-color-darkest: #1e40af;
   --white-color: #FCF8F8;
   
   /*===== Font and typography =====*/
   --body-font: 'Poppins', sans-serif;
   --big-font-size: 2.5rem;
   --normal-font-size: .938rem;
+  --smaller-font-size: .75rem;
+
+  /*===== 404 =====*/
+  --error-font-size: 2.375rem;
+  --text-color: hsl(38, 8%, 8%);
+  --error-color: #F2DF3A;
   
   /*===== z index =====*/
   --z-fixed: 100;
@@ -191,6 +198,7 @@ img{
 
 .home__button:hover{
   background-color: var(--first-color-darken);
+  color: var(--white-color);
 }
 
 /* ===== MEDIA QUERIES =====*/
@@ -237,6 +245,12 @@ img{
   .home__img img{
     width: 375px;
   }
+
+  .vertical-line{
+    display: inline-block;
+    border-left: 1px solid #ccc;
+    height: 1.3rem;
+  }
 }
 
 @media screen and (min-width: 1024px){
@@ -257,5 +271,11 @@ img{
 
   .home__img img{
     width: 604px;
+  }
+
+  .vertical-line{
+    display: inline-block;
+    border-left: 1px solid #ccc;
+    height: 1.3rem;
   }
 }
