@@ -116,7 +116,7 @@ class CashFlow extends React.Component {
     }
 
     onAddSupplier() {
-        this.props.history.push("/main/cashFlow/edit/0");
+        this.props.history.push("/main/cashFlow/add");
     }
 
     handleDel(id) {
@@ -201,16 +201,16 @@ class CashFlow extends React.Component {
         return (
           // Click to go create user page
           <Row>
-            {/* <Col span="18"></Col>
+            <Col span="18"></Col>
             <Col span="6" style={{ textAlign: "right" }}>
               <Button
                 type="primary"
                 icon={<UserAddOutlined />}
                 onClick={this.onAddSupplier}
               >
-                New User
+                Add cashflow
               </Button>
-            </Col> */}
+            </Col>
           </Row>
         );
     }
