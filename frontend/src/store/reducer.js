@@ -11,6 +11,9 @@ function reducer(state = defaultState, action) {
         case "setMenuItem":
             state.currentItem = action.value;
             break;
+        case "setCashflows":
+            state.cashflows = action.value;
+            break;
         default:
             break;
     }

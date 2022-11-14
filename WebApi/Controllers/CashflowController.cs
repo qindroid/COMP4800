@@ -24,13 +24,15 @@ namespace WebApi.Controllers
             _context = context;
             cashflowService = _cashflowService;
         }
-
+        private User getUser()
+        {
+            return httpContextAccessor.HttpContext.Items["User"] as User;
+        }
         [HttpGet("all")]
         public async Task<IActionResult> GetAll()
         {
-            var user = (User)this.httpContextAccessor.HttpContext.Items["User"];
-
-            var _cashflows = await cashflowService.GetAll(user.Id);
+            Console.WriteLine("dokeokeodkodeed");
+            var _cashflows = await cashflowService.GetAll(getUser().Id);
 
             return Ok(new { data = new { cashflows = _cashflows } });
         }
@@ -40,7 +42,8 @@ namespace WebApi.Controllers
         {
             var result = await cashflowService.DeleteCashflow(id);
 
-            return Ok(new { data = new { code = StatusCodes.Status200OK, message = "Deleted cashflow Successfully." } });
+            var cashflows = cashflowService.GetAll(getUser().Id);
+            return Ok(cashflows);
         }
 
         [AllowAnonymous]

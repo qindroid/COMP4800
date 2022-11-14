@@ -1,5 +1,10 @@
 import React from "react";
 import { Chart } from "react-google-charts";
+import utils from "../../common/Utils";
+import {  CASHFLOW_READ_ROUTE } from "../../common/urls";
+import { withCookies, Cookies } from "react-cookie";
+import { instanceOf } from "prop-types";
+import store from "../../store";
 
 export const data = [
   ["City", "2010 Population", "2000 Population"],
@@ -23,10 +28,42 @@ export const options = {
 };
 
 class Dashboard extends React.Component {
-  // constructor(props) {
-  //     super(props);
-  // }
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired,
+  };
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      cashflows: [],
+    }
+    this.getCashflows();
+    
+  }
 
+  getCashflows() {
+    const { cookies } = this.props;
+    console.log('token==', cookies.get("token"));
+    utils
+      .utilFetch("get", CASHFLOW_READ_ROUTE, null, cookies.get("token"))
+      .then((res) => {
+        console.log(res, res.data);
+       
+        if (200 === res.status) {
+          console.log("Setting cashflows");
+          let action = {
+            type: "setCashflows",
+            value: res.data,
+          };
+
+          store.dispatch(action);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.message);
+      });
+  }
   render() {
     return (
       <div>
@@ -58,8 +95,13 @@ class Dashboard extends React.Component {
               />
             </div>
             <div class="bg-white rounded-xl shadow-lg col-span-1 text-center">
+              
               <h1>PROFIT</h1>
+
               <h1>REVENUE</h1>
+              <div>{this.state.cashflows}</div>
+
+
             </div>
           </div>
         </div>
@@ -68,4 +110,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+export default withCookies(Dashboard);

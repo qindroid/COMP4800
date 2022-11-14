@@ -10,7 +10,7 @@ export const USER_LOGOUT_ROUTE = makeRoute("api/user/logout");
 export const USER_PASSWORD_ROUTE = makeRoute("api/user/password/");
 
 export const CASHFLOW_CREATE_ROUTE = makeRoute("api/cashflow/create");
-export const CASHFLOW_READ_ROUTE = makeRoute("api/cashflow/get");
+export const CASHFLOW_READ_ROUTE = makeRoute("api/cashflow/all");
 export const CASHFLOW_UPDATE_ROUTE = makeRoute("api/cashflow/update");
 export const CASHFLOW_DELETE_ROUTE = makeRoute("api/cashflow/delete/");
 

@@ -10,7 +10,7 @@ using WebApi.Services;
 
 [Authorize]
 [ApiController]
-[Route("/api/user")]
+[Route("api/user")]
 public class UsersController : ControllerBase
 {
     private IUserService _userService;
@@ -31,6 +31,7 @@ public class UsersController : ControllerBase
     [HttpPost("login")]
     public IActionResult Authenticate(AuthenticateRequest model)
     {
+       
         var response = _userService.Authenticate(model);
         return Ok(new { code = StatusCodes.Status200OK,  data = response, message="Success"});
     }

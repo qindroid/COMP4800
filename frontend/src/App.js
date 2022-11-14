@@ -23,7 +23,7 @@ import Landing from "./components/landing/Landing";
 import About from "./pages/about/About";
 import Error from "./pages/404/404";
 
-const Login = React.lazy(() => import("./components/login/Login2"));
+const Login = React.lazy(() => import("./components/login/Login"));
 const SignUp = React.lazy(() => import("./components/signup/SignUp"));
 const Main = React.lazy(() => import("./components/main/Main"));
 const CashflowManager = React.lazy(() => import("./components/cashflow/Cashflow"));
