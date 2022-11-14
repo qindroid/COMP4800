@@ -59,8 +59,8 @@ class Login extends React.Component {
                 self.setLoading(false);
             });
     }
- 
-    
+
+
     checkLogin() {
         let self = this;
         const { cookies } = self.props;
@@ -86,53 +86,53 @@ class Login extends React.Component {
 
     render() {
         return (
-          <Row justify="center" align="middle" className="container">
-            <Col span={10}>
-              <Row className="logo">
-                <Image preview={false} src={login_logo} />
-              </Row>
-              {/* User Enter username & password */}
+            <Row justify="center" align="middle" className="container">
+                <Col span={10}>
+                    <Row className="logo">
+                        <Image preview={false} src={login_logo} />
+                    </Row>
+                    {/* User Enter username & password */}
 
-              <Form name="basic" onFinish={this.onFinish}>
-                <Form.Item
-                  name="username"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input the username",
-                    },
-                  ]}
-                >
-                  <Input placeholder="Username" size="large" />
-                </Form.Item>
+                    <Form name="basic" onFinish={this.onFinish}>
+                        <Form.Item
+                            name="username"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input the username",
+                                },
+                            ]}
+                        >
+                            <Input placeholder="Username" size="large" />
+                        </Form.Item>
 
-                <Form.Item
-                  name="password"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input the password",
-                    },
-                  ]}
-                >
-                  <Input.Password placeholder="Password" size="large" />
-                </Form.Item>
+                        <Form.Item
+                            name="password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input the password",
+                                },
+                            ]}
+                        >
+                            <Input.Password placeholder="Password" size="large" />
+                        </Form.Item>
 
-                <Form.Item>
-                  {/* Click to login */}
-                  <Button type="primary" htmlType="submit" block>
-                    Login
-                  </Button>
-                </Form.Item>
-                {/* Click to SignUp */}
-                <Button color="primary" onClick={""} block>
-                  <Link to={"/SignUp"} target="_blank">
-                    SignUp
-                  </Link>
-                </Button>
-              </Form>
-            </Col>
-          </Row>
+                        <Form.Item>
+                            {/* Click to login */}
+                            <Button type="primary" htmlType="submit" block>
+                                Login
+                            </Button>
+                        </Form.Item>
+                        {/* Click to SignUp */}
+                        <Button color="primary" onClick={""} block>
+                            <Link to={"/SignUp"} target="_blank">
+                                SignUp
+                            </Link>
+                        </Button>
+                    </Form>
+                </Col>
+            </Row>
         );
     }
 }

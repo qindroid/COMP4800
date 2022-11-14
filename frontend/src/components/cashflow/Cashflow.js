@@ -8,6 +8,7 @@ import { instanceOf } from "prop-types";
 import {message} from "antd";
 import { withCookies, Cookies } from "react-cookie";
 import React from "react";
+import "./Cashflow.css";
 
 class CashflowManager extends React.Component {
     static propTypes = {
@@ -62,26 +63,26 @@ class CashflowManager extends React.Component {
     render() {
 
         return (
-          <div>
-            <p>Enter cashflow data:</p>
+          <div class="cashflow__container">
+            <p class="form__title">Enter cashflow data:</p>
             <form>
-              <div>
-                <label for="type"> Type: </label>
-                <input type="text" id="type"/>
+              <div class="relative z-0 mb-6 w-full group">
+                  <input type="text" id="type" class="input__style focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                  <label for="type" class="label__style">Type</label>
               </div>
-              <div>
-                <label for="amount"> Amount: </label>
-                <input type="number" id="amount"/>
+              <div class="relative z-0 mb-6 w-full group">
+                  <input type="text" id="amount" class="input__style focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                  <label for="amount" class="label__style">Amount</label>
               </div>
-              <div>
-                <label for="description"> Description: </label>
-                <input type="text" id="description"/>
+              <div class="relative z-0 mb-6 w-full group">
+                  <input type="text" id="description" class="input__style focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+                  <label for="description" class="label__style">Description</label>
               </div>
-              <div>
-                <label for="referenceType"> Reference Type: </label>
-                <input type="text" id="referenceType"/>
+              <div class="relative z-0 mb-6 w-full group">
+                  <input type="text" id="referenceType" class="input__style focus:ring-0 focus:border-blue-600 peer"  placeholder=" " required />
+                  <label for="referenceType" class="label__style">Reference Type</label>
               </div>
-              <button onClick={this.createCashflow}>Create Cashflow</button>
+              <button class="createCashflow__button" onClick={this.createCashflow}>Create Cashflow</button>
             </form>
           </div>
         );

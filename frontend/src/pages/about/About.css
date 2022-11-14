@@ -1,0 +1,126 @@
+.about {
+  margin-top: 100px;
+}
+
+.about__row {
+  @apply 
+  flex justify-evenly px-4 py-8 text-center;
+}
+.about__column {
+  @apply 
+  w-1/4 pt-2 pr-0;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.about__card {
+  @apply 
+    shadow-xl 
+    py-20
+    rounded-xl
+    text-neutral-700
+    cursor-pointer
+    ease-in-out duration-300
+    bg-white
+    place-items-center
+  ;
+}
+.about__card .img-container {
+  @apply 
+    h-32 
+    mx-auto 
+    mt-0 mb-8 p-2 w-32
+    rounded-full
+    bg-indigo-400
+    ;
+}
+.about__card img {
+  @apply 
+    w-full
+    rounded-full
+    object-cover
+  ;
+}
+.about__card h3 {
+  @apply 
+    font-medium	
+  ;
+}
+.about__card p {
+  @apply 
+    font-light 
+    mx-0 mt-2 
+    mb-8 
+    uppercase
+    tracking-widest	
+  ;
+}
+.icons {
+  @apply 
+    flex 
+    justify-between
+    m-auto 
+    w-1/2
+  ;
+  text-decoration: none;
+}
+.about__card a {
+  @apply 
+    text-2xl
+    no-underline
+  ;
+  color: inherit;
+  text-decoration: none;
+}
+.about__card:hover {
+  @apply 
+    text-white
+    bg-gradient-to-b from-indigo-600 to-indigo-500
+  ;
+}
+.about__card:hover .img-container {
+  @apply 
+    duration-300
+    scale-110
+  ;
+}
+
+@media screen and (min-width: 320px) {
+  
+  .about__row {
+    @apply
+      flex flex-col 
+    ;
+  }
+
+  .about__column {
+    @apply
+      w-full
+    ;
+  }
+}
+@media screen and (min-width: 700px) {
+  section {
+    @apply
+      pt-4
+    ;
+  }
+  .about__row {
+    @apply 
+      flex 
+      flex-row 
+      flex-wrap
+    ;
+  }
+  .about__column {
+    @apply 
+      w-1/4 
+      pt-2 
+      pr-2
+      pb-8
+    ;
+  }
+}

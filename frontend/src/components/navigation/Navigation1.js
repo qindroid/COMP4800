@@ -8,9 +8,10 @@ import {
   SettingOutlined,
   LogoutOutlined,
   DashboardOutlined,
+  MoneyCollectOutlined,
 } from "@ant-design/icons";
 import store from "../../store";
-import "./Main.css";
+import "./Navigation.css";
 import main_logo from "../../images/logo-color.png";
 
 const DashboardPage = React.lazy(() => import("../dashboard/Dashboard"));

@@ -1,0 +1,7 @@
+.navigation__login_button {
+  display: inline-block;
+  background-color: var(--first-color-dark);
+  color: var(--white-color);
+  padding: 0.5rem 1rem;
+  border-radius: .5rem;
+}

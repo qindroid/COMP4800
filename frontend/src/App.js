@@ -4,6 +4,7 @@ import {
   Route,
   Redirect,
   Switch,
+  BrowserRouter,
 } from "react-router-dom";
 import { Cookies, CookiesProvider } from "react-cookie";
 import { Spin } from "antd";
@@ -16,11 +17,18 @@ import axios from "axios";
 import utils from "./common/Utils";
 import { Row, Form, Col, Input, Button, message, Image } from "antd";
 
+// Pages 
+import Navbar from "./components/navigation/Navigation";
+import Landing from "./components/landing/Landing";
+import About from "./pages/about/About";
 
 const Login = React.lazy(() => import("./components/login/Login"));
 const SignUp = React.lazy(() => import("./components/signup/SignUp"));
 const Main = React.lazy(() => import("./components/main/Main"));
 const CashflowManager = React.lazy(() => import("./components/cashflow/Cashflow"));
+
+// Pages
+
 class App extends React.Component {
 
   constructor(props) {
@@ -66,15 +74,25 @@ class App extends React.Component {
             indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
           >
             <div className="App">
-              <Router>
+              <Navbar />
+              <BrowserRouter>
                 <Switch>
-                  <Redirect path="/" to="/login" exact />
+
+                  <Redirect path="/" to="/landing" exact />
+
+                  <Route path="/landing" component={Landing} />
+
                   <Route path="/login" component={Login} exact />
                   <Route path="/SignUp" component={SignUp} exact />
                   <Route path="/main" component={Main} />
                   <Route path="/cashflowManager" component={CashflowManager} />
+
+                  {/* <Redirect path="/about" to="/aboutus" exact /> */}
+
+                  <Route path="/about" component={About} />
+
                 </Switch>
-              </Router>
+              </BrowserRouter>
             </div>
           </Spin>
         </Suspense>
