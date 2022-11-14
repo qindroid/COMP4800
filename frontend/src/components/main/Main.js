@@ -15,6 +15,7 @@ import main_logo from "../../images/logo-color.png";
 import {USER_LOGOUT_ROUTE} from "../../common/urls";
 
 const DashboardPage = React.lazy(() => import("../dashboard/Dashboard"));
+const CashFlowManagerPage = React.lazy(() => import("../cashflow/Cashflow"));
 const PasswordPage = React.lazy(() => import("../password/Password"));
 const LogoutPage = React.lazy(() => import("../logout/Logout"));
 const StaffPage = React.lazy(() => import("../staff/User"));
@@ -138,6 +139,7 @@ class Main extends React.Component {
             <Switch>
               <Redirect from="/main/" to="/main/dashboard" exact />
               <Route path="/main/dashboard" component={DashboardPage} exact />
+              <Route path="/main/cashflowmanager" component={CashFlowManagerPage} exact />
               <Route path="/main/password" component={PasswordPage} exact />
               <Route path="/main/cashflow" component={CashflowPage} exact />
               <Route path="/main/user" component={StaffPage} exact />

@@ -8,12 +8,14 @@ import {
   SettingOutlined,
   LogoutOutlined,
   DashboardOutlined,
+  MoneyCollectOutlined,
 } from "@ant-design/icons";
 import store from "../../store";
 import "./Navigation.css";
 import main_logo from "../../images/logo-color.png";
 
 const DashboardPage = React.lazy(() => import("../dashboard/Dashboard"));
+const CashFlowManagerPage = React.lazy(() => import("../cashflow/Cashflow"));
 const PasswordPage = React.lazy(() => import("../password/Password"));
 const LogoutPage = React.lazy(() => import("../logout/Logout"));
 const StaffPage = React.lazy(() => import("../staff/User"));
@@ -122,6 +124,9 @@ class Main extends React.Component {
               <Menu.Item key="/main/dashboard" icon={<DashboardOutlined />}>
                 Dashboard
               </Menu.Item>
+              <Menu.Item key="/main/cashflowmanager" icon={<DashboardOutlined />}>
+                Create Cashflow
+              </Menu.Item>
               <Menu.Item key="/main/user" icon={<UsergroupAddOutlined />}>
                 Users
               </Menu.Item>
@@ -137,6 +142,7 @@ class Main extends React.Component {
             <Switch>
               <Redirect from="/main/" to="/main/dashboard" exact />
               <Route path="/main/dashboard" component={DashboardPage} exact />
+              <Route path="/main/cashflowmanager" component={CashFlowManagerPage} exact />
               <Route path="/main/password" component={PasswordPage} exact />
               <Route path="/main/user" component={StaffPage} exact />
               <Route
