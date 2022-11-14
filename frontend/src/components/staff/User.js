@@ -37,15 +37,15 @@ class User extends React.Component {
               width: 80,
             },
             {
-              title: "Username",
-              dataIndex: "username",
-              key: "username",
+              title: "UserName",
+              dataIndex: "userName",
+              key: "userName",
             },
-            {
-              title: "Created",
-              dataIndex: "created",
-              key: "created",
-            },
+            // {
+            //   title: "Created",
+            //   dataIndex: "created",
+            //   key: "created",
+            // },
             {
               title: "Expired",
               dataIndex: "expired",
@@ -156,22 +156,24 @@ class User extends React.Component {
         const { cookies } = self.props;
 
         axios({
-            method: "POST",
+            method: "GET",
             url: utils.getDomain() + "api/user/list",
-            headers: { token: cookies.get("token") },
-            data: { page: page, limit: pageSize },
+            // headers: { token: cookies.get("token") },
+            // data: { page: page, limit: pageSize },
         })
             .then(function (res) {
+              console.log(res);
+              console.log(res.data);
                 self.setLoading(false);
-                if (1 === res.data.code) {
-                    return self.props.history.push("/login");
-                } else if (0 === res.data.code) {
-                    self.setState({
-                        dataSource: res.data.data.data,
-                        count: res.data.data.count,
-                    });
+                if (400 === res.status) {
+                  return self.props.history.push("/login");
+                } else if (200 === res.status) {
+                  self.setState({
+                    dataSource: res.data,
+                    count: res.data.length,
+                  });
                 } else {
-                    message.error(res.data.message);
+                  message.error(res.statusText);
                 }
             })
             .catch(function (err) {

@@ -89,7 +89,7 @@ namespace WebApi.Services
         public async Task<IEnumerable<Cashflow>> GetAll(string userId)
         {
             var cashflow = await context.Cashflows
-                .Where(c => c.UserId == int.Parse(userId)).ToListAsync();
+                .ToListAsync();
 
             if (cashflow == null) throw new KeyNotFoundException("cashflow not found");
 

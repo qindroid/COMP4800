@@ -55,7 +55,9 @@ public class UsersController : ControllerBase
         // todo
         return Ok(new { message = "" });
     }
-    [HttpGet]
+
+    [AllowAnonymous]
+    [HttpGet("list")]
     public IActionResult GetAll()
     {
         var users = _userService.GetAll();
