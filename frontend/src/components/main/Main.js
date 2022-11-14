@@ -19,6 +19,7 @@ const PasswordPage = React.lazy(() => import("../password/Password"));
 const LogoutPage = React.lazy(() => import("../logout/Logout"));
 const StaffPage = React.lazy(() => import("../staff/User"));
 const StaffEdit = React.lazy(() => import("../staff/Edit"));
+const CashflowPage = React.lazy(() => import("../cashflow/CashflowTable"));
 
 const {Sider} = Layout;
 
@@ -104,7 +105,7 @@ class Main extends React.Component {
     return (
       <Layout className="container">
         <Layout>
-          <Sider width={200} className="" style={{background: "#FFFFFF"}}>
+          <Sider width={200} className="" style={{ background: "#FFFFFF" }}>
             <div className="logo">
               <Image preview={false} src={main_logo} background="white" />
             </div>
@@ -112,11 +113,15 @@ class Main extends React.Component {
               mode="inline"
               defaultSelectedKeys={this.state.currentItem}
               selectedKeys={this.state.currentItem}
-              style={{height: "100%", borderRight: 0}}
+              style={{ height: "100%", borderRight: 0 }}
               onClick={this.onMenuItemClick}
-              theme="light">
+              theme="light"
+            >
               <Menu.Item key="/main/dashboard" icon={<DashboardOutlined />}>
                 Dashboard
+              </Menu.Item>
+              <Menu.Item key="/main/cashflow" icon={<UsergroupAddOutlined />}>
+                Cashflow
               </Menu.Item>
               <Menu.Item key="/main/user" icon={<UsergroupAddOutlined />}>
                 Users
@@ -129,11 +134,12 @@ class Main extends React.Component {
               </Menu.Item>
             </Menu>
           </Sider>
-          <Layout style={{padding: "24px 24px 24px"}}>
+          <Layout style={{ padding: "24px 24px 24px" }}>
             <Switch>
               <Redirect from="/main/" to="/main/dashboard" exact />
               <Route path="/main/dashboard" component={DashboardPage} exact />
               <Route path="/main/password" component={PasswordPage} exact />
+              <Route path="/main/cashflow" component={CashflowPage} exact />
               <Route path="/main/user" component={StaffPage} exact />
               <Route path="/main/user/edit/:id" component={StaffEdit} exact />
               <Route path="/main/logout" component={LogoutPage} exact />

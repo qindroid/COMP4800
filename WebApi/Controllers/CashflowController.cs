@@ -75,5 +75,14 @@ namespace WebApi.Controllers
             return Ok(new { data = new { cashflow = _cashflow } });
         }
 
+
+        [AllowAnonymous]
+        [HttpGet("global")]
+        public async Task<IActionResult> GetGlobalAll()
+        {
+            var _cashflows = await cashflowService.GetGlobalAll();
+
+            return Ok(new { data = new { cashflows = _cashflows } });
+        }
     }
 }
