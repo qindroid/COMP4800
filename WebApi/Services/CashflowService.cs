@@ -9,6 +9,7 @@ namespace WebApi.Services
     public interface ICashflowService
     {
         Task<IEnumerable<Cashflow>> GetAll(string userid);
+        Task<IEnumerable<Cashflow>> GetGlobalAll();
         Task<int> CreateCashflow(CashflowModel cashflowModel, int userid);
         Task<Cashflow> DeleteCashflow(int id);
         Task<int> UpdateCashflow(CashflowModel cashflowRequestData);
@@ -95,7 +96,17 @@ namespace WebApi.Services
         public async Task<IEnumerable<Cashflow>> GetAll(string userId)
         {
             var cashflow = await context.Cashflows
-                .Where(c => c.UserId == int.Parse(userId)).ToListAsync();
+                .ToListAsync();
+
+            if (cashflow == null) throw new KeyNotFoundException("cashflow not found");
+
+            return cashflow;
+        }
+
+        public async Task<IEnumerable<Cashflow>> GetGlobalAll()
+        {
+            var cashflow = await context.Cashflows
+                .ToListAsync();
 
             if (cashflow == null) throw new KeyNotFoundException("cashflow not found");
 

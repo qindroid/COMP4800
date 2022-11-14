@@ -54,7 +54,15 @@ public static class ModelBuilderExtensions
                 ProjectType="test",
                 UserId=2,
 
-            }
+            },
+            new Cashflow {
+                CashFlowId = 2,
+                Type="Out",
+                Amount=200.00,
+                Description="test2",
+                ProjectType="test2",
+                UserId=2,
+            },
         };
 
         builder.Entity<Cashflow>().HasData(cashflows);

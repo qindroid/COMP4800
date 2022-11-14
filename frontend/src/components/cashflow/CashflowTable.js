@@ -8,7 +8,7 @@ import store from "../../store";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 
-class User extends React.Component {
+class CashFlow extends React.Component {
     static propTypes = {
         cookies: instanceOf(Cookies).isRequired,
     };
@@ -31,15 +31,15 @@ class User extends React.Component {
           // user List
           columns: [
             {
-              title: "ID",
-              dataIndex: "id",
-              key: "id",
+              title: "cashFlowId",
+              dataIndex: "cashFlowId",
+              key: "cashFlowId",
               width: 80,
             },
             {
-              title: "UserName",
-              dataIndex: "userName",
-              key: "userName",
+              title: "type",
+              dataIndex: "type",
+              key: "type",
             },
             // {
             //   title: "Created",
@@ -47,16 +47,14 @@ class User extends React.Component {
             //   key: "created",
             // },
             {
-              title: "Expired",
-              dataIndex: "expired",
-              key: "expired",
+              title: "amount",
+              dataIndex: "amount",
+              key: "amount",
             },
             {
-              title: "Is Admin",
-              key: "isAdmin",
-              render: (text, record) => {
-                return record.isAdmin ? "Yes" : "No";
-              },
+              title: "userId",
+              dataIndex: "userId",
+              key: "userId",
             },
             {
               title: "Action",
@@ -66,11 +64,11 @@ class User extends React.Component {
               render: (text, record) => (
                 <Space>
                   {/* Link to edit user page */}
-                  <Link to={"/main/user/edit/" + record.id}>
+                  {/* <Link to={"/main/CashFlow/edit/" + record.id}>
                     <Button type="primary" size="small" icon={<EditOutlined />}>
                       Edit
                     </Button>
-                  </Link>
+                  </Link> */}
 
                   <Popconfirm
                     placement="right"
@@ -118,7 +116,7 @@ class User extends React.Component {
     }
 
     onAddSupplier() {
-        this.props.history.push("/main/user/edit/0");
+        this.props.history.push("/main/cashFlow/add");
     }
 
     handleDel(id) {
@@ -129,7 +127,7 @@ class User extends React.Component {
       // Delete user API
       axios({
         method: "POST",
-        url: utils.getDomain() + "api/user/delete",
+        url: utils.getDomain() + "api/cashFlow/delete",
         headers: { token: cookies.get("token") },
         data: { id },
       })
@@ -156,30 +154,30 @@ class User extends React.Component {
         const { cookies } = self.props;
 
         axios({
-            method: "GET",
-            url: utils.getDomain() + "api/user/list",
-            // headers: { token: cookies.get("token") },
-            // data: { page: page, limit: pageSize },
+          method: "GET",
+          url: utils.getDomain() + "api/cashFlow/global",
+          // headers: { token: cookies.get("token") },
+          // data: { page: page, limit: pageSize },
         })
-            .then(function (res) {
-              console.log(res);
-              console.log(res.data);
-                self.setLoading(false);
-                if (400 === res.status) {
-                  return self.props.history.push("/login");
-                } else if (200 === res.status) {
-                  self.setState({
-                    dataSource: res.data,
-                    count: res.data.length,
-                  });
-                } else {
-                  message.error(res.statusText);
-                }
-            })
-            .catch(function (err) {
-                message.error(err.message);
-                self.setLoading(false);
-            });
+          .then(function (res) {
+            console.log(res.data.data.cashflows.$values);
+            console.log(res.data);
+            self.setLoading(false);
+            if (400 === res.status) {
+              return self.props.history.push("/login");
+            } else if (200 === res.status) {
+              self.setState({
+                dataSource: res.data.data.cashflows.$values,
+                count: res.data.data.cashflows.$values.length,
+              });
+            } else {
+              message.error(res.statusText);
+            }
+          })
+          .catch(function (err) {
+            message.error(err.message);
+            self.setLoading(false);
+          });
     }
 
     componentDidMount() {
@@ -189,7 +187,7 @@ class User extends React.Component {
 
         let action = {
           type: "setMenuItem",
-          value: ["/main/user"],
+          value: ["/main/cashFlow"],
         };
         store.dispatch(action);
     }
@@ -210,7 +208,7 @@ class User extends React.Component {
                 icon={<UserAddOutlined />}
                 onClick={this.onAddSupplier}
               >
-                New User
+                Add cashflow
               </Button>
             </Col>
           </Row>
@@ -239,4 +237,4 @@ class User extends React.Component {
     }
 }
 
-export default withCookies(User);
+export default withCookies(CashFlow);
