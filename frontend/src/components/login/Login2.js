@@ -11,6 +11,7 @@ import { withCookies, Cookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import {USER_LOGIN_ROUTE, USER_INFO_ROUTE} from "../../common/urls";
 
+// DON'T USE THIS FILE, USE 'login.js' INSTESAD
 
 class Login extends React.Component {
     static propTypes = {

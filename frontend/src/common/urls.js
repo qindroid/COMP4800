@@ -13,6 +13,7 @@ export const CASHFLOW_CREATE_ROUTE = makeRoute("api/cashflow/create");
 export const CASHFLOW_READ_ROUTE = makeRoute("api/cashflow/all");
 export const CASHFLOW_UPDATE_ROUTE = makeRoute("api/cashflow/update");
 export const CASHFLOW_DELETE_ROUTE = makeRoute("api/cashflow/delete/");
+export const CASHFLOW_GLOBAL_ROUTE = makeRoute("api/cashflow/global");
 
 
 function makeRoute(url) {

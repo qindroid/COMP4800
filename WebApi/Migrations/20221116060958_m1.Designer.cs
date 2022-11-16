@@ -11,7 +11,7 @@ using WebApi.Helpers;
 namespace WebApi.Migrations
 {
     [DbContext(typeof(SqliteDataContext))]
-    [Migration("20221110002918_m1")]
+    [Migration("20221116060958_m1")]
     partial class m1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,9 +53,117 @@ namespace WebApi.Migrations
                         new
                         {
                             CashFlowId = 1,
+                            Amount = 300.0,
+                            Description = "Apple",
+                            ProjectType = "Technology",
+                            Type = "In",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 2,
                             Amount = 100.0,
-                            Description = "test",
-                            ProjectType = "test",
+                            Description = "Apple",
+                            ProjectType = "Technology",
+                            Type = "Out",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 3,
+                            Amount = 300.0,
+                            Description = "Deloitte",
+                            ProjectType = "Finance",
+                            Type = "In",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 4,
+                            Amount = 200.0,
+                            Description = "Deloitte",
+                            ProjectType = "Finance",
+                            Type = "Out",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 5,
+                            Amount = 500.0,
+                            Description = "Chevron",
+                            ProjectType = "Energy",
+                            Type = "In",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 6,
+                            Amount = 500.0,
+                            Description = "Chevron",
+                            ProjectType = "Energy",
+                            Type = "Out",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 7,
+                            Amount = 100.0,
+                            Description = "Google",
+                            ProjectType = "Technology",
+                            Type = "In",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 8,
+                            Amount = 400.0,
+                            Description = "Google",
+                            ProjectType = "Technology",
+                            Type = "Out",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 9,
+                            Amount = 200.0,
+                            Description = "Microsoft",
+                            ProjectType = "Technology",
+                            Type = "In",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 10,
+                            Amount = 200.0,
+                            Description = "Microsoft",
+                            ProjectType = "Technology",
+                            Type = "Out",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 11,
+                            Amount = 1000.0,
+                            Description = "Meta",
+                            ProjectType = "Technology",
+                            Type = "Out",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 12,
+                            Amount = 300.0,
+                            Description = "Amazon",
+                            ProjectType = "Technology",
+                            Type = "In",
+                            UserId = 2
+                        },
+                        new
+                        {
+                            CashFlowId = 13,
+                            Amount = 400.0,
+                            Description = "Amazon",
+                            ProjectType = "Technology",
                             Type = "In",
                             UserId = 2
                         });
@@ -88,17 +196,17 @@ namespace WebApi.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c95d057c-48cd-457f-9950-d6ad01a198be",
-                            ConcurrencyStamp = "e9d96c39-007f-4fb4-b071-8d42e329682c",
-                            CreatedDate = new DateTime(2022, 11, 9, 16, 29, 18, 489, DateTimeKind.Local).AddTicks(8326),
+                            Id = "ff2e3a7f-9312-489c-b2cb-e6caa1d7d897",
+                            ConcurrencyStamp = "cb491f32-deff-4632-ab30-0e2167ad4bee",
+                            CreatedDate = new DateTime(2022, 11, 15, 22, 9, 57, 820, DateTimeKind.Local).AddTicks(9509),
                             Description = "Admin Role",
                             Name = "Admin"
                         },
                         new
                         {
-                            Id = "48bc98a0-3f51-436b-9f66-7a94d9eeffb8",
-                            ConcurrencyStamp = "94e6856d-6d30-4375-bb19-3ea38a54a174",
-                            CreatedDate = new DateTime(2022, 11, 9, 16, 29, 18, 489, DateTimeKind.Local).AddTicks(8405),
+                            Id = "810f7074-293c-40e4-859e-d5da5806745d",
+                            ConcurrencyStamp = "5371e0f8-ad12-4be4-b067-24cbe61c471a",
+                            CreatedDate = new DateTime(2022, 11, 15, 22, 9, 57, 820, DateTimeKind.Local).AddTicks(9596),
                             Description = "User Role",
                             Name = "User"
                         });
@@ -169,15 +277,15 @@ namespace WebApi.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6fe0f65c-bb8e-4922-b9da-6b8b78f0548a",
+                            ConcurrencyStamp = "35096d1f-ba9e-4f60-94f1-eaf92456e802",
                             EmailConfirmed = false,
-                            Expired = new DateTime(2032, 11, 9, 16, 29, 18, 263, DateTimeKind.Local).AddTicks(5322),
+                            Expired = new DateTime(2032, 11, 15, 22, 9, 57, 591, DateTimeKind.Local).AddTicks(2351),
                             IsAdmin = true,
                             LockoutEnabled = false,
                             Name = "Admin",
-                            PasswordHash = "$2a$11$2ftW2ve4wP7FCk1Cbf.tOODtma0D3vjdj5Z9iTjESEyEBtcoYbbu.",
+                            PasswordHash = "$2a$11$e53Rhajl/FTi2m6ky/DQq.Z2sTIgb.6ee14P0z97UrxuiFae7A14y",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "009cc2ab-0ebe-4007-a699-3fa8cc5b75a2",
+                            SecurityStamp = "6d207a5f-753b-4f2b-80ff-e0d400eb69eb",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -185,15 +293,15 @@ namespace WebApi.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d67b64a1-e0e7-4e34-a50c-c9fbde8a0b92",
+                            ConcurrencyStamp = "876c9cb9-56e1-4cb4-9715-8f7882a0467f",
                             EmailConfirmed = false,
-                            Expired = new DateTime(2022, 11, 16, 16, 29, 18, 489, DateTimeKind.Local).AddTicks(7699),
+                            Expired = new DateTime(2022, 11, 22, 22, 9, 57, 820, DateTimeKind.Local).AddTicks(8753),
                             IsAdmin = false,
                             LockoutEnabled = false,
                             Name = "User1",
-                            PasswordHash = "$2a$11$xr3FluIAY5f7zHPLPQTODu8jj2vUBJCnr3omPOy.rYYesJazS/wFW",
+                            PasswordHash = "$2a$11$njd9isDYSDqeKD2oRuqsg.IPr1BSq.BsltTPihoLfabYdU002qLn2",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bee029b9-4414-45ac-b78f-39b91ff339b0",
+                            SecurityStamp = "63b13a0f-e0b2-4622-83d0-6030e2c23f22",
                             TwoFactorEnabled = false,
                             UserName = "user1"
                         });
@@ -222,13 +330,13 @@ namespace WebApi.Migrations
                         new
                         {
                             Id = "1",
-                            RoleId = "c95d057c-48cd-457f-9950-d6ad01a198be",
+                            RoleId = "ff2e3a7f-9312-489c-b2cb-e6caa1d7d897",
                             UserId = "1"
                         },
                         new
                         {
                             Id = "2",
-                            RoleId = "48bc98a0-3f51-436b-9f66-7a94d9eeffb8",
+                            RoleId = "810f7074-293c-40e4-859e-d5da5806745d",
                             UserId = "2"
                         });
                 });

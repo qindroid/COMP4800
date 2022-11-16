@@ -102,37 +102,97 @@ namespace WebApi.Migrations
             migrationBuilder.InsertData(
                 table: "Cashflows",
                 columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
-                values: new object[] { 1, 100.0, "test", "test", "In", 2, null });
+                values: new object[] { 1, 300.0, "Apple", "Technology", "In", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 2, 100.0, "Apple", "Technology", "Out", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 3, 300.0, "Deloitte", "Finance", "In", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 4, 200.0, "Deloitte", "Finance", "Out", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 5, 500.0, "Chevron", "Energy", "In", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 6, 500.0, "Chevron", "Energy", "Out", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 7, 100.0, "Google", "Technology", "In", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 8, 400.0, "Google", "Technology", "Out", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 9, 200.0, "Microsoft", "Technology", "In", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 10, 200.0, "Microsoft", "Technology", "Out", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 11, 1000.0, "Meta", "Technology", "Out", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 12, 300.0, "Amazon", "Technology", "In", 2, null });
+
+            migrationBuilder.InsertData(
+                table: "Cashflows",
+                columns: new[] { "CashFlowId", "Amount", "Description", "ProjectType", "Type", "UserId", "UserId1" },
+                values: new object[] { 13, 400.0, "Amazon", "Technology", "In", 2, null });
 
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "48bc98a0-3f51-436b-9f66-7a94d9eeffb8", "94e6856d-6d30-4375-bb19-3ea38a54a174", new DateTime(2022, 11, 9, 16, 29, 18, 489, DateTimeKind.Local).AddTicks(8405), "User Role", "User", null });
+                values: new object[] { "810f7074-293c-40e4-859e-d5da5806745d", "5371e0f8-ad12-4be4-b067-24cbe61c471a", new DateTime(2022, 11, 15, 22, 9, 57, 820, DateTimeKind.Local).AddTicks(9596), "User Role", "User", null });
 
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "Description", "Name", "NormalizedName" },
-                values: new object[] { "c95d057c-48cd-457f-9950-d6ad01a198be", "e9d96c39-007f-4fb4-b071-8d42e329682c", new DateTime(2022, 11, 9, 16, 29, 18, 489, DateTimeKind.Local).AddTicks(8326), "Admin Role", "Admin", null });
+                values: new object[] { "ff2e3a7f-9312-489c-b2cb-e6caa1d7d897", "cb491f32-deff-4632-ab30-0e2167ad4bee", new DateTime(2022, 11, 15, 22, 9, 57, 820, DateTimeKind.Local).AddTicks(9509), "Admin Role", "Admin", null });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Expired", "IsAdmin", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "1", 0, "6fe0f65c-bb8e-4922-b9da-6b8b78f0548a", null, false, new DateTime(2032, 11, 9, 16, 29, 18, 263, DateTimeKind.Local).AddTicks(5322), true, false, null, "Admin", null, null, "$2a$11$2ftW2ve4wP7FCk1Cbf.tOODtma0D3vjdj5Z9iTjESEyEBtcoYbbu.", null, false, "009cc2ab-0ebe-4007-a699-3fa8cc5b75a2", false, "admin" });
+                values: new object[] { "1", 0, "35096d1f-ba9e-4f60-94f1-eaf92456e802", null, false, new DateTime(2032, 11, 15, 22, 9, 57, 591, DateTimeKind.Local).AddTicks(2351), true, false, null, "Admin", null, null, "$2a$11$e53Rhajl/FTi2m6ky/DQq.Z2sTIgb.6ee14P0z97UrxuiFae7A14y", null, false, "6d207a5f-753b-4f2b-80ff-e0d400eb69eb", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "Expired", "IsAdmin", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "2", 0, "d67b64a1-e0e7-4e34-a50c-c9fbde8a0b92", null, false, new DateTime(2022, 11, 16, 16, 29, 18, 489, DateTimeKind.Local).AddTicks(7699), false, false, null, "User1", null, null, "$2a$11$xr3FluIAY5f7zHPLPQTODu8jj2vUBJCnr3omPOy.rYYesJazS/wFW", null, false, "bee029b9-4414-45ac-b78f-39b91ff339b0", false, "user1" });
+                values: new object[] { "2", 0, "876c9cb9-56e1-4cb4-9715-8f7882a0467f", null, false, new DateTime(2022, 11, 22, 22, 9, 57, 820, DateTimeKind.Local).AddTicks(8753), false, false, null, "User1", null, null, "$2a$11$njd9isDYSDqeKD2oRuqsg.IPr1BSq.BsltTPihoLfabYdU002qLn2", null, false, "63b13a0f-e0b2-4622-83d0-6030e2c23f22", false, "user1" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "Id", "RoleId", "UserId" },
-                values: new object[] { "1", "c95d057c-48cd-457f-9950-d6ad01a198be", "1" });
+                values: new object[] { "1", "ff2e3a7f-9312-489c-b2cb-e6caa1d7d897", "1" });
 
             migrationBuilder.InsertData(
                 table: "UserRoles",
                 columns: new[] { "Id", "RoleId", "UserId" },
-                values: new object[] { "2", "48bc98a0-3f51-436b-9f66-7a94d9eeffb8", "2" });
+                values: new object[] { "2", "810f7074-293c-40e4-859e-d5da5806745d", "2" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cashflows_UserId1",
