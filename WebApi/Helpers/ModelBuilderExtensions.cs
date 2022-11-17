@@ -11,48 +11,48 @@ namespace WebApi.Helpers;
 
 public static class ModelBuilderExtensions
 {
-    public static void Seed(this ModelBuilder builder)
+  public static void Seed(this ModelBuilder builder)
+  {
+    // Seeding users
+    User adminUser = new User
     {
-        // Seeding users
-        User adminUser = new User
-        {
-            Id = "1",
-            Name = "Admin",
-            UserName = "admin",
-            IsAdmin = true,
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin"),
-            Expired = DateTime.Now.AddYears(10),
+      Id = "1",
+      Name = "Admin",
+      UserName = "admin",
+      IsAdmin = true,
+      PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin"),
+      Expired = DateTime.Now.AddYears(10),
 
-        };
+    };
 
-        User normalUser = new User
-        {
-            Id = "2",
-            Name = "User1",
-            UserName = "user1",
-            IsAdmin = false,
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword("user1"),
-            Expired = DateTime.Now.AddDays(7),
-        };
+    User normalUser = new User
+    {
+      Id = "2",
+      Name = "User1",
+      UserName = "user1",
+      IsAdmin = false,
+      PasswordHash = BCrypt.Net.BCrypt.HashPassword("user1"),
+      Expired = DateTime.Now.AddDays(7),
+    };
 
 
-        builder.Entity<User>().HasData(
-                new List<User>
-                {
+    builder.Entity<User>().HasData(
+            new List<User>
+            {
                     adminUser, normalUser
 
-                }
-        );
+            }
+    );
 
-        // Seeding cashflows
-        List<Cashflow> cashflows = new List<Cashflow> {
+    // Seeding cashflows
+    List<Cashflow> cashflows = new List<Cashflow> {
             new Cashflow {
                 CashFlowId = 1,
                 Type="In",
                 Amount=300.00,
                 Description="Apple",
                 ProjectType="Technology",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 2,
@@ -60,7 +60,7 @@ public static class ModelBuilderExtensions
                 Amount=100.00,
                 Description="Apple",
                 ProjectType="Technology",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 3,
@@ -68,7 +68,7 @@ public static class ModelBuilderExtensions
                 Amount=300.00,
                 Description="Deloitte",
                 ProjectType="Finance",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 4,
@@ -76,7 +76,7 @@ public static class ModelBuilderExtensions
                 Amount=200.00,
                 Description="Deloitte",
                 ProjectType="Finance",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 5,
@@ -84,7 +84,7 @@ public static class ModelBuilderExtensions
                 Amount=500.00,
                 Description="Chevron",
                 ProjectType="Energy",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 6,
@@ -92,7 +92,7 @@ public static class ModelBuilderExtensions
                 Amount=500.00,
                 Description="Chevron",
                 ProjectType="Energy",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 7,
@@ -100,7 +100,7 @@ public static class ModelBuilderExtensions
                 Amount=100.00,
                 Description="Google",
                 ProjectType="Technology",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 8,
@@ -108,7 +108,7 @@ public static class ModelBuilderExtensions
                 Amount=400.00,
                 Description="Google",
                 ProjectType="Technology",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 9,
@@ -116,7 +116,7 @@ public static class ModelBuilderExtensions
                 Amount=200.00,
                 Description="Microsoft",
                 ProjectType="Technology",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 10,
@@ -124,7 +124,7 @@ public static class ModelBuilderExtensions
                 Amount=200.00,
                 Description="Microsoft",
                 ProjectType="Technology",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 11,
@@ -132,7 +132,7 @@ public static class ModelBuilderExtensions
                 Amount=1000.00,
                 Description="Meta",
                 ProjectType="Technology",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 12,
@@ -140,7 +140,7 @@ public static class ModelBuilderExtensions
                 Amount=300.00,
                 Description="Amazon",
                 ProjectType="Technology",
-                UserId=2,
+                UserId="2",
             },
             new Cashflow {
                 CashFlowId = 13,
@@ -148,47 +148,47 @@ public static class ModelBuilderExtensions
                 Amount=400.00,
                 Description="Amazon",
                 ProjectType="Technology",
-                UserId=2,
+                UserId="2",
             },
         };
 
-        builder.Entity<Cashflow>().HasData(cashflows);
+    builder.Entity<Cashflow>().HasData(cashflows);
 
-        // Seeding roles
-        Role adminRole = new Role("Admin", "Admin Role", DateTime.Now);
-        Role userRole = new Role("User", "User Role", DateTime.Now);
+    // Seeding roles
+    Role adminRole = new Role("Admin", "Admin Role", DateTime.Now);
+    Role userRole = new Role("User", "User Role", DateTime.Now);
 
-        List<Role> roles = new List<Role>() {
+    List<Role> roles = new List<Role>() {
            adminRole,
            userRole
         };
 
-        builder.Entity<Role>().HasData(roles);
+    builder.Entity<Role>().HasData(roles);
 
-        // Seeding user roles
-        List<UserRoles> userRoles = new List<UserRoles>();
+    // Seeding user roles
+    List<UserRoles> userRoles = new List<UserRoles>();
 
-        userRoles.Add(new UserRoles
-        {
-            Id = "1",
-            UserId = adminUser.Id,
-            RoleId = adminRole.Id
-        });
+    userRoles.Add(new UserRoles
+    {
+      Id = "1",
+      UserId = adminUser.Id,
+      RoleId = adminRole.Id
+    });
 
-        userRoles.Add(new UserRoles
-        {
-            Id = "2",
-            UserId = normalUser.Id,
-            RoleId = userRole.Id
-        });
+    userRoles.Add(new UserRoles
+    {
+      Id = "2",
+      UserId = normalUser.Id,
+      RoleId = userRole.Id
+    });
 
-        // builder.Entity<UserRoles>(entity =>
-        // {
-        //     entity.HasData(userRoles);
-        // });
+    // builder.Entity<UserRoles>(entity =>
+    // {
+    //     entity.HasData(userRoles);
+    // });
 
-        builder.Entity<UserRoles>().HasData(userRoles);
+    builder.Entity<UserRoles>().HasData(userRoles);
 
 
-    }
+  }
 }
