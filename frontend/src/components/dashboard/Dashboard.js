@@ -146,27 +146,31 @@ function Dashboard() {
               height={"400px"}
             />
           </div>
-          <div class="bg-white rounded-xl shadow-lg text-center">
-            <h1>REVENUE</h1>
-            <h3>
-              {cashflowData.reduce((total, currentValue, currentIndex) => {
-                if (currentIndex == 0) {
-                  return 0;
-                } else {
-                  return +total + +currentValue[1];
-                }
-              }, 0)}
-            </h3>
-            <h1>PROFIT</h1>
-            <h3>
-              {cashflowData.reduce((total, currentValue, currentIndex) => {
-                if (currentIndex == 0) {
-                  return 0;
-                } else {
-                  return +total + +currentValue[1] - +currentValue[2];
-                }
-              }, 0)}
-            </h3>
+          <div class="bg-white rounded-xl shadow-lg flex justify-center items-center">
+            <div class="text-center">
+              <h1 class="underline underline-offset-4 font-bold">REVENUE</h1>
+              <h3>
+                $
+                {cashflowData.reduce((total, currentValue, currentIndex) => {
+                  if (currentIndex == 0) {
+                    return 0;
+                  } else {
+                    return +total + +currentValue[1];
+                  }
+                }, 0)}
+              </h3>
+              <h1 class="underline underline-offset-4 font-bold">PROFIT</h1>
+              <h3>
+                $
+                {cashflowData.reduce((total, currentValue, currentIndex) => {
+                  if (currentIndex == 0) {
+                    return 0;
+                  } else {
+                    return +total + +currentValue[1] - +currentValue[2];
+                  }
+                }, 0)}
+              </h3>
+            </div>
           </div>
         </div>
       </div>
