@@ -27,7 +27,8 @@ namespace WebApi.Controllers
     private User getUser()
     {
       return httpContextAccessor.HttpContext.Items["User"] as User;
-    }
+        }
+        [AllowAnonymous]
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
     {
@@ -37,6 +38,7 @@ namespace WebApi.Controllers
       return Ok(new { data = new { cashflows = _cashflows } });
     }
 
+        [AllowAnonymous]
     [HttpDelete("delete")]
     public async Task<IActionResult> DeleteCashflow(int id)
     {
@@ -56,7 +58,8 @@ namespace WebApi.Controllers
     }
 
 
-    [HttpGet("search")]
+    [AllowAnonymous]
+    [HttpPost("search")]
     public async Task<IActionResult> searchCashflow([FromBody] CashflowModel model)
     {
       var _cashflow = await cashflowService.searchCashflow(model);
@@ -64,6 +67,7 @@ namespace WebApi.Controllers
       return Ok(new { data = new { cashflow = _cashflow } });
     }
 
+        [AllowAnonymous]
     [HttpPost("update")]
     public IActionResult UpdateCashflow([FromBody] CashflowModel model)
     {
@@ -71,6 +75,7 @@ namespace WebApi.Controllers
       return Ok(new { data = new { cashflow = _cashflow } });
     }
 
+        [AllowAnonymous]
     [HttpPost("create")]
     public IActionResult CreateCashflow([FromBody] CashflowModel model)
     {

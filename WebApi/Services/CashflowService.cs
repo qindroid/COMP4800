@@ -105,13 +105,20 @@ namespace WebApi.Services
 
     public async Task<IEnumerable<Cashflow>> searchCashflow(CashflowModel model)
     {
+      //search cashflow by model    
       var cashflow = await context.Cashflows
           .Where(i => i.Description.ToLower().Contains(model.Description.ToLower())
-          || i.CashFlowId.ToString().ToLower().Contains(model.CashFlowId.ToString().ToLower())
-          || i.Amount.ToString().ToLower().Contains(model.Amount.ToString().ToLower())
-          || i.ProjectType.ToLower().Contains(model.ProjectType.ToLower())
-          || i.Type.ToLower().Contains(model.Type.ToLower())
+          && i.ProjectType.ToLower().Contains(model.ProjectType.ToLower())
+          && i.Type.ToLower().Contains(model.Type.ToLower())
           ).ToListAsync();
+      if (model.CashFlowId != 0)
+      {
+        cashflow = cashflow.Where(i => i.CashFlowId == model.CashFlowId).ToList();
+      }
+      if (model.Amount != 0)
+      {
+        cashflow = cashflow.Where(i => i.Amount == model.Amount).ToList();
+      }
       if (cashflow == null) throw new KeyNotFoundException("cashflow not found");
       return cashflow;
     }
