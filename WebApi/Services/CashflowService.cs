@@ -62,15 +62,22 @@ namespace WebApi.Services
     }
     public Task<int> CreateCashflow(CashflowModel cashflowModel, string userId)
     {
-      Cashflow cashflow = _mapper.Map<Cashflow>(cashflowModel);
-
-      cashflow.UserId = userId.ToString();
-
-      context.Add(cashflow);
-      context.SaveChanges();
-
-      return Task.FromResult(StatusCodes.Status200OK);
+            Cashflow cashflow = new Cashflow();
+            cashflow.Amount = (double)(cashflowModel.Amount != null ? cashflowModel.Amount : 0);
+            cashflow.Description = cashflowModel.Description;
+            cashflow.Type = cashflowModel.Type;
+            cashflow.ProjectType = cashflowModel.ProjectType;
+            cashflow.UserId = userId;
+            context.Cashflows.Add(cashflow);
+            context.SaveChangesAsync();
+            return Task.FromResult(StatusCodes.Status200OK);
     }
+      // Cashflow cashflow = _mapper.Map<Cashflow>(cashflowModel);
+      // cashflow.UserId = userId.ToString();
+      // Console.WriteLine(userId);
+      // context.Cashflows.Add(cashflow);
+      // context.SaveChanges();
+      // return Task.FromResult(StatusCodes.Status200OK);
 
     public async Task<int> UpdateCashflow(CashflowModel cashflowRequestData)
     {

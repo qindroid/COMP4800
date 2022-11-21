@@ -81,6 +81,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
+    this.setLoading(false);
     let self = this;
     self.setState({
       currentItem: store.getState().currentItem,
@@ -104,7 +105,7 @@ class Main extends React.Component {
 
   render() {
     return (
-      <Layout className="container">
+      <Layout className="container mt-5">
         <Layout>
           <Sider width={200} className="" style={{ background: "#FFFFFF" }}>
             <div className="logo">

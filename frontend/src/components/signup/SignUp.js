@@ -73,11 +73,13 @@ class SignUp extends React.Component {
     this.setLoading(true);
     let url = USER_REGISTER_ROUTE;
     let self = this;
-
-    values["expired"] = _expired;
+    console.log("values", url);
+    values["firstname"] = values["username"];
+    values["lastname"] = values["username"];
+    // values["expired"] = _expired;
     axios({
       method: "POST",
-      url: utils.getDomain() + url,
+      url: url,
       data: values,
     })
       .then(function (res) {

@@ -104,7 +104,7 @@ class UserEdit extends React.Component {
 
     axios({
       method: "POST",
-      url: utils.getDomain() + url,
+      url: url,
       headers: { token: cookies.get("token") },
       data: values,
     })
