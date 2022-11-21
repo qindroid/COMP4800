@@ -56,7 +56,8 @@ namespace WebApi.Controllers
     }
 
 
-    [HttpGet("search")]
+    [AllowAnonymous]
+    [HttpPost("search")]
     public async Task<IActionResult> searchCashflow([FromBody] CashflowModel model)
     {
       var _cashflow = await cashflowService.searchCashflow(model);
