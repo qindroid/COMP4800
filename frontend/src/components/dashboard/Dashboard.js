@@ -19,12 +19,12 @@ export const barChartOptions = {
 
 export const pieChartInOptions = {
   title: "Cash Inflow",
-  chartArea: { width: "50%" },
+  chartArea: { width: "100%" },
 };
 
 export const pieChartOutOptions = {
   title: "Cash Outflow",
-  chartArea: { width: "50%" },
+  chartArea: { width: "100%" },
 };
 
 export const compare = (a, b) => {
