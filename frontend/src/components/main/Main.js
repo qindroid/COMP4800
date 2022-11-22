@@ -139,7 +139,7 @@ class Main extends React.Component {
             <Switch>
               <Redirect from="/main/" to="/main/dashboard" exact />
               <Route path="/main/dashboard" component={DashboardPage} exact />
-              <Route path="/main/cashflowmanager" component={CashFlowManagerPage} exact />
+              <Route path="/main/cashflow/add" component={CashFlowManagerPage} exact />
               <Route path="/main/password" component={PasswordPage} exact />
               <Route path="/main/cashflow" component={CashflowPage} exact />
               <Route path="/main/user" component={StaffPage} exact />
