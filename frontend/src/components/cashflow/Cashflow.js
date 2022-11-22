@@ -27,10 +27,9 @@ class CashflowManager extends React.Component {
     console.log("createCashflow");
 
     axios({
-      method: "post",
-      // url: CASHFLOW_CREATE_ROUTE,
-      url: "http://localhost:4000/api/cashflow/create",
-      headers: { token: cookies.get("token") },
+      method: "POST",
+      url: CASHFLOW_CREATE_ROUTE,
+      // headers: { token: cookies.get("token") },
       // data: {
       //   Type: "Income",
       //   Amount: 100,
@@ -39,20 +38,29 @@ class CashflowManager extends React.Component {
       // },
       data: {
         type: document.getElementById("type").value,
-        amount: document.getElementById("amount").value,
+        amount: parseFloat(document.getElementById("amount").value),
         description: document.getElementById("description").value,
-        referenceType: document.getElementById("referenceType").value,
+        projectType: document.getElementById("referenceType").value,
       },
     })
       .then(function (res) {
-        if (200 === res.data.code) {
-          console.log(res.data.data);
-          console.log(res.data.message);
+        console.log(res);
+        if (200 === res.status) {
+          message.success("Cashflow created successfully");
         } else {
-          console.log("error");
           message.error(res.data.message);
-          console.log(res.data.message);
         }
+
+        // if (0 === res.data.code) {
+        //   //console.log(res.data.data);
+        //   console.log(res.data.message);
+        // } else {
+        //   console.log("error");
+        //   message.error(res.data.message);
+        //   console.log(res.data.message);
+        // }
+        //navigate to cashflow page
+        self.props.history.push("/main/cashflow");
       })
       .catch(function (err) {
         message.error(err.message);

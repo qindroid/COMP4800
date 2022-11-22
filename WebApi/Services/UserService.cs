@@ -36,7 +36,7 @@ public class UserService : IUserService
     public AuthenticateResponse Authenticate(AuthenticateRequest model)
     {
         var user = _context.Users.SingleOrDefault(x => x.UserName == model.Username);
-
+        
         // validate
         if (user == null || !BCrypt.Verify(model.Password, user.PasswordHash))
             throw new AppException("Username or password is incorrect");
@@ -44,6 +44,8 @@ public class UserService : IUserService
         // authentication successful
         var response = _mapper.Map<AuthenticateResponse>(user);
         response.Token = _jwtUtils.GenerateToken(user);
+        //authenticate user
+        
         return response;
     }
 
