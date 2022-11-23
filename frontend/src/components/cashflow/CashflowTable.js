@@ -40,13 +40,13 @@ class CashFlow extends React.Component {
       // user List
       columns: [
         {
-          title: "cashFlowId",
+          title: "ID",
           dataIndex: "cashFlowId",
           key: "cashFlowId",
           width: 80,
         },
         {
-          title: "type",
+          title: "Cashflow Type",
           dataIndex: "type",
           key: "type",
         },
@@ -56,22 +56,22 @@ class CashFlow extends React.Component {
         //   key: "created",
         // },
         {
-          title: "amount",
+          title: "Amount in CAD",
           dataIndex: "amount",
           key: "amount",
         },
         {
-          title: "project Type",
+          title: "Project Type (Industry)",
           dataIndex: "projectType",
           key: "projecttype",
         },
         {
-          title: "Description",
+          title: "Company",
           dataIndex: "description",
           key: "description",
         },
         {
-          title: "Action",
+          title: "",
           key: "operation",
           fixed: "right",
           width: 150,
