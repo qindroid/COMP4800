@@ -304,7 +304,7 @@ class CashFlow extends React.Component {
         <Row>
           <Row span="24">
             <Input.Search
-              placeholder="Search Description"
+              placeholder="Search Company"
               onSearch={(value) => {
                 this.setState({ bSearchMode: true });
                 this.searchCashflow(value);

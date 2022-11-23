@@ -5,6 +5,7 @@ import { CASHFLOW_READ_ROUTE, CASHFLOW_GLOBAL_ROUTE } from "../../common/urls";
 import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
 import store from "../../store";
+import { useHistory } from "react-router-dom";
 
 export const barChartOptions = {
   title: "Business Cashflows",
@@ -95,6 +96,7 @@ export const filterValues = (array) => {
 function Dashboard() {
   const [cashflowData, setData] = React.useState([]);
   const [cashflowOut, setOutData] = React.useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     fetch(CASHFLOW_GLOBAL_ROUTE)
@@ -115,6 +117,21 @@ function Dashboard() {
       .catch((error) => console.log(error));
   }, []);
 
+  const chartEvents = [
+    {
+      eventName: "select",
+      callback({ chartWrapper }) {
+        let row = chartWrapper.getChart().getSelection()[0].row;
+        let name = cashflowData[row + 1][0];
+
+        console.log("Selected ", chartWrapper.getChart().getSelection()[0]);
+        console.log("item: ", name);
+
+        history.push('/main/cashflow');
+      },
+    },
+  ];
+
   return (
     <>
       <div>
@@ -126,6 +143,7 @@ function Dashboard() {
               height="400px"
               data={cashflowData}
               options={barChartOptions}
+              chartEvents={chartEvents}
             />
           </div>
           <div class="bg-white shadow-lg col-span-2">
@@ -135,6 +153,7 @@ function Dashboard() {
               options={pieChartInOptions}
               width={"100%"}
               height={"400px"}
+              chartEvents={chartEvents}
             />
           </div>
           <div class="bg-white shadow-lg col-span-2">
@@ -144,6 +163,7 @@ function Dashboard() {
               options={pieChartOutOptions}
               width={"100%"}
               height={"400px"}
+              chartEvents={chartEvents}
             />
           </div>
           <div class="bg-white rounded-xl shadow-lg flex justify-center items-center">
