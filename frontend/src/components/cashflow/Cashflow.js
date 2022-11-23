@@ -90,12 +90,12 @@ class CashflowManager extends React.Component {
               Type
             </p> */}
             {/* <select class="type__dropdown focus:shadow-outline"> */}
-            <select class="block w-full py-3 pl-4 pr-8 bg-white border border-gray-300 rounded-sm appearance-none cursor-pointer focus:outline-none hover:border-gray-400">
+            <select id="type" class="block w-full py-3 pl-4 pr-8 bg-white border border-gray-300 rounded-sm appearance-none cursor-pointer focus:outline-none hover:border-gray-400">
               <option disabled="disabled" selected="selected" value="">
                 Select type
               </option>
-              <option value="in">In</option>
-              <option value="out">Out</option>
+              <option value="In">In</option>
+              <option value="Out">Out</option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
@@ -140,7 +140,7 @@ class CashflowManager extends React.Component {
               required
             />
             <label for="referenceType" class="label__style">
-              Reference Type
+              Project Type (Industry)
             </label>
           </div>
           <button
