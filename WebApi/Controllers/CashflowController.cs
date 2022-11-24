@@ -9,7 +9,6 @@ using WebApi.Models.Cashflows;
 
 namespace WebApi.Controllers
 {
-  [Authorize]
   [ApiController]
   [Route("api/cashflow")]
   public class CashflowController : Controller
@@ -26,23 +25,23 @@ namespace WebApi.Controllers
     }
     private User getUser()
     {
-      // get login user
-      var user = httpContextAccessor.HttpContext.User;
-      Console.WriteLine(httpContextAccessor.HttpContext.User.Identity.Name  + " is the user");
-      return httpContextAccessor.HttpContext.Items["User"] as User;
+      // var user = httpContextAccessor.HttpContext.Items["User"];
+      // Console.WriteLine(user.ToString()  + " is the user!!!!!!!!!");
+      var user = httpContextAccessor.HttpContext.Items["User"];
+      return (User)user;
+      // return Config.loginUser;
     }
 
-    [AllowAnonymous]
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
     {
-      Console.WriteLine(getUser());
+      Console.WriteLine(getUser().Id + " is the user!");
+      Console.WriteLine(Config.loginUser.UserName + " is the userName");
       var _cashflows = await cashflowService.GetAll(getUser().Id);
-
       return Ok(new { data = new { cashflows = _cashflows } });
+      // return Ok(new { data = new { cashflows = new List<Cashflow>() } });
     }
 
-    [AllowAnonymous]
     [HttpDelete("delete")]
     public async Task<IActionResult> DeleteCashflow(int id)
     {
@@ -51,7 +50,6 @@ namespace WebApi.Controllers
       return Ok(cashflows);
     }
 
-    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -61,16 +59,14 @@ namespace WebApi.Controllers
     }
 
 
-    [AllowAnonymous]
     [HttpPost("search")]
     public async Task<IActionResult> searchCashflow([FromBody] CashflowModel model)
     {
-      var _cashflow = await cashflowService.searchCashflow(model);
+      var _cashflow = await cashflowService.searchCashflow(model, getUser().Id);
 
       return Ok(new { data = new { cashflow = _cashflow } });
     }
 
-    [AllowAnonymous]
     [HttpPost("update")]
     public IActionResult UpdateCashflow([FromBody] CashflowModel model)
     {
@@ -78,7 +74,6 @@ namespace WebApi.Controllers
       return Ok(new { data = new { cashflow = _cashflow } });
     }
 
-    [AllowAnonymous]
     [HttpPost("create")]
     public IActionResult CreateCashflow([FromBody] CashflowModel model)
     { 
@@ -92,13 +87,17 @@ namespace WebApi.Controllers
     }
 
 
-    [AllowAnonymous]
     [HttpGet("global")]
     public async Task<IActionResult> GetGlobalAll()
     {
-      var _cashflows = await cashflowService.GetGlobalAll();
-
-      return Ok(new { data = new { cashflows = _cashflows } });
+      if (getUser().IsAdmin == true)
+      {
+          var _cashflows = await cashflowService.GetGlobalAll();
+          return Ok(new { data = new { cashflows = _cashflows } });
+      } else {
+          var _cashflows = await cashflowService.GetAll(getUser().Id);
+          return Ok(new { data = new { cashflows = _cashflows } });
+      }
     }
   }
 }

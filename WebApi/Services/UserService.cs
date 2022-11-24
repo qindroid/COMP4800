@@ -7,14 +7,19 @@ using WebApi.Entities;
 using WebApi.Helpers;
 using WebApi.Models.Users;
 
+public static class Config
+{
+    public static Dictionary<string, string> Application = new Dictionary<string, string>();
+    public static User loginUser = new User();
+}
 public interface IUserService
 {
     AuthenticateResponse Authenticate(AuthenticateRequest model);
     IEnumerable<User> GetAll();
-    User GetById(int id);
+    User GetById(string id);
     void Register(RegisterRequest model);
-    void Update(int id, UpdateRequest model);
-    void Delete(int id);
+    void Update(string id, UpdateRequest model);
+    void Delete(string id);
 }
 
 public class UserService : IUserService
@@ -45,7 +50,10 @@ public class UserService : IUserService
         var response = _mapper.Map<AuthenticateResponse>(user);
         response.Token = _jwtUtils.GenerateToken(user);
         //authenticate user
-        
+        Config.loginUser = user;
+        Console.WriteLine(Config.loginUser.Id + " is the user!");
+        Console.WriteLine(Config.loginUser.UserName + " is the userName");
+
         return response;
     }
 
@@ -54,7 +62,7 @@ public class UserService : IUserService
         return _context.Users;
     }
 
-    public User GetById(int id)
+    public User GetById(string id)
     {
         return getUser(id);
     }
@@ -76,7 +84,7 @@ public class UserService : IUserService
         _context.SaveChanges();
     }
 
-    public void Update(int id, UpdateRequest model)
+    public void Update(string id, UpdateRequest model)
     {
         var user = getUser(id);
 
@@ -94,7 +102,7 @@ public class UserService : IUserService
         _context.SaveChanges();
     }
 
-    public void Delete(int id)
+    public void Delete(string id)
     {
         var user = getUser(id);
         _context.Users.Remove(user);
@@ -103,7 +111,7 @@ public class UserService : IUserService
 
     // helper methods
 
-    private User getUser(int id)
+    private User getUser(string id)
     {
         var user = _context.Users.Find(id);
         if (user == null) throw new KeyNotFoundException("User not found");

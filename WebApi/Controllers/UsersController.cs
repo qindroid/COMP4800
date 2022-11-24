@@ -67,7 +67,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetById(int id)
+    public IActionResult GetById(string id)
     {
         var user = _userService.GetById(id);
 
@@ -75,14 +75,14 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, UpdateRequest model)
+    public IActionResult Update(string id, UpdateRequest model)
     {
         _userService.Update(id, model);
         return Ok(new { message = "User updated successfully" });
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public IActionResult Delete(string id)
     {
         _userService.Delete(id);
         return Ok(new { message = "User deleted successfully" });
