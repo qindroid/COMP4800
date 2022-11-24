@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../navigation/Navigation';
 
 // CSS
 import "./Landing.css";
@@ -9,6 +10,7 @@ import Main from "./Main";
 const Landing = () => {
     return (
         <div>
+            <Navbar />
             <Main />
         </div>
     );

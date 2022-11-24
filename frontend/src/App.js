@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import {
-  HashRouter as Router,
   Route,
   Redirect,
   Switch,
@@ -13,10 +12,6 @@ import "./App.css";
 import "./tailwind_compiled.css";
 import store from "./store";
 
-import axios from "axios";
-import utils from "./common/Utils";
-import { Row, Form, Col, Input, Button, message, Image } from "antd";
-
 // Pages 
 import Navbar from "./components/navigation/Navigation";
 import Landing from "./components/landing/Landing";
@@ -26,9 +21,6 @@ import Error from "./pages/404/404";
 const Login = React.lazy(() => import("./components/login/Login"));
 const SignUp = React.lazy(() => import("./components/signup/SignUp"));
 const Main = React.lazy(() => import("./components/main/Main"));
-const CashflowManager = React.lazy(() => import("./components/cashflow/Cashflow"));
-
-// Pages
 
 class App extends React.Component {
 
@@ -75,7 +67,7 @@ class App extends React.Component {
             indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
           >
             <div className="App">
-              <Navbar />
+              {/* <Navbar /> */}
               <BrowserRouter>
                 <Switch>
 
@@ -87,12 +79,8 @@ class App extends React.Component {
                   <Route path="/login" component={Login} exact />
                   <Route path="/SignUp" component={SignUp} exact />
                   <Route path="/main" component={Main} />
-                  <Route path="/cashflowManager" component={CashflowManager} />
-
-                  {/* <Redirect path="/about" to="/aboutus" exact /> */}
 
                   <Route path="/*" component={Error} />
-
                 </Switch>
               </BrowserRouter>
             </div>

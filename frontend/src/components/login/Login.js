@@ -11,6 +11,8 @@ import { withCookies, Cookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import { USER_LOGIN_ROUTE, USER_INFO_ROUTE } from "../../common/urls";
 
+import Navbar from "../navigation/Navigation";
+
 class Login extends React.Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired,
@@ -47,13 +49,13 @@ class Login extends React.Component {
     }
 
     let self = this;
-  
+
     utils
       .utilFetch("post", USER_LOGIN_ROUTE, values)
-      .then(function(res) {
+      .then(function (res) {
 
         if (200 === res.status) {
-          
+
           const { cookies } = self.props;
           cookies.set("token", res.data.data.token, { path: "/" });
           console.log(cookies.get("token"))
@@ -63,7 +65,7 @@ class Login extends React.Component {
         }
         self.setLoading(false);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         message.error(err.message);
         self.setLoading(false);
       });
@@ -94,53 +96,56 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Row justify="center" align="middle" className="container">
-        <Col span={10}>
-          <Row className="logo">
-            <Image preview={false} src={login_logo} />
-          </Row>
-          {/* User Enter username & password */}
+      <>
+        <Navbar />
+        <Row justify="center" align="middle" className="container">
+          <Col span={10}>
+            <Row className="logo">
+              <Image preview={false} src={login_logo} />
+            </Row>
+            {/* User Enter username & password */}
 
-          <Form name="basic" onFinish={this.onFinish}>
-            <Form.Item
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input the username",
-                },
-              ]}
-            >
-              <Input placeholder="Username" size="large" />
-            </Form.Item>
+            <Form name="basic" onFinish={this.onFinish}>
+              <Form.Item
+                name="username"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input the username",
+                  },
+                ]}
+              >
+                <Input placeholder="Username" size="large" />
+              </Form.Item>
 
-            <Form.Item
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input the password",
-                },
-              ]}
-            >
-              <Input.Password placeholder="Password" size="large" />
-            </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input the password",
+                  },
+                ]}
+              >
+                <Input.Password placeholder="Password" size="large" />
+              </Form.Item>
 
-            <Form.Item>
-              {/* Click to login */}
-              <Button type="primary" htmlType="submit" block>
-                Login
+              <Form.Item>
+                {/* Click to login */}
+                <Button type="primary" htmlType="submit" block>
+                  Login
+                </Button>
+              </Form.Item>
+              {/* Click to SignUp */}
+              <Button color="primary" onClick={""} block>
+                <Link to={"/SignUp"} target="_blank">
+                  SignUp
+                </Link>
               </Button>
-            </Form.Item>
-            {/* Click to SignUp */}
-            <Button color="primary" onClick={""} block>
-              <Link to={"/SignUp"} target="_blank">
-                SignUp
-              </Link>
-            </Button>
-          </Form>
-        </Col>
-      </Row>
+            </Form>
+          </Col>
+        </Row>
+      </>
     );
   }
 }

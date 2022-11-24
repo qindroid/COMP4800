@@ -47,8 +47,8 @@ function Navigation() {
           <ul className="nav__list">
             <li className="nav__item"><a href="/" className="nav__link active">Home</a></li>
             <li className="nav__item"><a href='/about' className="nav__link">About</a></li>
-            <li className="nav__item"><a href="plan" className="nav__link">Plan</a></li>
-            <li className="nav__item"><a href="abort" className="nav__link">Contact</a></li>
+            {/* <li className="nav__item"><a href="plan" className="nav__link">Plan</a></li> */}
+            {/* <li className="nav__item"><a href="abort" className="nav__link">Contact</a></li> */}
             <li className="nav__item vertical-line"></li>
             <li className="nav__item auth">
               <a href="/login" className="nav__link">Login</a>
