@@ -127,7 +127,7 @@ function Dashboard() {
         console.log("Selected ", chartWrapper.getChart().getSelection()[0]);
         console.log("item: ", name);
 
-        history.push('/main/cashflow');
+        history.push('/main/cashflow', {name: name});
       },
     },
   ];

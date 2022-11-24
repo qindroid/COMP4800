@@ -199,6 +199,15 @@ class CashFlow extends React.Component {
       value: ["/main/cashFlow"],
     };
     store.dispatch(action);
+
+    if (
+      this.props.history.location.state !== undefined &&
+      this.props.history.location.state.name !== undefined
+    ) {
+      let cashflowName = this.props.history.location.state.name;
+      console.log("cashflowName: ", cashflowName);
+      this.searchCashflow(cashflowName);
+    }
   }
 
   reloadPage() {
