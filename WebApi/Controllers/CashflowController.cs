@@ -82,7 +82,7 @@ namespace WebApi.Controllers
       {
         id = "1";
       }
-      var _cashflow = cashflowService.CreateCashflow(model, id);
+      var _cashflow = cashflowService.CreateCashflow(model, getUser().Id);
       return Ok(new { data = new { cashflow = _cashflow } });
     }
 
