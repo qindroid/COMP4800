@@ -183,7 +183,7 @@ function Dashboard() {
               <h3>
                 $
                 {cashflowData.reduce((total, currentValue, currentIndex) => {
-                  if (currentIndex == 0) {
+                  if (currentIndex === 0) {
                     return 0;
                   } else {
                     return +total + +currentValue[1] - +currentValue[2];

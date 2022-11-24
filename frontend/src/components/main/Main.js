@@ -1,6 +1,7 @@
 import React from "react";
 import {Route, Redirect, withRouter, Switch} from "react-router-dom";
 import {Layout, Menu, message, Image} from "antd";
+
 import axios from "axios";
 import utils from "../../common/Utils";
 import {
@@ -14,6 +15,9 @@ import "./Main.css";
 import main_logo from "../../images/logo-color.png";
 import {USER_LOGOUT_ROUTE} from "../../common/urls";
 
+import {withCookies, Cookies} from "react-cookie";
+import {instanceOf} from "prop-types";
+
 const DashboardPage = React.lazy(() => import("../dashboard/Dashboard"));
 const CashFlowManagerPage = React.lazy(() => import("../cashflow/Cashflow"));
 const PasswordPage = React.lazy(() => import("../password/Password"));
@@ -21,7 +25,7 @@ const LogoutPage = React.lazy(() => import("../logout/Logout"));
 const StaffPage = React.lazy(() => import("../staff/User"));
 const StaffEdit = React.lazy(() => import("../staff/Edit"));
 const CashflowPage = React.lazy(() => import("../cashflow/CashflowTable"));
-
+const SubscriptionManagePage = React.lazy(()=> import("../"))
 const {Sider} = Layout;
 
 class Main extends React.Component {
@@ -29,6 +33,7 @@ class Main extends React.Component {
     super(props);
 
     this.state = {
+      isAdmin: false,
       currentItem: [],
     };
 
@@ -86,6 +91,21 @@ class Main extends React.Component {
     self.setState({
       currentItem: store.getState().currentItem,
     });
+    
+    console.log("Cookie = ", self.props.cookies.get("token"));
+
+    utils
+      .utilFetch(
+        "get",
+        "api/user/isAdmin",
+        null,
+        self.props.cookies.get("token")
+      )
+      .then((data) => {
+        self.setState({
+          isAdmin: data.data.isAdmin,
+        });
+      });
 
     this.unsubscribe = store.subscribe(() => {
       if (
@@ -104,10 +124,23 @@ class Main extends React.Component {
   }
 
   render() {
+    let ManageSubscriptionMenuItem = <></>;
+    let ManageSubscriptionRoute = <></>;
+    if (this.state.isAdmin) {
+      ManageSubscriptionMenuItem = (
+        <Menu.Item key="/main/dashboard" icon={<DashboardOutlined />}>
+          Dashboard
+        </Menu.Item>
+      );
+      ManageSubscriptionRoute = (
+        <Route path="/main/subscriptionsView" component={StaffPage} exact />
+      );
+    }
+
     return (
       <Layout className="container mt-5">
         <Layout>
-          <Sider width={200} className="" style={{ background: "#FFFFFF" }}>
+          <Sider width={200} className="" style={{background: "#FFFFFF"}}>
             <div className="logo">
               <Image preview={false} src={main_logo} background="white" />
             </div>
@@ -115,10 +148,9 @@ class Main extends React.Component {
               mode="inline"
               defaultSelectedKeys={this.state.currentItem}
               selectedKeys={this.state.currentItem}
-              style={{ height: "100%", borderRight: 0 }}
+              style={{height: "100%", borderRight: 0}}
               onClick={this.onMenuItemClick}
-              theme="light"
-            >
+              theme="light">
               <Menu.Item key="/main/dashboard" icon={<DashboardOutlined />}>
                 Dashboard
               </Menu.Item>
@@ -128,6 +160,7 @@ class Main extends React.Component {
               <Menu.Item key="/main/user" icon={<UsergroupAddOutlined />}>
                 Users
               </Menu.Item>
+              ManageSubscriptionMenuItem,
               <Menu.Item key="/main/password" icon={<SettingOutlined />}>
                 Password
               </Menu.Item>
@@ -136,13 +169,18 @@ class Main extends React.Component {
               </Menu.Item>
             </Menu>
           </Sider>
-          <Layout style={{ padding: "24px 24px 24px" }}>
+          <Layout style={{padding: "24px 24px 24px"}}>
             <Switch>
               <Redirect from="/main/" to="/main/dashboard" exact />
               <Route path="/main/dashboard" component={DashboardPage} exact />
-              <Route path="/main/cashflow/add" component={CashFlowManagerPage} exact />
+              <Route
+                path="/main/cashflow/add"
+                component={CashFlowManagerPage}
+                exact
+              />
               <Route path="/main/password" component={PasswordPage} exact />
               <Route path="/main/cashflow" component={CashflowPage} exact />
+
               <Route path="/main/user" component={StaffPage} exact />
               <Route path="/main/user/edit/:id" component={StaffEdit} exact />
               <Route path="/main/logout" component={LogoutPage} exact />

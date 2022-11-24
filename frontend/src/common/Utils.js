@@ -24,7 +24,6 @@ let utils = {
       data: data,
       headers: options,
     };
-    console.log(request);
     return axios(request);
   },
 };

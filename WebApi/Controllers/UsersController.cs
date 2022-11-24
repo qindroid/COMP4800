@@ -1,12 +1,17 @@
 ﻿namespace WebApi.Controllers;
 
+using System.Text.Json;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using WebApi.Authorization;
+using WebApi.Entities;
 using WebApi.Helpers;
 using WebApi.Models.Users;
 using WebApi.Services;
+using System.IO;
+using WebApi.Helpers;
+using global::Helpers.SubscriptionInfo;
 
 [Authorize]
 [ApiController]
@@ -17,6 +22,8 @@ public class UsersController : ControllerBase
     private IMapper _mapper;
     private readonly AppSettings _appSettings;
 
+
+
     public UsersController(
         IUserService userService,
         IMapper mapper,
@@ -25,15 +32,16 @@ public class UsersController : ControllerBase
         _userService = userService;
         _mapper = mapper;
         _appSettings = appSettings.Value;
+
     }
 
     [AllowAnonymous]
     [HttpPost("login")]
     public IActionResult Authenticate(AuthenticateRequest model)
     {
-       
+
         var response = _userService.Authenticate(model);
-        return Ok(new { code = StatusCodes.Status200OK,  data = response, message="Success"});
+        return Ok(new { code = StatusCodes.Status200OK, data = response, message = "Success" });
     }
 
     [AllowAnonymous]
@@ -45,11 +53,31 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost("logout")]
-    public IActionResult Logout(int id) {
+    public IActionResult Logout(int id)
+    {
         // todo
-        return Ok(new {message = ""});
+        return Ok(new { message = "" });
     }
-    
+    [AllowAnonymous]
+    [HttpGet("isAdmin")]
+    public IActionResult IsAdmin()
+    {
+        return Ok(new { isAdmin = ((User)this.HttpContext.Items["User"])?.IsAdmin });
+    }
+    [HttpGet("allowedCashflows")]
+    public IActionResult GetAllowedCashflowAmount()
+    {
+
+        var currentUser = (User)this.HttpContext.Items["User"];
+        bool isNotExpired = currentUser.Expired < DateTime.Now;
+
+        var info = SubscriptionInfoService.GetInfo();
+
+        int amount = isNotExpired ? info.PremiumCashflowAllowance : info.FreeCashflowAllowance;
+
+        return Ok(new { amount = amount });
+    }
+
     [HttpGet("info")]
     public IActionResult GetInfo()
     {
