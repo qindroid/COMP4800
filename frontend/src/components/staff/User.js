@@ -158,7 +158,7 @@ class User extends React.Component {
         axios({
             method: "GET",
             url: utils.getDomain() + "api/user/list",
-            headers: { token: cookies.get("token") },
+            // headers: { token: cookies.get("token") },
             // data: { page: page, limit: pageSize },
         })
             .then(function (res) {
