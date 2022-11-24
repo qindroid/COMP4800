@@ -6,6 +6,8 @@ import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
 import store from "../../store";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+
 
 export const barChartOptions = {
   title: "Business Cashflows",
@@ -97,12 +99,18 @@ function Dashboard() {
   const [cashflowData, setData] = React.useState([]);
   const [cashflowOut, setOutData] = React.useState([]);
   const history = useHistory();
+  const cookies = new Cookies();
 
   useEffect(() => {
-    fetch(CASHFLOW_GLOBAL_ROUTE)
-      .then((response) => response.json())
+    axios({
+      method: "GET",
+      url: CASHFLOW_GLOBAL_ROUTE,
+      headers: { token: cookies.get("token") },
+    })
       .then((data) => {
-        let values = data.data.cashflows.$values;
+        console.log("data: ", data);
+        let values = data.data.data.cashflows.$values;
+        console.log("values: ", values);
 
         let array = filterValues(values);
         setData(array);

@@ -95,8 +95,8 @@ namespace WebApi.Controllers
           var _cashflows = await cashflowService.GetGlobalAll();
           return Ok(new { data = new { cashflows = _cashflows } });
       } else {
-          // var _cashflows = await cashflowService.GetAll(getUser().Id);
-          var _cashflows = await cashflowService.GetGlobalAll();
+          var _cashflows = await cashflowService.GetAll(getUser().Id);
+          // var _cashflows = await cashflowService.GetGlobalAll();
           return Ok(new { data = new { cashflows = _cashflows } });
       }
     }
