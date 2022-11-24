@@ -41,9 +41,10 @@ namespace WebApi.Services
       if (cashflow == null) throw new KeyNotFoundException("cashflow not found");
       return cashflow;
     }
-    public Task<List<Cashflow>> GetAll(string userID)
+    public async Task<List<Cashflow>> GetAll(string userID)
     {
-      return context.Cashflows.Where(x => x.UserId == userID).ToListAsync();
+      var cashflows = await context.Cashflows.Where(x => x.UserId == userID).ToListAsync();
+      return cashflows;
     }
     public async Task<Cashflow> DeleteCashflow(int id)
     {
