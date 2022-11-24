@@ -29,7 +29,7 @@ class CashflowManager extends React.Component {
     axios({
       method: "POST",
       url: CASHFLOW_CREATE_ROUTE,
-      // headers: { token: cookies.get("token") },
+      headers: { token: cookies.get("token") },
       // data: {
       //   Type: "Income",
       //   Amount: 100,
