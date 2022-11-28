@@ -18,6 +18,7 @@ public class JwtMiddleware
         //show all content of the request
         Console.WriteLine(token + " is the token");            
         var userId = jwtUtils.ValidateToken(token);
+        Console.WriteLine(userId + " is the userId");
         if (userId != null)
         {
             // attach user to context on successful jwt validation

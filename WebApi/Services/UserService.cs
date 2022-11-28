@@ -7,6 +7,11 @@ using WebApi.Entities;
 using WebApi.Helpers;
 using WebApi.Models.Users;
 
+public static class Config
+{
+    public static Dictionary<string, string> Application = new Dictionary<string, string>();
+    public static User loginUser = new User();
+}
 public interface IUserService
 {
     AuthenticateResponse Authenticate(AuthenticateRequest model);
