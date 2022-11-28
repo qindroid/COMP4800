@@ -4,9 +4,13 @@ import { UilLinkedin, UilGithub, UilEnvelope } from "@iconscout/react-unicons";
 
 import Navbar from "../../components/navigation/Navigation";
 
+import Navbar from "../../components/navigation/Navigation";
+
+
 import React from "react";
 import { gsap } from "gsap";
 const { useLayoutEffect, useRef } = React;
+
 
 function About() {
   const app = useRef();

@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../navigation/Navigation';
 
 // CSS
 import "./Landing.css";

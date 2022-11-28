@@ -12,6 +12,10 @@ import { Link } from "react-router-dom";
 import PricingCard from "./CardItem";
 import "./CardItem.css";
 import { USER_REGISTER_ROUTE } from "../../common/urls";
+
+import Navbar from "../navigation/Navigation";
+
+
 const cardsData = [
   {
     id: 1,
@@ -100,56 +104,60 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <Row justify="center" align="middle" className="container">
-        <Col span={10}>
-          <Row className="logo">
-            <Image preview={false} src={login_logo} />
-          </Row>
-          {/* User Enter username & password */}
-          <Form name="basic" onFinish={this.onFinish} ref={this.formRef}>
-            <Form.Item
-              label="Username"
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input the username",
-                },
-              ]}
-            >
-              <Input placeholder="Username" size="large" />
-            </Form.Item>
+      <>
+        <Navbar />
+        <Row justify="center" align="middle" className="container">
+          <Col span={10}>
+            <Row className="logo">
+              <Image preview={false} src={login_logo} />
+            </Row>
+            {/* User Enter username & password */}
+            <Form name="basic" onFinish={this.onFinish} ref={this.formRef}>
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input the username",
+                  },
+                ]}
+              >
+                <Input placeholder="Username" size="large" />
+              </Form.Item>
 
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "The length is at least 5",
-                  min: 5,
-                },
-              ]}
-            >
-              <Input.Password placeholder="Password" size="large" />
-            </Form.Item>
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "The length is at least 5",
+                    min: 5,
+                  },
+                ]}
+              >
+                <Input.Password placeholder="Password" size="large" />
+              </Form.Item>
 
-            <div className="app-wrapper">
-              {cardsData.map((props) => {
-                return (
-                  <PricingCard
-                    {...props}
-                    key={props.id}
-                    clickMe={() => {
-                      _expired = props.clickMe;
-                    }}
-                  />
-                );
-              })}
-            </div>
-          </Form>
-        </Col>
-      </Row>
+              <div className="app-wrapper">
+                {cardsData.map((props) => {
+                  return (
+                    <PricingCard
+                      {...props}
+                      key={props.id}
+                      clickMe={() => {
+                        _expired = props.clickMe;
+                      }}
+                    />
+                  );
+                })}
+              </div>
+
+            </Form>
+          </Col>
+        </Row>
+      </>
     );
   }
 }

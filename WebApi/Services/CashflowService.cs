@@ -17,7 +17,7 @@ namespace WebApi.Services
     Task<Cashflow> GetById(int id);
 
 
-    Task<IEnumerable<Cashflow>> searchCashflow(CashflowModel model);
+    Task<IEnumerable<Cashflow>> searchCashflow(CashflowModel model, string userid);
   }
   public class CashflowService : ICashflowService
   {
@@ -41,9 +41,10 @@ namespace WebApi.Services
       if (cashflow == null) throw new KeyNotFoundException("cashflow not found");
       return cashflow;
     }
-    public Task<List<Cashflow>> GetAll(string userID)
+    public async Task<List<Cashflow>> GetAll(string userID)
     {
-      return context.Cashflows.Where(x => x.User.Id == userID).ToListAsync();
+      var cashflows = await context.Cashflows.Where(x => x.UserId == userID).ToListAsync();
+      return cashflows;
     }
     public async Task<Cashflow> DeleteCashflow(int id)
     {
@@ -108,11 +109,12 @@ namespace WebApi.Services
       return cashflow;
     }
 
-    public async Task<IEnumerable<Cashflow>> searchCashflow(CashflowModel model)
+    public async Task<IEnumerable<Cashflow>> searchCashflow(CashflowModel model, string UserId)
     {
       //search cashflow by model    
       var cashflow = await context.Cashflows
           .Where(i => i.Description.ToLower().Contains(model.Description.ToLower())
+          && i.UserId == UserId
           && i.ProjectType.ToLower().Contains(model.ProjectType.ToLower())
           && i.Type.ToLower().Contains(model.Type.ToLower())
           ).ToListAsync();

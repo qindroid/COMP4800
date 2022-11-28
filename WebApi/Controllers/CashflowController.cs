@@ -25,19 +25,21 @@ namespace WebApi.Controllers
     }
     private User getUser()
     {
-      // get login user
-      var user = httpContextAccessor.HttpContext.User;
-      Console.WriteLine(httpContextAccessor.HttpContext.User.Identity.Name  + " is the user");
-      return httpContextAccessor.HttpContext.Items["User"] as User;
+      // var user = httpContextAccessor.HttpContext.Items["User"];
+      // Console.WriteLine(user.ToString()  + " is the user!!!!!!!!!");
+      var user = httpContextAccessor.HttpContext.Items["User"];
+      return (User)user;
+      // return Config.loginUser;
     }
 
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
     {
-      Console.WriteLine(getUser());
+      Console.WriteLine(getUser().Id + " is the user!");
+      Console.WriteLine(Config.loginUser.UserName + " is the userName");
       var _cashflows = await cashflowService.GetAll(getUser().Id);
-
       return Ok(new { data = new { cashflows = _cashflows } });
+      // return Ok(new { data = new { cashflows = new List<Cashflow>() } });
     }
 
     [HttpDelete("delete")]
@@ -60,12 +62,11 @@ namespace WebApi.Controllers
     [HttpPost("search")]
     public async Task<IActionResult> searchCashflow([FromBody] CashflowModel model)
     {
-      var _cashflow = await cashflowService.searchCashflow(model);
+      var _cashflow = await cashflowService.searchCashflow(model, getUser().Id);
 
       return Ok(new { data = new { cashflow = _cashflow } });
     }
 
-    [AllowAnonymous]
     [HttpPost("update")]
     public IActionResult UpdateCashflow([FromBody] CashflowModel model)
     {
@@ -81,7 +82,7 @@ namespace WebApi.Controllers
       {
         return BadRequest(new { message = "User not found" });
       }
-      var _cashflow = cashflowService.CreateCashflow(model, id);
+      var _cashflow = cashflowService.CreateCashflow(model, getUser().Id);
       return Ok(new { data = new { cashflow = _cashflow } });
     }
 

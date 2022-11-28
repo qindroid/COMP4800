@@ -11,6 +11,8 @@ import { withCookies, Cookies } from "react-cookie";
 import { Link } from "react-router-dom";
 import { USER_LOGIN_ROUTE, USER_INFO_ROUTE } from "../../common/urls";
 
+import Navbar from "../navigation/Navigation";
+
 class Login extends React.Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired,
@@ -47,10 +49,10 @@ class Login extends React.Component {
     }
 
     let self = this;
-  
+
     utils
       .utilFetch("post", USER_LOGIN_ROUTE, values)
-      .then(function(res) {
+      .then(function (res) {
 
         if (200 === res.status) {
           const { cookies } = self.props;
@@ -62,7 +64,7 @@ class Login extends React.Component {
         }
         self.setLoading(false);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         message.error(err.message);
         self.setLoading(false);
       });
@@ -118,33 +120,34 @@ class Login extends React.Component {
               <Input placeholder="Username" size="large" />
             </Form.Item>
 
-            <Form.Item
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input the password",
-                },
-              ]}
-            >
-              <Input.Password placeholder="Password" size="large" />
-            </Form.Item>
+              <Form.Item
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input the password",
+                  },
+                ]}
+              >
+                <Input.Password placeholder="Password" size="large" />
+              </Form.Item>
 
-            <Form.Item>
-              {/* Click to login */}
-              <Button type="primary" htmlType="submit" block>
-                Login
+              <Form.Item>
+                {/* Click to login */}
+                <Button type="primary" htmlType="submit" block>
+                  Login
+                </Button>
+              </Form.Item>
+              {/* Click to SignUp */}
+              <Button color="primary" onClick={""} block>
+                <Link to={"/SignUp"} target="_blank">
+                  SignUp
+                </Link>
               </Button>
-            </Form.Item>
-            {/* Click to SignUp */}
-            <Button color="primary" onClick={""} block>
-              <Link to={"/SignUp"} target="_blank">
-                SignUp
-              </Link>
-            </Button>
-          </Form>
-        </Col>
-      </Row>
+            </Form>
+          </Col>
+        </Row>
+      </>
     );
   }
 }
