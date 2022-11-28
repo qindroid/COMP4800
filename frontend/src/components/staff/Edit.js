@@ -47,22 +47,22 @@ class UserEdit extends React.Component {
     const { cookies } = self.props;
     // Staff info API, to get staff detail
     axios({
-      method: "POST",
-      url: USER_DETAIL_ROUTE,
+      method: "Get",
+      url: USER_DETAIL_ROUTE + "" + id,
       headers: { token: cookies.get("token") },
-      data: { id },
     })
       .then(function (res) {
+        console.log(res);
         self.setLoading(false);
         if (1 === res.data.code) {
           self.props.history.push("/login");
-        } else if (0 === res.data.code) {
+        } else if (200 === res.status) {
           self.formRef.current.setFieldsValue({
-            username: res.data.data.username,
-            password: res.data.data.password,
+            username: res.data.userName,
+            password: res.data.passwordHash,
           });
           self.setState({
-            isAdmin: res.data.data.isAdmin,
+            isAdmin: res.data.isAdmin,
           });
         } else {
           message.error(res.data.message);
@@ -91,37 +91,71 @@ class UserEdit extends React.Component {
   onFinish(values) {
     this.setLoading(true);
     // if has staaff ==?update, if not ===> create a new one
-    let url = USER_REGISTER_ROUTE;
+    let url = "";
     if ("0" !== this.id) {
       url = USER_UPDATE_ROUTE;
+      values.id = this.id;
+      values.isAdmin = this.state.isAdmin;
+      values["firstname"] = values["username"];
+      values["lastname"] = values["username"];
+      let self = this;
+      const { cookies } = self.props;
+      axios({
+        method: "PUT",
+        url: url + "" + this.id,
+        headers: { token: cookies.get("token") },
+        data: values,
+      })
+        .then(function (res) {
+          self.setLoading(false);
+          console.log(res);
+          if (1 === res.data.code) {
+            self.props.history.push("/login");
+          } else if (200 === res.status) {
+            self.props.history.push("/main/user");
+          } else {
+            message.error(res.data.message);
+          }
+        })
+        .catch(function (err) {
+          self.setLoading(false);
+          message.error(err.message);
+        });
+
+
+    } else {
+      url = USER_REGISTER_ROUTE;
+      values.id = this.id;
+      values.isAdmin = this.state.isAdmin;
+      values["firstname"] = values["username"];
+      values["lastname"] = values["username"];
+      let self = this;
+      const { cookies } = self.props;
+
+      axios({
+        method: "POST",
+        url: url,
+        headers: { token: cookies.get("token") },
+        data: values,
+      })
+        .then(function (res) {
+          self.setLoading(false);
+          console.log(res);
+          if (1 === res.data.code) {
+            self.props.history.push("/login");
+          } else if (200 === res.status) {
+            self.props.history.push("/main/user");
+          } else {
+            message.error(res.data.message);
+          }
+        })
+        .catch(function (err) {
+          self.setLoading(false);
+          message.error(err.message);
+        });
     }
 
-    values.id = this.id;
-    values.isAdmin = this.state.isAdmin;
-
-    let self = this;
-    const { cookies } = self.props;
-
-    axios({
-      method: "POST",
-      url: url,
-      headers: { token: cookies.get("token") },
-      data: values,
-    })
-      .then(function (res) {
-        self.setLoading(false);
-        if (1 === res.data.code) {
-          self.props.history.push("/login");
-        } else if (0 === res.data.code) {
-          self.props.history.push("/main/user");
-        } else {
-          message.error(res.data.message);
-        }
-      })
-      .catch(function (err) {
-        self.setLoading(false);
-        message.error(err.message);
-      });
+    
   }
 
   onGoback() {
