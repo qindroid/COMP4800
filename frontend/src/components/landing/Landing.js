@@ -5,12 +5,15 @@ import "./Landing.css";
 
 // Components
 import Main from "./Main";
+import Navbar from "../navigation/Navigation";
 
 const Landing = () => {
     return (
-        <div>
-            <Main />
-        </div>
+      <div>
+        {" "}
+        <Navbar />
+        <Main />
+      </div>
     );
 }
 

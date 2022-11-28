@@ -128,10 +128,10 @@ class User extends React.Component {
       const { cookies } = self.props;
       // Delete user API
       axios({
-        method: "POST",
-        url: utils.getDomain() + "api/user/delete",
+        method: "Delete",
+        url: utils.getDomain() + "api/user/" + id,
         headers: { token: cookies.get("token") },
-        data: { id },
+        // data: { id },
       })
         .then(function (res) {
           self.setLoading(false);
@@ -139,8 +139,10 @@ class User extends React.Component {
             return self.props.history.push("/login");
           } else if (0 === res.data.code) {
             self.reloadPage(1, self.state.limit);
+             self.reloadPage();
           } else {
             message.error(res.data.message);
+             self.reloadPage();
           }
         })
         .catch(function (err) {

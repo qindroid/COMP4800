@@ -9,7 +9,6 @@ using WebApi.Models.Cashflows;
 
 namespace WebApi.Controllers
 {
-  [Authorize]
   [ApiController]
   [Route("api/cashflow")]
   public class CashflowController : Controller
@@ -32,7 +31,6 @@ namespace WebApi.Controllers
       return httpContextAccessor.HttpContext.Items["User"] as User;
     }
 
-    [AllowAnonymous]
     [HttpGet("all")]
     public async Task<IActionResult> GetAll()
     {
@@ -42,7 +40,6 @@ namespace WebApi.Controllers
       return Ok(new { data = new { cashflows = _cashflows } });
     }
 
-    [AllowAnonymous]
     [HttpDelete("delete")]
     public async Task<IActionResult> DeleteCashflow(int id)
     {
@@ -51,7 +48,6 @@ namespace WebApi.Controllers
       return Ok(cashflows);
     }
 
-    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -61,7 +57,6 @@ namespace WebApi.Controllers
     }
 
 
-    [AllowAnonymous]
     [HttpPost("search")]
     public async Task<IActionResult> searchCashflow([FromBody] CashflowModel model)
     {
@@ -78,27 +73,37 @@ namespace WebApi.Controllers
       return Ok(new { data = new { cashflow = _cashflow } });
     }
 
-    [AllowAnonymous]
     [HttpPost("create")]
     public IActionResult CreateCashflow([FromBody] CashflowModel model)
     { 
       string id = "";
       if (getUser() == null)
       {
-        id = "1";
+        return BadRequest(new { message = "User not found" });
       }
       var _cashflow = cashflowService.CreateCashflow(model, id);
       return Ok(new { data = new { cashflow = _cashflow } });
     }
 
 
-    [AllowAnonymous]
     [HttpGet("global")]
     public async Task<IActionResult> GetGlobalAll()
     {
-      var _cashflows = await cashflowService.GetGlobalAll();
-
-      return Ok(new { data = new { cashflows = _cashflows } });
+      getUser();
+      if (getUser() != null) {
+        if (getUser().IsAdmin) {
+          var _cashflows = await cashflowService.GetGlobalAll();
+          return Ok(new { data = new { cashflows = _cashflows } });
+        } else {
+          var _cashflows = await cashflowService.GetAll(getUser().Id);
+          return Ok(new { data = new { cashflows = _cashflows } });
+        }
+      } else {
+          var _cashflows = await cashflowService.GetGlobalAll();
+          return Ok(new { data = new { cashflows = _cashflows } });
+      }
+      //print
+      
     }
   }
 }

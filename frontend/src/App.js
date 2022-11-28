@@ -75,7 +75,6 @@ class App extends React.Component {
             indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
           >
             <div className="App">
-              <Navbar />
               <BrowserRouter>
                 <Switch>
 

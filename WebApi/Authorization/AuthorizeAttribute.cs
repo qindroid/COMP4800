@@ -13,8 +13,7 @@ public class AuthorizeAttribute : Attribute, IAuthorizationFilter
         var allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
         if (allowAnonymous)
             return;
-
-        // authorization
+   
         var user = (User)context.HttpContext.Items["User"];
         Console.WriteLine("Authorization: " + user.ToString());
         if (user == null)

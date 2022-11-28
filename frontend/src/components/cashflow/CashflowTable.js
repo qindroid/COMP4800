@@ -143,7 +143,7 @@ class CashFlow extends React.Component {
     axios({
       method: "DELETE",
       url: utils.getDomain() + "api/cashFlow/delete?id=" + id,
-      // headers: { token: cookies.get("token") },
+      headers: { token: cookies.get("token") },
     })
       .then(function (res) {
         console.log(res.data);
@@ -165,7 +165,7 @@ class CashFlow extends React.Component {
     axios({
       method: "GET",
       url: utils.getDomain() + "api/cashFlow/global",
-      // headers: { token: cookies.get("token") },
+      headers: { token: cookies.get("token") },
       // data: { page: page, limit: pageSize },
     })
       .then(function (res) {

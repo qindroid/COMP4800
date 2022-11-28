@@ -53,7 +53,6 @@ class Login extends React.Component {
       .then(function(res) {
 
         if (200 === res.status) {
-          
           const { cookies } = self.props;
           cookies.set("token", res.data.data.token, { path: "/" });
           console.log(cookies.get("token"))
@@ -94,14 +93,19 @@ class Login extends React.Component {
 
   render() {
     return (
-      <Row justify="center" align="middle" className="container">
+      <Row
+        justify="center"
+        align="middle"
+        className="container"
+        style={{minHeight: "100vh"}}
+      >
         <Col span={10}>
           <Row className="logo">
             <Image preview={false} src={login_logo} />
           </Row>
           {/* User Enter username & password */}
 
-          <Form name="basic" onFinish={this.onFinish}>
+          <Form name="basic" onFinish={this.onFinish} className="mt-5">
             <Form.Item
               name="username"
               rules={[

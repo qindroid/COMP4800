@@ -4,11 +4,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using WebApi.Authorization;
+using WebApi.Entities;
 using WebApi.Helpers;
 using WebApi.Models.Users;
 using WebApi.Services;
 
-[Authorize]
 [ApiController]
 [Route("api/user")]
 public class UsersController : ControllerBase
@@ -16,18 +16,27 @@ public class UsersController : ControllerBase
     private IUserService _userService;
     private IMapper _mapper;
     private readonly AppSettings _appSettings;
+    private IHttpContextAccessor httpContextAccessor;
 
     public UsersController(
         IUserService userService,
         IMapper mapper,
-        IOptions<AppSettings> appSettings)
+        IOptions<AppSettings> appSettings,
+        IHttpContextAccessor accessor)
     {
         _userService = userService;
         _mapper = mapper;
         _appSettings = appSettings.Value;
+        httpContextAccessor = accessor;
+    }
+    private User getUser()
+    {
+        // get login user
+        var user = httpContextAccessor.HttpContext.User;
+        Console.WriteLine(httpContextAccessor.HttpContext.User.Identity.Name + " is the user");
+        return httpContextAccessor.HttpContext.Items["User"] as User;
     }
 
-    [AllowAnonymous]
     [HttpPost("login")]
     public IActionResult Authenticate(AuthenticateRequest model)
     {
@@ -36,12 +45,18 @@ public class UsersController : ControllerBase
         return Ok(new { code = StatusCodes.Status200OK,  data = response, message="Success"});
     }
 
-    [AllowAnonymous]
     [HttpPost("signup")]
     public IActionResult Register(RegisterRequest model)
     {
         _userService.Register(model);
         return Ok(new { message = "Registration successful" });
+    }
+
+    [HttpPost("password")]
+    public IActionResult Password( string password)
+    {
+        _userService.Password(getUser().Id, password);
+        return Ok(new { message = "Password changed successful" });
     }
 
     [HttpPost("logout")]
@@ -57,7 +72,6 @@ public class UsersController : ControllerBase
         return Ok(new { message = "" });
     }
 
-    [AllowAnonymous]
     [HttpGet("list")]
     public IActionResult GetAll()
     {
@@ -67,7 +81,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetById(int id)
+    public IActionResult GetById(string id)
     {
         var user = _userService.GetById(id);
 
@@ -75,14 +89,14 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, UpdateRequest model)
+    public IActionResult Update(string id, UpdateRequest model)
     {
         _userService.Update(id, model);
         return Ok(new { message = "User updated successfully" });
     }
 
     [HttpDelete("{id}")]
-    public IActionResult Delete(int id)
+    public IActionResult Delete(string id)
     {
         _userService.Delete(id);
         return Ok(new { message = "User deleted successfully" });

@@ -11,10 +11,13 @@ public interface IUserService
 {
     AuthenticateResponse Authenticate(AuthenticateRequest model);
     IEnumerable<User> GetAll();
-    User GetById(int id);
+    User GetById(string id);
     void Register(RegisterRequest model);
-    void Update(int id, UpdateRequest model);
-    void Delete(int id);
+    void Update(string id, UpdateRequest model);
+    void Delete(string id);
+    
+    void Password(string id, string password);
+
 }
 
 public class UserService : IUserService
@@ -36,7 +39,8 @@ public class UserService : IUserService
     public AuthenticateResponse Authenticate(AuthenticateRequest model)
     {
         var user = _context.Users.SingleOrDefault(x => x.UserName == model.Username);
-        
+        Console.WriteLine("Authenticate user is " + user.UserName);
+
         // validate
         if (user == null || !BCrypt.Verify(model.Password, user.PasswordHash))
             throw new AppException("Username or password is incorrect");
@@ -44,8 +48,8 @@ public class UserService : IUserService
         // authentication successful
         var response = _mapper.Map<AuthenticateResponse>(user);
         response.Token = _jwtUtils.GenerateToken(user);
+        Console.WriteLine("Authenticate token is " + response.Token);
         //authenticate user
-        
         return response;
     }
 
@@ -54,7 +58,7 @@ public class UserService : IUserService
         return _context.Users;
     }
 
-    public User GetById(int id)
+    public User GetById(string id)
     {
         return getUser(id);
     }
@@ -76,7 +80,7 @@ public class UserService : IUserService
         _context.SaveChanges();
     }
 
-    public void Update(int id, UpdateRequest model)
+    public void Update(string id, UpdateRequest model)
     {
         var user = getUser(id);
 
@@ -94,7 +98,20 @@ public class UserService : IUserService
         _context.SaveChanges();
     }
 
-    public void Delete(int id)
+    public void Password(string id, string password)
+    {
+        var user = getUser(id);
+
+        // hash password if it was entered
+        if (!string.IsNullOrEmpty(password))
+            user.PasswordHash = BCrypt.HashPassword(password);
+
+        // copy model to user and save
+        _context.Users.Update(user);
+        _context.SaveChanges();
+    }
+
+    public void Delete(string id)
     {
         var user = getUser(id);
         _context.Users.Remove(user);
@@ -103,7 +120,7 @@ public class UserService : IUserService
 
     // helper methods
 
-    private User getUser(int id)
+    private User getUser(string id)
     {
         var user = _context.Users.Find(id);
         if (user == null) throw new KeyNotFoundException("User not found");

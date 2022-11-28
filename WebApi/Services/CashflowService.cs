@@ -43,9 +43,7 @@ namespace WebApi.Services
     }
     public Task<List<Cashflow>> GetAll(string userID)
     {
-
-
-      return context.Cashflows.Where(x => x.UserId.ToString() == userID).ToListAsync();
+      return context.Cashflows.Where(x => x.User.Id == userID).ToListAsync();
     }
     public async Task<Cashflow> DeleteCashflow(int id)
     {

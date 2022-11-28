@@ -6,6 +6,7 @@ import { withCookies, Cookies } from "react-cookie";
 import { instanceOf } from "prop-types";
 import store from "../../store";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 export const barChartOptions = {
   title: "Business Cashflows",
@@ -93,21 +94,46 @@ export const filterValues = (array) => {
   return newArray;
 };
 
-function Dashboard() {
+function Dashboard(props) {
   const [cashflowData, setData] = React.useState([]);
   const [cashflowOut, setOutData] = React.useState([]);
   const history = useHistory();
-
+  const { cookies } = props;
   useEffect(() => {
-    fetch(CASHFLOW_GLOBAL_ROUTE)
-      .then((response) => response.json())
+    // fetch(CASHFLOW_GLOBAL_ROUTE)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     let values = data.data.cashflows.$values;
+
+    //     let array = filterValues(values);
+    //     setData(array);
+
+    //     let newArray = JSON.parse(JSON.stringify(array)); // deep copy of the filtered array
+    //     console.log(newArray);
+    //     newArray.forEach((i) => {
+    //       // remove the first column, which is the cash inflows
+    //       i.splice(1, 1);
+    //     });
+    //     setOutData(newArray);
+    //   })
+    //   .catch((error) => console.log(error));
+    axios({
+      method: "GET",
+      url: utils.getDomain() + "api/cashFlow/global",
+      headers: { token: cookies.get("token") },
+      // data: { page: page, limit: pageSize },
+    })
+      .then((response) => response.data)
       .then((data) => {
+        console.log(data);
         let values = data.data.cashflows.$values;
 
+        console.log(values);
         let array = filterValues(values);
         setData(array);
 
         let newArray = JSON.parse(JSON.stringify(array)); // deep copy of the filtered array
+        console.log(newArray);
         newArray.forEach((i) => {
           // remove the first column, which is the cash inflows
           i.splice(1, 1);
@@ -115,6 +141,7 @@ function Dashboard() {
         setOutData(newArray);
       })
       .catch((error) => console.log(error));
+
   }, []);
 
   const chartEvents = [

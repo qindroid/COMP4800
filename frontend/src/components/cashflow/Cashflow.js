@@ -29,7 +29,7 @@ class CashflowManager extends React.Component {
     axios({
       method: "POST",
       url: CASHFLOW_CREATE_ROUTE,
-      // headers: { token: cookies.get("token") },
+      headers: { token: cookies.get("token") },
       // data: {
       //   Type: "Income",
       //   Amount: 100,
@@ -90,7 +90,10 @@ class CashflowManager extends React.Component {
               Type
             </p> */}
             {/* <select class="type__dropdown focus:shadow-outline"> */}
-            <select id="type" class="block w-full py-3 pl-4 pr-8 bg-white border border-gray-300 rounded-sm appearance-none cursor-pointer focus:outline-none hover:border-gray-400">
+            <select
+              id="type"
+              class="block w-full py-3 pl-4 pr-8 bg-white border border-gray-300 rounded-sm appearance-none cursor-pointer focus:outline-none hover:border-gray-400"
+            >
               <option disabled="disabled" selected="selected" value="">
                 Select type
               </option>
@@ -114,6 +117,7 @@ class CashflowManager extends React.Component {
               class="input__style focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
+              style={{ color: "black" }}
             />
             <label for="amount" class="label__style">
               Amount
@@ -126,6 +130,7 @@ class CashflowManager extends React.Component {
               class="input__style focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
+              style={{ color: "black" }}
             />
             <label for="description" class="label__style">
               Name of company
@@ -138,6 +143,7 @@ class CashflowManager extends React.Component {
               class="input__style focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required
+              style={{ color: "black" }}
             />
             <label for="referenceType" class="label__style">
               Project Type (Industry)

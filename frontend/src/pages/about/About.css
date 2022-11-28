@@ -103,11 +103,11 @@
   }
 }
 @media screen and (min-width: 700px) {
-  section {
+  /* section {
     @apply
       pt-4
     ;
-  }
+  } */
   .about__row {
     @apply 
       flex 
