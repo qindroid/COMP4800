@@ -128,3 +128,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 WebApi/comp4800.db
+WebApi/comp4800.db
+WebApi/comp4800.db-shm
+WebApi/comp4800.db-wal
