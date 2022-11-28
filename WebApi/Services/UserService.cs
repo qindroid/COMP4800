@@ -40,17 +40,36 @@ public class UserService : IUserService
     {
         var user = _context.Users.SingleOrDefault(x => x.UserName == model.Username);
         Console.WriteLine("Authenticate user is " + user.UserName);
-
         // validate
         if (user == null || !BCrypt.Verify(model.Password, user.PasswordHash))
             throw new AppException("Username or password is incorrect");
-
+        Console.WriteLine("Login user is " + user.UserName);
+        Console.WriteLine("Login user is " + user.PasswordHash);
         // authentication successful
-        var response = _mapper.Map<AuthenticateResponse>(user);
-        response.Token = _jwtUtils.GenerateToken(user);
-        Console.WriteLine("Authenticate token is " + response.Token);
-        //authenticate user
-        return response;
+        Console.WriteLine("_mapper user is " + _mapper.ToString());
+        //create AuthenticateResponse
+        try
+        {
+            var response = _mapper.Map<AuthenticateResponse>(user);
+            response.Token = _jwtUtils.GenerateToken(user);
+            return response;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Error is " + e);
+            throw new AppException("Error is " + e);
+        }
+        // var response = _mapper.Map<AuthenticateResponse>(user);
+        // if (response == null)
+        // {
+        //     Console.WriteLine("response is null");
+        // }
+        // Console.WriteLine("response is !" + response);
+        // response.Token = _jwtUtils.GenerateToken(user);
+        // Console.WriteLine("Authenticate token is !" + response.Token);
+        // //authenticate user
+        // //return response;
+        // return response;
     }
 
     public IEnumerable<User> GetAll()
@@ -71,11 +90,12 @@ public class UserService : IUserService
 
         // map model to new user object
         var user = _mapper.Map<User>(model);
-
         // hash password
         user.PasswordHash = BCrypt.HashPassword(model.Password);
-
+        Console.WriteLine("Register user is " + user.UserName + model.Password + user.PasswordHash);
         // save user
+        user.Expired = DateTime.Now.AddYears(1);
+        user.IsAdmin = false;
         _context.Users.Add(user);
         _context.SaveChanges();
     }

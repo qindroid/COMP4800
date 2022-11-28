@@ -48,7 +48,9 @@ public class UsersController : ControllerBase
     [HttpPost("signup")]
     public IActionResult Register(RegisterRequest model)
     {
+        Console.WriteLine("Register:" + model.Username + model.Password);
         _userService.Register(model);
+        _mapper.Map<User>(model);
         return Ok(new { message = "Registration successful" });
     }
 
@@ -72,6 +74,14 @@ public class UsersController : ControllerBase
         // todo
         return Ok(new { message = "" });
     }
+
+    [HttpGet("admin")]
+    public IActionResult GetAdmin()
+    {
+        // todo
+        return Ok(new { isAdmin = getUser().IsAdmin });
+    }
+
 
     [HttpGet("list")]
     public IActionResult GetAll()

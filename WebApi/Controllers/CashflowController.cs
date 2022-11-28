@@ -27,7 +27,7 @@ namespace WebApi.Controllers
     {
       // get login user
       var user = httpContextAccessor.HttpContext.User;
-      Console.WriteLine(httpContextAccessor.HttpContext.User.Identity.Name  + " is the user");
+      Console.WriteLine(httpContextAccessor.HttpContext.User.Identity.Name  + " is the getUser()");
       return httpContextAccessor.HttpContext.Items["User"] as User;
     }
 
@@ -81,7 +81,7 @@ namespace WebApi.Controllers
       {
         return BadRequest(new { message = "User not found" });
       }
-      var _cashflow = cashflowService.CreateCashflow(model, id);
+      var _cashflow = cashflowService.CreateCashflow(model, getUser());
       return Ok(new { data = new { cashflow = _cashflow } });
     }
 
@@ -90,6 +90,7 @@ namespace WebApi.Controllers
     public async Task<IActionResult> GetGlobalAll()
     {
       getUser();
+      Console.WriteLine(getUser().Id + " is the user GetGlobalAll");
       if (getUser() != null) {
         if (getUser().IsAdmin) {
           var _cashflows = await cashflowService.GetGlobalAll();

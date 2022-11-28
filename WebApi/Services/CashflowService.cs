@@ -10,7 +10,7 @@ namespace WebApi.Services
   {
     Task<List<Cashflow>> GetAll(string userid);
     Task<IEnumerable<Cashflow>> GetGlobalAll();
-    Task<int> CreateCashflow(CashflowModel cashflowModel, string userid);
+    Task<int> CreateCashflow(CashflowModel cashflowModel, User user);
     Task<Cashflow> DeleteCashflow(int id);
     Task<int> UpdateCashflow(CashflowModel cashflowRequestData);
 
@@ -58,14 +58,15 @@ namespace WebApi.Services
 
       return cashflow;
     }
-    public Task<int> CreateCashflow(CashflowModel cashflowModel, string userId)
+    public Task<int> CreateCashflow(CashflowModel cashflowModel, User user)
     {
             Cashflow cashflow = new Cashflow();
             cashflow.Amount = (double)(cashflowModel.Amount != null ? cashflowModel.Amount : 0);
             cashflow.Description = cashflowModel.Description;
             cashflow.Type = cashflowModel.Type;
             cashflow.ProjectType = cashflowModel.ProjectType;
-            cashflow.UserId = userId;
+            cashflow.UserId = user.Id;
+            cashflow.User = user;
             context.Cashflows.Add(cashflow);
             context.SaveChangesAsync();
             return Task.FromResult(StatusCodes.Status200OK);

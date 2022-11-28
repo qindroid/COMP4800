@@ -97,6 +97,7 @@ export const filterValues = (array) => {
 function Dashboard(props) {
   const [cashflowData, setData] = React.useState([]);
   const [cashflowOut, setOutData] = React.useState([]);
+  const [arraydata, setarraydata] = React.useState([]);
   const history = useHistory();
   const { cookies } = props;
   useEffect(() => {
@@ -133,6 +134,7 @@ function Dashboard(props) {
         setData(array);
 
         let newArray = JSON.parse(JSON.stringify(array)); // deep copy of the filtered array
+        setarraydata(newArray);
         console.log(newArray);
         newArray.forEach((i) => {
           // remove the first column, which is the cash inflows
@@ -164,34 +166,68 @@ function Dashboard(props) {
       <div>
         <div class="grid grid-cols-5 gap-4">
           <div class="shadow-lg col-span-5">
-            <Chart
-              chartType="BarChart"
-              width="100%"
-              height="400px"
-              data={cashflowData}
-              options={barChartOptions}
-              chartEvents={chartEvents}
-            />
+            {arraydata.length === 1 ? (
+              <div class="flex justify-center items-center h-full">
+                <p
+                  class="text-gray-500"
+                  style={{ height: "400px", paddingTop: "180px" }}
+                >
+                  No data, Please enter a cashflow!
+                </p>
+              </div>
+            ) : (
+              <Chart
+                chartType="BarChart"
+                width="100%"
+                height="400px"
+                data={cashflowData}
+                options={barChartOptions}
+                chartEvents={chartEvents}
+              />
+            )}
           </div>
           <div class="bg-white shadow-lg col-span-2">
-            <Chart
-              chartType="PieChart"
-              data={cashflowData}
-              options={pieChartInOptions}
-              width={"100%"}
-              height={"400px"}
-              chartEvents={chartEvents}
-            />
+            {/* if no data */}
+            {arraydata.length === 1 ? (
+              <div class="flex justify-center items-center h-full">
+                <p
+                  class="text-gray-500"
+                  style={{ height: "400px", paddingTop: "180px" }}
+                >
+                  No data
+                </p>
+              </div>
+            ) : (
+              <Chart
+                chartType="PieChart"
+                data={cashflowData}
+                options={pieChartInOptions}
+                width={"100%"}
+                height={"400px"}
+                chartEvents={chartEvents}
+              />
+            )}
           </div>
           <div class="bg-white shadow-lg col-span-2">
-            <Chart
-              chartType="PieChart"
-              data={cashflowOut}
-              options={pieChartOutOptions}
-              width={"100%"}
-              height={"400px"}
-              chartEvents={chartEvents}
-            />
+            {arraydata.length === 1 ? (
+              <div class="flex justify-center items-center h-full">
+                <p
+                  class="text-gray-500"
+                  style={{ height: "400px", paddingTop: "180px" }}
+                >
+                  No data
+                </p>
+              </div>
+            ) : (
+              <Chart
+                chartType="PieChart"
+                data={cashflowOut}
+                options={pieChartOutOptions}
+                width={"100%"}
+                height={"400px"}
+                chartEvents={chartEvents}
+              />
+            )}
           </div>
           <div class="bg-white rounded-xl shadow-lg flex justify-center items-center">
             <div class="text-center">

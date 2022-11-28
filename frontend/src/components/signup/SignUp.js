@@ -73,7 +73,7 @@ class SignUp extends React.Component {
     this.setLoading(true);
     let url = USER_REGISTER_ROUTE;
     let self = this;
-    console.log("values", url);
+    console.log("values", values);
     values["firstname"] = values["username"];
     values["lastname"] = values["username"];
     // values["expired"] = _expired;
