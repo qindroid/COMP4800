@@ -45,34 +45,33 @@ class Password extends React.Component {
             message.error("Password doesn not match");
             return;
         }
-
+        console.log(values.password);
         this.setLoading(true);
 
         let self = this;
         const { cookies } = self.props;
         // Password API
         axios({
-            method: "POST",
-            url: USER_PASSWORD_ROUTE,
-            headers: { token: cookies.get("token") },
-            data: values,
+          method: "POST",
+          url: USER_PASSWORD_ROUTE + "" + values.password,
+          headers: { token: cookies.get("token") },
+          data: values.password,
         })
-            .then(function (res) {
-                if (1 === res.data.code) {
-                    self.props.history.replace("/");
-                }
-                else if (0 === res.data.code) {
-                    cookies.set("token", res.data.data.token, { path: "/" });
-                    message.success("Password updated");
-                } else {
-                    message.error(res.data.message);
-                }
-                self.setLoading(false);
-            })
-            .catch(function (err) {
-                message.error(err.message);
-                self.setLoading(false);
-            });
+          .then(function (res) {
+            console.log(res);
+            if (1 === res.data.code) {
+              self.props.history.replace("/");
+            } else if (200 === res.status) {
+              message.success("Password updated");
+            } else {
+              message.error(res.data.message);
+            }
+            self.setLoading(false);
+          })
+          .catch(function (err) {
+            message.error(err.message);
+            self.setLoading(false);
+          });
     }
 
     render() {

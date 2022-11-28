@@ -101,7 +101,7 @@ public class UserService : IUserService
     public void Password(string id, string password)
     {
         var user = getUser(id);
-
+        Console.WriteLine("Password is " + password);
         // hash password if it was entered
         if (!string.IsNullOrEmpty(password))
             user.PasswordHash = BCrypt.HashPassword(password);

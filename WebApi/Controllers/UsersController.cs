@@ -52,9 +52,10 @@ public class UsersController : ControllerBase
         return Ok(new { message = "Registration successful" });
     }
 
-    [HttpPost("password")]
-    public IActionResult Password( string password)
+    [HttpPost("password/{password}")]
+    public IActionResult Password(string password)
     {
+        Console.WriteLine(password);
         _userService.Password(getUser().Id, password);
         return Ok(new { message = "Password changed successful" });
     }
@@ -82,7 +83,7 @@ public class UsersController : ControllerBase
 
     [HttpGet("{id}")]
     public IActionResult GetById(string id)
-    {
+    {        
         var user = _userService.GetById(id);
 
         return Ok(user);
